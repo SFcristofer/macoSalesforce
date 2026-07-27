@@ -29,3 +29,9 @@
 6. Perfiles (Seguridad a Nivel de Campo - FLS)
    - force-app/main/default/profiles/Admin.profile-meta.xml (Habilitada visibilidad para los nuevos campos de Masterboxes y Productos Adicionales)
 
+
+
+7. Ajustes de UI y Layouts (Fase 1 - Feedback)
+   - force-app/main/default/layouts/Product2-1-Producto Base.layout-meta.xml (Habilitado el botón 'Nuevo' en la lista relacionada de Fábricas)
+   - force-app/main/default/objects/Product2/compactLayouts/Resumen_Fabrica.compactLayout-meta.xml (Nuevo Compact Layout para el Panel de Resumen)
+   - force-app/main/default/objects/Product2/recordTypes/ProductoDeFabrica.recordType-meta.xml (Asignación del Compact Layout al tipo de registro de fábrica)
