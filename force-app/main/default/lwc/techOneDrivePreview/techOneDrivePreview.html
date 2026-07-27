@@ -1,0 +1,31 @@
+<template>
+    <div class="slds-form-element slds-m-bottom_small">
+        <label class="slds-form-element__label">Enlace OneDrive</label>
+        <div class="slds-form-element__control">
+            <template if:true={onedriveLink}>
+                <a href={onedriveLink} target="_blank" rel="noopener noreferrer">{onedriveLink}</a>
+            </template>
+            <template if:false={onedriveLink}>
+                <span>-</span>
+            </template>
+        </div>
+    </div>
+    
+    <template if:true={isLoadingThumbnails}>
+        <div class="slds-is-relative slds-m-vertical_small" style="height: 30px;">
+            <lightning-spinner alternative-text="Cargando miniaturas" size="small"></lightning-spinner>
+        </div>
+    </template>
+    
+    <template if:true={onedriveThumbnails.length}>
+        <div class="slds-m-top_small">
+            <div class="slds-grid slds-wrap slds-gutters">
+                <template for:each={onedriveThumbnails} for:item="thumb">
+                    <div key={thumb} class="slds-col slds-size_1-of-2 slds-medium-size_1-of-4 slds-m-bottom_small">
+                        <img src={thumb} alt="Preview" style="max-height: 80px; width: auto; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);"/>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,371 @@
+/* ═══════════════════════════════════════════════════════════════════
+   productImportWizard.css
+   Estilos completos para el asistente de importación de productos
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Encabezado del wizard ────────────────────────────────────────── */
+.wizard-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.wizard-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #032d60;
+    letter-spacing: -0.01em;
+}
+
+/* ── Cuerpo y contenido de paso ──────────────────────────────────── */
+.wizard-body {
+    background: #f8fafc;
+    border-radius: 0.5rem;
+}
+
+.wizard-step-content {
+    padding: 1.5rem 1.75rem 1rem;
+    min-height: 320px;
+}
+
+/* ── Encabezado de paso (número + título) ───────────────────────── */
+.step-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0176d3, #032d60);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(1, 118, 211, 0.35);
+}
+
+.step-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #032d60;
+    margin: 0 0 0.25rem;
+}
+
+.step-subtitle {
+    font-size: 0.85rem;
+    color: #5a6872;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   STEP 1 — Tarjetas de operación
+   ═══════════════════════════════════════════════════════════════════ */
+.operation-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.operation-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.25rem 1rem;
+    border: 2px solid #d8dde6;
+    border-radius: 0.75rem;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+    user-select: none;
+}
+
+.operation-card:hover {
+    border-color: #0176d3;
+    box-shadow: 0 4px 16px rgba(1, 118, 211, 0.15);
+    transform: translateY(-2px);
+}
+
+.operation-card.selected {
+    border-color: #0176d3;
+    background: #f0f8ff;
+    box-shadow: 0 0 0 3px rgba(1, 118, 211, 0.2), 0 4px 16px rgba(1, 118, 211, 0.15);
+}
+
+.op-icon {
+    margin-bottom: 0.75rem;
+    color: #0176d3;
+}
+
+.operation-card.selected .op-icon {
+    color: #032d60;
+}
+
+.op-label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #181818;
+    margin-bottom: 0.35rem;
+}
+
+.op-desc {
+    font-size: 0.78rem;
+    color: #5a6872;
+    line-height: 1.4;
+}
+
+/* ── Caja de campo de coincidencia ───────────────────────────────── */
+.match-field-box {
+    background: #fff8e1;
+    border: 1px solid #f0c040;
+    border-radius: 0.6rem;
+    padding: 1rem 1.25rem;
+}
+
+.match-field-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #5c4000;
+}
+
+.match-field-hint {
+    font-size: 0.82rem;
+    color: #7c5800;
+    margin: 0 0 0.75rem;
+    line-height: 1.4;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   STEP 2 — Zona de carga de archivo
+   ═══════════════════════════════════════════════════════════════════ */
+.upload-zone {
+    border: 2px dashed #b0c4de;
+    border-radius: 0.75rem;
+    background: #fff;
+    transition: border-color 0.2s ease, background 0.2s ease;
+    margin-bottom: 1rem;
+}
+
+.upload-zone:hover {
+    border-color: #0176d3;
+    background: #f0f8ff;
+}
+
+.upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2.5rem 1.5rem;
+    cursor: pointer;
+    gap: 0.75rem;
+}
+
+.upload-icon {
+    color: #0176d3;
+    opacity: 0.8;
+}
+
+.upload-filename {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #2e844a;
+}
+
+.check-icon {
+    color: #2e844a;
+}
+
+.upload-cta {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #0176d3;
+}
+
+.upload-hint {
+    font-size: 0.8rem;
+    color: #8a8a8a;
+}
+
+/* ── Estadísticas del archivo ────────────────────────────────────── */
+.file-stats {
+    display: flex;
+    align-items: center;
+    background: #eef4ff;
+    border: 1px solid #c9d9f7;
+    border-radius: 0.5rem;
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+    color: #032d60;
+    gap: 0.25rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   STEP 3 — Tabla de mapeo
+   ═══════════════════════════════════════════════════════════════════ */
+.mapping-table-wrap {
+    max-height: 360px;
+    overflow-y: auto;
+    border: 1px solid #d8dde6;
+    border-radius: 0.5rem;
+    background: #fff;
+}
+
+.mapping-table {
+    width: 100%;
+}
+
+.mapping-table thead th {
+    background: #f3f6fb;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #444;
+    padding: 0.6rem 0.75rem;
+    border-bottom: 2px solid #d8dde6;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.mapping-row:hover {
+    background: #f8faff;
+}
+
+.col-name {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #032d60;
+    padding: 0.1rem 0;
+}
+
+.col-sample {
+    font-size: 0.82rem;
+    color: #706e6b;
+    font-style: italic;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   STEP 4 — Resumen e importación
+   ═══════════════════════════════════════════════════════════════════ */
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.summary-card {
+    background: #fff;
+    border: 1px solid #d8dde6;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.summary-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #032d60;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+}
+
+.summary-label {
+    font-size: 0.8rem;
+    color: #706e6b;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.op-badge {
+    font-size: 1.1rem;
+    background: linear-gradient(135deg, #0176d3, #032d60);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ── Caja de resultado ───────────────────────────────────────────── */
+.result-box {
+    border-radius: 0.6rem;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1.5px solid transparent;
+}
+
+.result-box--success {
+    background: #f3fbf5;
+    border-color: #91d6a8;
+}
+
+.result-box--error {
+    background: #fff5f5;
+    border-color: #f88962;
+}
+
+.result-icon-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.6rem;
+}
+
+.result-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #181818;
+}
+
+.result-message {
+    font-size: 0.83rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: #3e3e3c;
+    margin: 0;
+    max-height: 180px;
+    overflow-y: auto;
+    font-family: 'Courier New', monospace;
+    background: rgba(0,0,0,0.03);
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.35rem;
+}
+
+/* ── Caja de procesamiento ───────────────────────────────────────── */
+.processing-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    background: #f0f8ff;
+    border: 1px solid #c9d9f7;
+    border-radius: 0.6rem;
+    color: #032d60;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* ── Footer del wizard ───────────────────────────────────────────── */
+.wizard-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}

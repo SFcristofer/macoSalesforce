@@ -1,0 +1,31 @@
+﻿Lista de componentes nuevos/modificados para la Migracion 2:
+
+1. Lightning Web Component (LWC)
+   - Nombre: techCustomHighlightsPanel
+   - Etiqueta: Tech Panel Dinamico Personalizado
+   - Archivos involucrados: 
+     - force-app/main/default/lwc/techCustomHighlightsPanel/techCustomHighlightsPanel.html
+     - force-app/main/default/lwc/techCustomHighlightsPanel/techCustomHighlightsPanel.js
+     - force-app/main/default/lwc/techCustomHighlightsPanel/techCustomHighlightsPanel.js-meta.xml
+
+2. Campos Personalizados (Masterboxes)
+   - Masterbox4AltoCm__c, Masterbox4AnchoCm__c, Masterbox4LargoCm__c, Masterbox4PesoKg__c, Masterbox4_detalle__c, Masterbox4M3__c, Units_per_Master_Box_4__c
+   - Masterbox5AltoCm__c, Masterbox5AnchoCm__c, Masterbox5LargoCm__c, Masterbox5PesoKg__c, Masterbox5_detalle__c, Masterbox5M3__c, Units_per_Master_Box_5__c
+   - Masterbox6AltoCm__c, Masterbox6AnchoCm__c, Masterbox6LargoCm__c, Masterbox6PesoKg__c, Masterbox6_detalle__c, Masterbox6M3__c, Units_per_Master_Box_6__c
+
+3. Logica Backend (Apex y Formulas - Masterboxes)
+   - force-app/main/default/classes/ProductTriggerHelper.cls (Trigger Helper)
+   - force-app/main/default/objects/Product2/fields/T__c.field-meta.xml (Formula CBM Total)
+
+4. Interfaz de Usuario Visual (LWC)
+   - force-app/main/default/lwc/techProductMasterBoxesUI (Añadidas Masterboxes 4, 5 y 6)
+   - force-app/main/default/lwc/techNewProductForm (Añadidas Masterboxes 4, 5, 6 y Productos 4, 5, 6)
+
+5. Campos Personalizados (Productos Adicionales 4, 5 y 6)
+   - Producto 4: Producto4_detalle__c, Producto4LargoCm__c, Producto4AnchoCm__c, Producto4AltoCm__c, Producto4DiametroCm__c, Producto4M3__c, Producto4PesoKg__c, Producto4PesoBruto__c
+   - Producto 5: Producto5_detalle__c, Producto5LargoCm__c, Producto5AnchoCm__c, Producto5AltoCm__c, Producto5DiametroCm__c, Producto5M3__c, Producto5PesoKg__c, Producto5PesoBruto__c
+   - Producto 6: Producto6_detalle__c, Producto6LargoCm__c, Producto6AnchoCm__c, Producto6AltoCm__c, Producto6DiametroCm__c, Producto6M3__c, Producto6PesoKg__c, Producto6PesoBruto__c
+
+6. Perfiles (Seguridad a Nivel de Campo - FLS)
+   - force-app/main/default/profiles/Admin.profile-meta.xml (Habilitada visibilidad para los nuevos campos de Masterboxes y Productos Adicionales)
+

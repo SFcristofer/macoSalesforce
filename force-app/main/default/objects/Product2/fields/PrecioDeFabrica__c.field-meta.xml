@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PrecioDeFabrica__c</fullName>
+    <defaultValue>0</defaultValue>
+    <description>Precio de fabrica (no incluye costos de importación)</description>
+    <label>Costo Fábrica</label>
+    <precision>14</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>true</trackHistory>
+    <type>Currency</type>
+</CustomField>

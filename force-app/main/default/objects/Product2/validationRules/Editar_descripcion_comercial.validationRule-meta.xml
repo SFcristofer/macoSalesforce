@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Editar_descripcion_comercial</fullName>
+    <active>true</active>
+    <description>No se puede modificar una descripción comercial</description>
+    <errorConditionFormula>AND( ISCHANGED(Name),
+$Profile.Name &lt;&gt; &quot;Administrador del sistema&quot;,
+$Profile.Name &lt;&gt; &quot;Compras&quot;,
+$Profile.Name &lt;&gt; &quot;Super Compras&quot;
+)</errorConditionFormula>
+    <errorDisplayField>Name</errorDisplayField>
+    <errorMessage>RV02: No se puede modificar una descripción comercial</errorMessage>
+</ValidationRule>

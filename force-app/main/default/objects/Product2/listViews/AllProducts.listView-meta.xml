@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AllProducts</fullName>
+    <columns>PRODUCT2.NAME</columns>
+    <columns>PRODUCT2.CUSTOMER_PRODUCT_ID</columns>
+    <columns>Tech_Status__c</columns>
+    <columns>Clase__c</columns>
+    <columns>Nombre_Fabrica__c</columns>
+    <columns>Listado_en_catalogo__c</columns>
+    <columns>Codigo_EAN__c</columns>
+    <columns>Codigo_EAN2__c</columns>
+    <columns>PRODUCT2.CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>PRODUCT2.FAMILY</field>
+        <operation>equals</operation>
+        <value>B-!DEA Heating &amp; Fan</value>
+    </filters>
+    <filters>
+        <field>Subfamilia__c</field>
+        <operation>equals</operation>
+        <value>3-Calefacción y Climatización</value>
+    </filters>
+    <filters>
+        <field>Clase__c</field>
+        <operation>equals</operation>
+        <value>02-Calefactores</value>
+    </filters>
+    <label>Todos los productos</label>
+</ListView>

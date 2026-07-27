@@ -1,0 +1,19 @@
+<aura:component implements="force:massAction,force:lightningQuickActionWithoutHeader,force:hasRecordId" access="global">
+    <!-- Estilos para ampliar el modal estándar de Salesforce -->
+    <aura:html tag="style">
+        .slds-modal__container {
+            width: 80% !important;
+            max-width: 900px !important;
+        }
+        .cuf-content {
+            padding: 0 0rem !important;
+        }
+        .slds-p-around--medium {
+            padding: 0rem !important;
+        }
+    </aura:html>
+    
+    <!-- Invocamos nuestro LWC -->
+    <c:productImportWizard onclosemodal="{!c.closeModal}"></c:productImportWizard>
+    
+</aura:component>

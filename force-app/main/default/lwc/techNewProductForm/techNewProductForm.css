@@ -1,0 +1,15 @@
+/* Minimal overrides, fully utilizing SLDS tokens and structure */
+.custom-box-shadow {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 0.25rem;
+    border-color: #e5e5e5;
+}
+
+lightning-layout-item {
+    transition: all 0.2s ease-in-out;
+}
+
+lightning-accordion {
+    --slds-c-accordion-summary-color-background: #f4f6f9;
+    --slds-c-accordion-summary-color-background-hover: #ecebea;
+}

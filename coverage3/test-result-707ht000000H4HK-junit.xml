@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="force.apex" timestamp="2026-07-23T22:37:36.000Z" hostname="https://pacificglobal--dev2.sandbox.my.salesforce.com" tests="2" failures="0"  errors="0"  time="5.77">
+        <properties>
+            <property name="outcome" value="Successful"/>
+            <property name="testsRan" value="2"/>
+            <property name="passing" value="2"/>
+            <property name="failing" value="0"/>
+            <property name="skipped" value="0"/>
+            <property name="passRate" value="100%"/>
+            <property name="failRate" value="0%"/>
+            <property name="testStartTime" value="Thu Jul 23 2026 4:37:36 p.m."/>
+            <property name="testSetupTimeInMs" value="0"/>
+            <property name="testExecutionTime" value="5.77 s"/>
+            <property name="testTotalTime" value="5.77 s"/>
+            <property name="commandTime" value="0.19 s"/>
+            <property name="hostname" value="https://pacificglobal--dev2.sandbox.my.salesforce.com"/>
+            <property name="orgId" value="00Dht0000000F5VEAU"/>
+            <property name="username" value="soporte2.tecnovalue@pacificglob.com.dev2"/>
+            <property name="testRunId" value="707ht000000H4HK"/>
+            <property name="userId" value="0054w00000AY1qjAAD"/>
+            <property name="coveredLines" value="347"/>
+            <property name="testRunCoverage" value="75%"/>
+            <property name="orgWideCoverage" value="3%"/>
+        </properties>
+        <testcase name="testTriggerHelperInsert" classname="ProductTriggerHelperTest" time="2.66">
+        </testcase>
+        <testcase name="testTriggerHelperUpdateDelete" classname="ProductTriggerHelperTest" time="3.11">
+        </testcase>
+    </testsuite>
+</testsuites>

@@ -1,0 +1,26 @@
+ASUNTO: Solicitud de credenciales para integración de Salesforce con OneDrive (Entorno de Producción)
+
+Hola equipo de TI / Administradores de Azure,
+
+Para finalizar la integración del gestor de imágenes de productos entre nuestro entorno de Producción de Salesforce y OneDrive, necesitamos conectar ambas plataformas mediante OAuth 2.0.
+
+Por favor, requerimos que generen o actualicen la Aplicación en su portal de Microsoft Azure (Entra ID) con los siguientes parámetros:
+
+1. URL DE REDIRECCIÓN (CALLBACK URL)
+Por favor, agreguen la siguiente URL exacta en la sección de "Redirect URIs" (Plataforma Web) de la aplicación en Azure:
+https://pacificglobal.my.salesforce.com/services/authcallback/Tech_Microsoft_Graph
+
+2. PERMISOS REQUERIDOS (API PERMISSIONS - DELEGATED)
+La aplicación debe tener delegados los permisos de Microsoft Graph necesarios para leer e interactuar con los archivos. Asegúrense de incluir:
+- offline_access
+- Files.ReadWrite.All
+- User.Read
+
+3. INFORMACIÓN A DEVOLVER
+Una vez configurada la aplicación con esa URL de redirección, por favor proporciónenme los siguientes dos datos de forma segura para ingresarlos en nuestro Auth Provider de Salesforce:
+- Application (client) ID: ______________________
+- Client Secret (Valor del secreto): ______________________
+
+En cuanto me compartan el ID y el Secreto, terminaremos de configurar el inicio de sesión y la integración quedará funcional. 
+
+Quedo atento a su respuesta, ¡muchas gracias!

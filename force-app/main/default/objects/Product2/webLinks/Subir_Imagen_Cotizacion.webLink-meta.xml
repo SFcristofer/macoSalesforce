@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Subir_Imagen_Cotizacion</fullName>
+    <availability>online</availability>
+    <description>Subir las imagenes,usadas en la cotizacion, hacia el repositorio de amazon</description>
+    <displayType>button</displayType>
+    <linkType>page</linkType>
+    <masterLabel>Subir Imagen Cotizacion</masterLabel>
+    <openType>replace</openType>
+    <page>UploadProdImageAWSS3</page>
+    <protected>false</protected>
+</WebLink>

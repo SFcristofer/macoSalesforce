@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Marca__c</fullName>
+    <label>Marca_base</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>A-!DEA Garden</fullName>
+                <default>false</default>
+                <label>A-!DEA Garden</label>
+            </value>
+            <value>
+                <fullName>AR-ARO (MAKRO ARGENTINA)</fullName>
+                <default>false</default>
+                <label>AR-ARO (MAKRO ARGENTINA)</label>
+            </value>
+            <value>
+                <fullName>B-!DEA Home</fullName>
+                <default>false</default>
+                <label>B-!DEA Home</label>
+            </value>
+            <value>
+                <fullName>C-!DEA Heating &amp; Fan</fullName>
+                <default>false</default>
+                <label>C-!DEA Heating &amp; Fan</label>
+            </value>
+            <value>
+                <fullName>D-DO BRANDS</fullName>
+                <default>false</default>
+                <label>D-DO BRANDS</label>
+            </value>
+            <value>
+                <fullName>E-MEMBERS CHOICE (CITY CLUB)</fullName>
+                <default>false</default>
+                <label>E-MEMBERS CHOICE (CITY CLUB)</label>
+            </value>
+            <value>
+                <fullName>F-ALLURE (DO BRANDS CITY CLUB)</fullName>
+                <default>false</default>
+                <label>F-ALLURE (DO BRANDS CITY CLUB)</label>
+            </value>
+            <value>
+                <fullName>G-B2COOL (DO BRANDS - CITY CLUB)</fullName>
+                <default>false</default>
+                <label>G-B2COOL (DO BRANDS - CITY CLUB)</label>
+            </value>
+            <value>
+                <fullName>H-OUTDOOR TREND (SORIANA)</fullName>
+                <default>false</default>
+                <label>H-OUTDOOR TREND (SORIANA)</label>
+            </value>
+            <value>
+                <fullName>HE-HEUMAN BRAND (LIVERPOOL)</fullName>
+                <default>false</default>
+                <label>HE-HEUMAN BRAND (LIVERPOOL)</label>
+            </value>
+            <value>
+                <fullName>HL-HOME LINE (CHEDRAUI)</fullName>
+                <default>false</default>
+                <label>HL-HOME LINE (CHEDRAUI)</label>
+            </value>
+            <value>
+                <fullName>I-HOMESTYLE DESIGN (SORIANA)</fullName>
+                <default>false</default>
+                <label>I-HOMESTYLE DESIGN (SORIANA)</label>
+            </value>
+            <value>
+                <fullName>J-ROOTS (CENCOSUD)</fullName>
+                <default>false</default>
+                <label>J-ROOTS (CENCOSUD)</label>
+            </value>
+            <value>
+                <fullName>K-BSAFE (AFALPI)</fullName>
+                <default>false</default>
+                <label>K-BSAFE (AFALPI)</label>
+            </value>
+            <value>
+                <fullName>KE-KERRVILLE (HEB)</fullName>
+                <default>false</default>
+                <label>KE-KERRVILLE (HEB)</label>
+            </value>
+            <value>
+                <fullName>KO-KOVA (KOVA FURNITURE)</fullName>
+                <default>false</default>
+                <label>KO-KOVA (KOVA FURNITURE)</label>
+            </value>
+            <value>
+                <fullName>L-LIVING ACCENTS (ACE)</fullName>
+                <default>false</default>
+                <label>L-LIVING ACCENTS (ACE)</label>
+            </value>
+            <value>
+                <fullName>M-MEMBERS MARK (SAMS)</fullName>
+                <default>false</default>
+                <label>M-MEMBERS MARK (SAMS)</label>
+            </value>
+            <value>
+                <fullName>N-TALA 18 (AFALPI)</fullName>
+                <default>false</default>
+                <label>N-TALA 18 (AFALPI)</label>
+            </value>
+            <value>
+                <fullName>O-KREA (CENCOSUD)</fullName>
+                <default>false</default>
+                <label>O-KREA (CENCOSUD)</label>
+            </value>
+            <value>
+                <fullName>OS-OUTDOOR SOLUTIONS (HEB)</fullName>
+                <default>false</default>
+                <label>OS-OUTDOOR SOLUTIONS (HEB)</label>
+            </value>
+            <value>
+                <fullName>P-CLARK GARDEN (HOMESENTRY)</fullName>
+                <default>false</default>
+                <label>P-CLARK GARDEN (HOMESENTRY)</label>
+            </value>
+            <value>
+                <fullName>Q-SUNABLE (SAMS)</fullName>
+                <default>false</default>
+                <label>Q-SUNABLE (SAMS)</label>
+            </value>
+            <value>
+                <fullName>R-CARREFOUR HOME (CARREFOUR)</fullName>
+                <default>false</default>
+                <label>R-CARREFOUR HOME (CARREFOUR)</label>
+            </value>
+            <value>
+                <fullName>S-RED DOT (CASA LEY)</fullName>
+                <default>false</default>
+                <label>S-RED DOT (CASA LEY)</label>
+            </value>
+            <value>
+                <fullName>ST-STUK (OFFICE MAX)</fullName>
+                <default>true</default>
+                <label>ST-STUK (OFFICE MAX)</label>
+            </value>
+            <value>
+                <fullName>T-MAHAIA (LA COMER)</fullName>
+                <default>false</default>
+                <label>T-MAHAIA (LA COMER)</label>
+            </value>
+            <value>
+                <fullName>U-MASTER CRAFT (SORIANA)</fullName>
+                <default>false</default>
+                <label>U-MASTER CRAFT (SORIANA)</label>
+            </value>
+            <value>
+                <fullName>V-VARIOS ESPECIALES</fullName>
+                <default>false</default>
+                <label>V-VARIOS ESPECIALES</label>
+            </value>
+            <value>
+                <fullName>VI-VIOS (SORIANA)</fullName>
+                <default>false</default>
+                <label>VI-VIOS (SORIANA)</label>
+            </value>
+            <value>
+                <fullName>W-!DEA Kids</fullName>
+                <default>false</default>
+                <label>W-!DEA Kids</label>
+            </value>
+            <value>
+                <fullName>X-DO HEALTH</fullName>
+                <default>false</default>
+                <label>X-DO HEALTH</label>
+            </value>
+            <value>
+                <fullName>Y-MAINSTAYS (WALMART)</fullName>
+                <default>false</default>
+                <label>Y-MAINSTAYS (WALMART)</label>
+            </value>
+            <value>
+                <fullName>Z-ALPES (CENCOSUD)</fullName>
+                <default>false</default>
+                <label>Z-ALPES (CENCOSUD)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

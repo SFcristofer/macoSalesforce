@@ -1,0 +1,22 @@
+<template>
+    <lightning-card title="Order History" icon-name="standard:orders">
+        <div class="slds-p-horizontal_medium">
+            <template if:true={data}>
+                <template if:true={data.length}>
+                    <lightning-datatable
+                        key-field="Id"
+                        data={data}
+                        columns={columns}
+                        hide-checkbox-column>
+                    </lightning-datatable>
+                </template>
+                <template if:false={data.length}>
+                    <p class="slds-text-align_center slds-text-color_weak slds-p-vertical_medium">No order history found for this product.</p>
+                </template>
+            </template>
+            <template if:true={errorMessage}>
+                <p class="slds-text-color_error">Error loading order history: {errorMessage}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

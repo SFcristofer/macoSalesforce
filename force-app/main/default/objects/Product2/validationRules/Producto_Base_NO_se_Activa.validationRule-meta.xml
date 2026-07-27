@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Producto_Base_NO_se_Activa</fullName>
+    <active>true</active>
+    <description>Los productos base deben permanecer Inactivos</description>
+    <errorConditionFormula>AND(RecordType.DeveloperName == &apos;Producto&apos;,
+ProductCode != &apos;22222222&apos;,
+IsActive)</errorConditionFormula>
+    <errorDisplayField>IsActive</errorDisplayField>
+    <errorMessage>RV03: Los productos base deben permanecer Inactivos</errorMessage>
+</ValidationRule>

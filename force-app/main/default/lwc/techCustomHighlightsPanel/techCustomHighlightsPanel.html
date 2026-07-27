@@ -1,0 +1,35 @@
+<template>
+    <div class="slds-page-header slds-page-header_record-home">
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <lightning-icon icon-name={iconName} size="medium"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span class="slds-page-header__title slds-truncate" title={title}>{title}</span>
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-page-header__row slds-m-top_medium">
+            <div style="width: 100%;">
+                <lightning-record-view-form record-id={recordId} object-api-name={objectApiName}>
+                    <div class="slds-grid slds-wrap slds-gutters_small">
+                        <template for:each={fieldList} for:item="field">
+                            <div class="slds-col slds-size_1-of-1 slds-small-size_1-of-2 slds-medium-size_1-of-4 slds-p-bottom_small" key={field}>
+                                <lightning-output-field field-name={field} variant="stacked"></lightning-output-field>
+                            </div>
+                        </template>
+                    </div>
+                </lightning-record-view-form>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Subfamilia__c</fullName>
+    <label>Subfamilia</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Family</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>0-Extra</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>0-Extra</label>
+            </value>
+            <value>
+                <fullName>1-Aire Libre</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>1-Aire Libre</label>
+            </value>
+            <value>
+                <fullName>1-Back to School y Oficina</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>1-Back to School y Oficina</label>
+            </value>
+            <value>
+                <fullName>1-Fans</fullName>
+                <default>false</default>
+                <label>1-Fans</label>
+            </value>
+            <value>
+                <fullName>1-Kids&apos; furniture</fullName>
+                <default>false</default>
+                <label>1-Kids&apos; furniture</label>
+            </value>
+            <value>
+                <fullName>1-Living Room Furniture</fullName>
+                <default>false</default>
+                <label>1-Living Room Furniture</label>
+            </value>
+            <value>
+                <fullName>1-Muebles de Jardín</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>1-Muebles de Jardín</label>
+            </value>
+            <value>
+                <fullName>1-Outdoor Furniture</fullName>
+                <default>false</default>
+                <label>1-Outdoor Furniture</label>
+            </value>
+            <value>
+                <fullName>1-Seguridad</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>1-Seguridad</label>
+            </value>
+            <value>
+                <fullName>2-Creatividad</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>2-Creatividad</label>
+            </value>
+            <value>
+                <fullName>2-Indoor Heaters</fullName>
+                <default>false</default>
+                <label>2-Indoor Heaters</label>
+            </value>
+            <value>
+                <fullName>2-Kitchen &amp; Dining Furniture</fullName>
+                <default>false</default>
+                <label>2-Kitchen &amp; Dining Furniture</label>
+            </value>
+            <value>
+                <fullName>2-Muebles de Comedor y Cocina</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>2-Muebles de Comedor y Cocina</label>
+            </value>
+            <value>
+                <fullName>2-Outdoor Shades &amp; Structures</fullName>
+                <default>false</default>
+                <label>2-Outdoor Shades &amp; Structures</label>
+            </value>
+            <value>
+                <fullName>2-Outdoor Toys</fullName>
+                <default>false</default>
+                <label>2-Outdoor Toys</label>
+            </value>
+            <value>
+                <fullName>2-Outdoor y Temporada</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>2-Outdoor y Temporada</label>
+            </value>
+            <value>
+                <fullName>2-Taller</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>2-Taller</label>
+            </value>
+            <value>
+                <fullName>3-BBQ</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>3-BBQ</label>
+            </value>
+            <value>
+                <fullName>3-Calefacción y Climatización</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>3-Calefacción y Climatización</label>
+            </value>
+            <value>
+                <fullName>3-Juegos de Imitación</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>3-Juegos de Imitación</label>
+            </value>
+            <value>
+                <fullName>3-Muebles de Sala y Habitación</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>3-Muebles de Sala y Habitación</label>
+            </value>
+            <value>
+                <fullName>3-Office Furniture</fullName>
+                <default>false</default>
+                <label>3-Office Furniture</label>
+            </value>
+            <value>
+                <fullName>3-Outdoor Cooking</fullName>
+                <default>false</default>
+                <label>3-Outdoor Cooking</label>
+            </value>
+            <value>
+                <fullName>3-Outdoor Heaters</fullName>
+                <default>false</default>
+                <label>3-Outdoor Heaters</label>
+            </value>
+            <value>
+                <fullName>4-Air Treatment</fullName>
+                <default>false</default>
+                <label>4-Air Treatment</label>
+            </value>
+            <value>
+                <fullName>4-Camping &amp; Beach</fullName>
+                <default>false</default>
+                <label>4-Camping &amp; Beach</label>
+            </value>
+            <value>
+                <fullName>4-Equipamiento de Seguridad</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>4-Equipamiento de Seguridad</label>
+            </value>
+            <value>
+                <fullName>4-Fans</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>4-Fans</label>
+            </value>
+            <value>
+                <fullName>4-Jardinería</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>4-Jardinería</label>
+            </value>
+            <value>
+                <fullName>4-Muñecas y Figuras</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>4-Muñecas y Figuras</label>
+            </value>
+            <value>
+                <fullName>4-Organización</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>4-Organización</label>
+            </value>
+            <value>
+                <fullName>4-Storage &amp; Organization</fullName>
+                <default>false</default>
+                <label>4-Storage &amp; Organization</label>
+            </value>
+            <value>
+                <fullName>5-Air Conditioner</fullName>
+                <default>false</default>
+                <label>5-Air Conditioner</label>
+            </value>
+            <value>
+                <fullName>5-Bricolaje y Automóvil</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>5-Bricolaje y Automóvil</label>
+            </value>
+            <value>
+                <fullName>5-Folding Furniture</fullName>
+                <default>false</default>
+                <label>5-Folding Furniture</label>
+            </value>
+            <value>
+                <fullName>5-Playa</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>5-Playa</label>
+            </value>
+            <value>
+                <fullName>5-Vehículos y Pistas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>5-Vehículos y Pistas</label>
+            </value>
+            <value>
+                <fullName>6-Aprendizaje</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>6-Aprendizaje</label>
+            </value>
+            <value>
+                <fullName>6-Camping</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>6-Camping</label>
+            </value>
+            <value>
+                <fullName>6-Outdoor Gardening</fullName>
+                <default>false</default>
+                <label>6-Outdoor Gardening</label>
+            </value>
+            <value>
+                <fullName>7-Juguetes para Bebés</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>7-Juguetes para Bebés</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>B-!DEA Heating &amp; Fan</controllingFieldValue>
+            <valueName>1-Fans</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>B-!DEA Heating &amp; Fan</controllingFieldValue>
+            <valueName>2-Indoor Heaters</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>B-!DEA Heating &amp; Fan</controllingFieldValue>
+            <valueName>3-Outdoor Heaters</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>B-!DEA Heating &amp; Fan</controllingFieldValue>
+            <valueName>4-Air Treatment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>B-!DEA Heating &amp; Fan</controllingFieldValue>
+            <valueName>5-Air Conditioner</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>G-!DEA Garden</controllingFieldValue>
+            <valueName>1-Outdoor Furniture</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>G-!DEA Garden</controllingFieldValue>
+            <valueName>2-Outdoor Shades &amp; Structures</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>G-!DEA Garden</controllingFieldValue>
+            <valueName>3-Outdoor Cooking</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>G-!DEA Garden</controllingFieldValue>
+            <valueName>4-Camping &amp; Beach</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>G-!DEA Garden</controllingFieldValue>
+            <valueName>5-Folding Furniture</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>G-!DEA Garden</controllingFieldValue>
+            <valueName>6-Outdoor Gardening</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>H-!DEA Home</controllingFieldValue>
+            <valueName>1-Living Room Furniture</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>H-!DEA Home</controllingFieldValue>
+            <valueName>2-Kitchen &amp; Dining Furniture</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>H-!DEA Home</controllingFieldValue>
+            <valueName>3-Office Furniture</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>H-!DEA Home</controllingFieldValue>
+            <valueName>4-Storage &amp; Organization</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>P-!DEA Kids</controllingFieldValue>
+            <valueName>1-Kids&apos; furniture</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>P-!DEA Kids</controllingFieldValue>
+            <valueName>2-Outdoor Toys</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

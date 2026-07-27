@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Listado_en_catalogo__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indica si el Producto debe ser listado en el catalogo web y en la pagina de agregar productos a oportunidad. Usado para evitar que aparezca varias veces el mismo producto con distinta marca</description>
+    <inlineHelpText>Indicates whether the product should be listed in the web catalog and on the add products page</inlineHelpText>
+    <label>Listado en catálogo</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

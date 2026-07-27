@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NuevaOpcionDePackaging</fullName>
+    <availability>online</availability>
+    <displayType>massActionButton</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Nueva opción de packaging</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <requireRowSelection>false</requireRowSelection>
+    <url>/flow/CrearOpcionDePackagingDesdeProducto?varParentProductName={!Product2.Name}&amp;varParentProductId={!Product2.Id}&amp;retURL={!Product2.Id}</url>
+</WebLink>

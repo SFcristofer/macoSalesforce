@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProformaImage__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( 
+OR(NOT(ISBLANK(IDImagen1__c)), 
+NOT(ISBLANK(ProductoBase__r.IDImagen1__c)), 
+NOT(ISBLANK(ProductoDeFabrica__r.ProductoBase__r.IDImagen1__c))), 
+
+&apos;/servlet/servlet.FileDownload?file=&apos; + 
+IF( RecordType.DeveloperName == &apos;Producto&apos;, 
+IDImagen1__c, 
+IF(RecordType.DeveloperName == &apos;ProductoDeFabrica&apos;, 
+ProductoBase__r.IDImagen1__c, 
+ProductoDeFabrica__r.ProductoBase__r.IDImagen1__c)), 
+
+&apos;/servlet/servlet.FileDownload?file=015460000005lAl&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Proforma Image</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Medidas_Agrupadas__c</fullName>
+    <externalId>false</externalId>
+    <formula>ProductoLargoCm__c + &apos;x&apos; + ProductoAnchoCm__c + &apos;x&apos; + ProductoAltoCm__c + &apos; CM&apos; +
+IF(NOT(OR(ISBLANK(ProductoDiametroCm__c), ProductoDiametroCm__c == &apos;0&apos;)),
+&apos;ø&apos; + ProductoDiametroCm__c,
+&apos;&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Medidas del Producto Agrupadas</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Nuevos_Productos_ltimos_30_d_as</fullName>
+    <columns>PRODUCT2.NAME</columns>
+    <columns>Descripcion__c</columns>
+    <columns>CodigoDeProductoBase__c</columns>
+    <columns>Thumb1__c</columns>
+    <columns>PRODUCT2.CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>PRODUCT2.ACTIVE</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>PRODUCT2.CREATED_DATE</field>
+        <operation>greaterOrEqual</operation>
+        <value>1/1/2023 12:00 AM</value>
+    </filters>
+    <label>Nuevos Productos 2023</label>
+</ListView>

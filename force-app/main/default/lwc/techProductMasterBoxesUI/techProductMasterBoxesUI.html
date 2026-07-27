@@ -1,0 +1,209 @@
+<template>
+    <lightning-card title="Master Boxes" icon-name="custom:custom93">
+        <div class="slds-p-around_medium">
+            <!-- Header con Total CBM -->
+            <div class="slds-text-heading_small slds-m-bottom_medium slds-text-align_right">
+                <strong>Total CBM: {totalCBM}</strong>
+            </div>
+
+            <lightning-record-edit-form record-id={recordId} object-api-name="Product2" onsuccess={handleSuccess}>
+                
+                <lightning-accordion active-section-name={activeSections} allow-multiple-sections-open>
+                    <!-- CAJA 1 -->
+                    <template if:true={showBox1}>
+                        <lightning-accordion-section name="Box1" label="Master Box 1">
+                            <lightning-layout multiple-rows>
+                                <lightning-layout-item size="12" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox1_detalle__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="MasterboxLargoCm__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="MasterboxAnchoCm__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="MasterboxAltoCm__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="MasterboxPesoKg__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="MasterboxM3__c" onchange={handleCBMChange}></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="UnidadesPorMasterBox__c"></lightning-input-field>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-accordion-section>
+                    </template>
+
+                    <!-- CAJA 2 -->
+                    <template if:true={showBox2}>
+                        <lightning-accordion-section name="Box2" label="Master Box 2">
+                            <lightning-layout multiple-rows>
+                                <lightning-layout-item size="12" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox2_detalle__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox2LargoCm__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox2AnchoCm__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox2AltoCm__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox2PesoKg__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox2M3__c" onchange={handleCBMChange}></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small" class="slds-text-align_right">
+                                    <lightning-button-icon icon-name="utility:delete" variant="bare" alternative-text="Eliminar Caja 2" class="slds-m-top_large" onclick={handleRemoveBox2}></lightning-button-icon>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-accordion-section>
+                    </template>
+
+                    <!-- CAJA 3 -->
+                    <template if:true={showBox3}>
+                        <lightning-accordion-section name="Box3" label="Master Box 3">
+                            <lightning-layout multiple-rows>
+                                <lightning-layout-item size="12" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox3_detalle__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox3LargoCm__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox3AnchoCm__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox3AltoCm__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox3PesoKg__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox3M3__c" onchange={handleCBMChange}></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Units_per_Master_Box_3__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small" class="slds-text-align_right">
+                                    <lightning-button-icon icon-name="utility:delete" variant="bare" alternative-text="Eliminar Caja 3" class="slds-m-top_large" onclick={handleRemoveBox3}></lightning-button-icon>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-accordion-section>
+                    </template>
+
+<!-- CAJA 4 -->
+                    <template if:true={showBox4}>
+                        <lightning-accordion-section name="Box4" label="Master Box 4">
+                            <lightning-layout multiple-rows>
+                                <lightning-layout-item size="12" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox4_detalle__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox4LargoCm__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox4AnchoCm__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox4AltoCm__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox4PesoKg__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox4M3__c" onchange={handleCBMChange}></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Units_per_Master_Box_4__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small" class="slds-text-align_right">
+                                    <lightning-button-icon icon-name="utility:delete" variant="bare" alternative-text="Eliminar Caja 4" class="slds-m-top_large" onclick={handleRemoveBox4}></lightning-button-icon>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-accordion-section>
+                    </template>
+
+<!-- CAJA 5 -->
+                    <template if:true={showBox5}>
+                        <lightning-accordion-section name="Box5" label="Master Box 5">
+                            <lightning-layout multiple-rows>
+                                <lightning-layout-item size="12" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox5_detalle__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox5LargoCm__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox5AnchoCm__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox5AltoCm__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox5PesoKg__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox5M3__c" onchange={handleCBMChange}></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Units_per_Master_Box_5__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small" class="slds-text-align_right">
+                                    <lightning-button-icon icon-name="utility:delete" variant="bare" alternative-text="Eliminar Caja 5" class="slds-m-top_large" onclick={handleRemoveBox5}></lightning-button-icon>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-accordion-section>
+                    </template>
+
+<!-- CAJA 6 -->
+                    <template if:true={showBox6}>
+                        <lightning-accordion-section name="Box6" label="Master Box 6">
+                            <lightning-layout multiple-rows>
+                                <lightning-layout-item size="12" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox6_detalle__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox6LargoCm__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox6AnchoCm__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox6AltoCm__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox6PesoKg__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Masterbox6M3__c" onchange={handleCBMChange}></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input-field field-name="Units_per_Master_Box_6__c"></lightning-input-field>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small" class="slds-text-align_right">
+                                    <lightning-button-icon icon-name="utility:delete" variant="bare" alternative-text="Eliminar Caja 6" class="slds-m-top_large" onclick={handleRemoveBox6}></lightning-button-icon>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-accordion-section>
+                    </template>
+                </lightning-accordion>
+
+                <!-- Botones de Acción -->
+                <div class="slds-m-top_medium slds-text-align_center">
+                    <template if:true={canAddMore}>
+                        <lightning-button label="+ Add More Box" onclick={handleAddBox} class="slds-m-right_small"></lightning-button>
+                    </template>
+                    <lightning-button variant="brand" type="submit" label="Guardar Cajas"></lightning-button>
+                </div>
+            </lightning-record-edit-form>
+        </div>
+    </lightning-card>
+</template>

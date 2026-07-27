@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DireccionComercialCamposRestringidos</fullName>
+    <active>true</active>
+    <errorConditionFormula>$Profile.Name = &quot;Direccion Comercial&quot;
+&amp;&amp; NOT ( ISNEW() )
+&amp;&amp; OR (
+ISCHANGED ( Name ) ,
+ISCHANGED ( IsActive ) ,
+ISCHANGED ( CurrencyIsoCode ) ,
+ISCHANGED ( RecordTypeId )
+)</errorConditionFormula>
+    <errorMessage>RV01: Usuarios con el perfil &quot;Direccion Comercial&quot; no pueden actualizar ciertos campos en el producto.</errorMessage>
+</ValidationRule>

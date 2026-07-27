@@ -1,0 +1,5 @@
+<aura:component implements="lightning:isUrlAddressable" access="global">
+    <div class="slds-box slds-theme_default slds-m-around_medium" style="background-color: white;">
+        <c:techNewProductForm />
+    </div>
+</aura:component>

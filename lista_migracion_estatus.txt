@@ -1,0 +1,71 @@
+========================================================================
+LISTA DE VERIFICACIÓN DE MIGRACIÓN - ESTATUS DE COMPONENTES
+========================================================================
+Instrucciones: Marca con una 'X' dentro de los corchetes [ ] lo que ya se 
+haya subido exitosamente a Producción.
+
+------------------------------------------------------------------------
+1. DEPENDENCIAS Y CREDENCIALES (Manual/Automático)
+------------------------------------------------------------------------
+[X] StaticResource: papaparse
+[X] AuthProvider: Tech_Microsoft_Graph (Creado manual en Prod)
+[X] ExternalCredential: OneDrive (Creado y autenticado manual en Prod)
+[X] NamedCredential: OneDrive_API (Creado manual en Prod)
+
+------------------------------------------------------------------------
+2. CAMPOS PERSONALIZADOS (Custom Fields en objeto Product2)
+------------------------------------------------------------------------
+[X] Product2.Tech_Enlace_OneDrive__c
+[X] Product2.Tech_Status__c
+(Añade aquí cualquier otro campo específico que hayas creado para estos flujos)
+
+------------------------------------------------------------------------
+2. CLASES APEX Y TESTS (Backend)
+------------------------------------------------------------------------
+[X] ProductTriggerHelper
+[X] ProductTriggerHelperTest
+[X] ProductImportWizardController
+[X] ProductImportWizardControllerTest
+[X] TechOneDriveService
+[X] TechOneDriveServiceTest
+[X] TechProductImagesController
+[X] TechProductImagesControllerTest
+[X] TechProductOrderHistoryController
+[X] TechProductOrderHistoryCtrlTest
+[X] TechRelatedProductController
+[X] TechRelatedProductControllerTest
+
+------------------------------------------------------------------------
+3. COMPONENTES LIGHTNING WEB (LWC)
+------------------------------------------------------------------------
+[X] productImportWizard
+[X] techNewProductForm
+[X] techOneDrivePreview
+[X] techProductImagesManager
+[X] techProductMasterBoxesUI
+[X] techProductOrderHistory
+[X] techRelatedProductView
+
+------------------------------------------------------------------------
+5. BOTONES Y COMPONENTES AURA (UI Wrappers)
+------------------------------------------------------------------------
+[X] QuickAction: Product2.ImportProductsMass
+[X] QuickAction: Product2.Tech_Nuevo_Producto
+[X] QuickAction: Tech_Nuevo_Producto_Global
+[X] Aura: ProductImportWizardApp
+[X] Aura: ProductImportWizardAura
+[X] Aura: TechNewProductActionOverride
+[X] Aura: TechNewProductAuraWrapper
+
+------------------------------------------------------------------------
+6. BOTONES DE VISTA DE LISTA Y VISUALFORCE
+------------------------------------------------------------------------
+[X] WebLink: Product2.Import_Products_List
+[X] WebLink: Product2.Tech_Nuevo_Producto_List
+[X] Visualforce: ProductImportWizardPage
+
+------------------------------------------------------------------------
+7. CONFIGURACIÓN FINAL (Opcional pero requerido para la UI)
+------------------------------------------------------------------------
+[ ] Asignación de Permisos (Perfiles o Permission Sets para las Clases/Campos)
+[ ] Lightning Pages (Añadir los LWC a la página de registro de Producto u otras)

@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prospecto_de_Producto</fullName>
+    <active>true</active>
+    <description>Para uso en las Ferias</description>
+    <label>Prospecto de Producto</label>
+    <picklistValues>
+        <picklist>Clase__c</picklist>
+        <values>
+            <fullName>01-Air Conditioner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>01-Air Purifiers</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>01-Camping Tents</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>01-Ceramic %26 Fans Heaters</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>01-Chairs</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>01-Charcoal Grills</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>01-Closet Storage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>01-Dining Chairs</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>01-Gas Heaters</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>01-Kids%27 Chairs %26 tables</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>01-Office Chairs</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>01-Outdoor Dining Sets</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>01-Outdoor Playsets</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>01-Plant containers %26 Planters</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>01-Stand %26 Tower Fans</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>01-Umbrellas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>01-Utility Folding Tables %28HDPE%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>02-Air Cooler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>02-Camping Chairs %26 Tables</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>02-Coffe Tables%2C Side %26 End Tables</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>02-Desk %26 Floor Fans</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>02-Desks</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>02-Dining Tables</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>02-Folding Chairs</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>02-Gas Grills</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>02-Humidifiers %26 Dehumidifiers</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>02-Infrared %26 Halogen Heaters</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>02-Kids%27 Beds %26 Bunk Beds</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>02-Outdoor Seating Sets</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>02-Pergolas %26 Gazebos</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>02-Quartz %26 Carbon Heaters</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>02-Shoe Storage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>02-Swings %26 Ride-ons</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>02-Watering %26 Irrigation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>03-Awnings</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>03-Bookcases</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>03-Coolers %26 Thermal Bags</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>03-Dining Sets</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>03-Folding  Benches</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>03-Garden Tool %26 Equipment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>03-Grill Accesorios</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>03-Kids%27 Storage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>03-Oil Filled Radiators</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>03-Outdoor Chairs %26 Loungers</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>03-Rechargeable Fans</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>03-Sofas %26 Couches</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>03-Storage Carts %26 Drawers</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>04-Bar Stools</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>04-Beach Chairs %26 Umbrellas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>04-Ceiling Fans</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>04-Electric Heaters %26 Convectors</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>04-Fire Pits %26 Fire Tables</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>04-Folding  Sets %28Tables%2B Chairs%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>04-Garden Decoration</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>04-Office Storage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>04-Outdoor Tables</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>04-Sectional Sofas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>04-Storage Bins %26 Boxes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>04-Umbrellas Accessories</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>05-Camping Accessories</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>05-Electric Grills</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>05-Kitchen Carts %26 Islands</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>05-Loveseats</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>05-Office Accessories</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>05-Outdoor Storage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>05-Shelving Units</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>05-Wall Fans</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>06-Beach Carts %26 Wagons</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>06-Dining Storage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>06-Hammocks %26 Swings</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>06-Pizza Oven</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>06-Sofa Beds</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>07-Benches %26 Ottomans</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>07-Outdoor Benches</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>08-Accent Chairs %26 Recliners</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>09-Console Tables %26 Sideboards</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>10-Tv Stands %26 Entertaiment Centers</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>11-Storage Furniture</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Clasificacion_producto__c</picklist>
+        <values>
+            <fullName>BASIC</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>PREMIUM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Estado_verificacion_costo__c</picklist>
+        <values>
+            <fullName>En Proceso</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verificado</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Family</picklist>
+        <values>
+            <fullName>B-%21DEA Heating %26 Fan</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>G-%21DEA Garden</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H-%21DEA Home</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Incoterm__c</picklist>
+        <values>
+            <fullName>CIF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DAT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DDP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DDP%2BAlmacenaje</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FOB</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Marca__c</picklist>
+        <values>
+            <fullName>A-%21DEA Garden</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>B-%21DEA Home</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C-%21DEA Heating %26 Fan</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>D-DO BRANDS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>E-MEMBERS CHOICE %28CITY CLUB%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>F-ALLURE %28DO BRANDS CITY CLUB%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>G-B2COOL %28DO BRANDS - CITY CLUB%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H-OUTDOOR TREND %28SORIANA%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>I-HOMESTYLE DESIGN %28SORIANA%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>J-ROOTS %28CENCOSUD%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>K-BSAFE %28AFALPI%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>L-LIVING ACCENTS %28ACE%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>M-MEMBERS MARK %28SAMS%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>N-TALA 18 %28AFALPI%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>O-KREA %28CENCOSUD%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>P-CLARK GARDEN %28HOMESENTRY%29</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Packaging__c</picklist>
+        <values>
+            <fullName>1-BROWN BOX</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>11-WINDOW BOX</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>12-BLISTER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>13-STACK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>15-PDQ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2-BROWN BOX %2B HANGTAG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3-BROWN BOX %2B COLOR LABEL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>7-WHITE BOX %2B COLOR LABEL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>9-COLOR BOX</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>PlazoDeFabricacion__c</picklist>
+        <values>
+            <fullName>%3C15 días</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%3E180 días</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>120-150 días</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>15-30 días</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>150-180 días</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>30-45 días</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>45-60 días</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>60-75 días</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>75-90 días</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>90-120 días</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>QuantityUnitOfMeasure</picklist>
+        <values>
+            <fullName>Each</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Subfamilia__c</picklist>
+        <values>
+            <fullName>1-Fans</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1-Kids%27 furniture</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1-Living Room Furniture</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1-Outdoor Furniture</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2-Indoor Heaters</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2-Kitchen %26 Dining Furniture</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2-Outdoor Shades %26 Structures</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2-Outdoor Toys</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3-Office Furniture</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3-Outdoor Cooking</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3-Outdoor Heaters</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4-Air Treatment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4-Camping %26 Beach</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4-Storage %26 Organization</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5-Air Conditioner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5-Folding Furniture</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>6-Outdoor Gardening</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tech_Status__c</picklist>
+        <values>
+            <fullName>Active</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Draft</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+</RecordType>

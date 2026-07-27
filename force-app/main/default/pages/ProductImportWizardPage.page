@@ -1,0 +1,35 @@
+<apex:page standardController="Product2" recordSetVar="products" standardStylesheets="false" showHeader="false" sidebar="false" applyBodyTag="false" applyHtmlTag="false">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <title>Import Products</title>
+            <apex:includeLightning />
+            <apex:slds /> <!-- Lightning Design System -->
+            <style>
+                html, body { margin: 0; padding: 0; height: 100%; background: #f3f3f3; }
+                .app-container { width: 100%; max-width: 900px; margin: 2rem auto; }
+            </style>
+        </head>
+        <body class="slds-scope">
+            <div class="app-container">
+                <div id="lightningComponent" />
+            </div>
+            
+            <script>
+                $Lightning.use("c:ProductImportWizardApp", function() {
+                    $Lightning.createComponent("c:productImportWizard",
+                    { },
+                    "lightningComponent",
+                    function(cmp) {
+                        // When the user clicks the "Cerrar" button in the LWC, go back to the List View
+                        document.addEventListener("closemodal", function() {
+                            // En Lightning, window.history.back() nos devuelve a la lista
+                            window.history.back();
+                        });
+                    });
+                });
+            </script>
+        </body>
+    </html>
+</apex:page>

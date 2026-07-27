@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Productos_Fabrica</fullName>
+    <columns>PRODUCT2.NAME</columns>
+    <columns>Descripcion__c</columns>
+    <columns>CodigoDeProductoBase__c</columns>
+    <columns>Codigo_EAN2__c</columns>
+    <columns>Marca2__c</columns>
+    <columns>UnidadesContainer20__c</columns>
+    <columns>UnidadesHQ__c</columns>
+    <columns>Thumb1__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>PRODUCT2.ACTIVE</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Productos Activos</label>
+</ListView>

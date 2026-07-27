@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AnadirProductoAFabrica</fullName>
+    <availability>online</availability>
+    <displayType>massActionButton</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Añadir producto a fábrica</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <requireRowSelection>false</requireRowSelection>
+    <url>/flow/CrearProductoDeFabricaDesdeProducto?varProductName={!Product2.Name}&amp;varProductId={!Product2.Id}&amp;retURL={!Product2.Id}&amp;cancelURL={!Product2.Id}</url>
+</WebLink>

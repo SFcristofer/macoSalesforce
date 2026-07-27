@@ -1,0 +1,1401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Clase__c</fullName>
+    <label>Clase</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Subfamilia__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>01-Chairs</fullName>
+                <default>false</default>
+                <label>01-Chairs</label>
+            </value>
+            <value>
+                <fullName>02-Coffe Tables, Side &amp; End Tables</fullName>
+                <default>false</default>
+                <label>02-Coffe Tables, Side &amp; End Tables</label>
+            </value>
+            <value>
+                <fullName>03-Sofas &amp; Couches</fullName>
+                <default>false</default>
+                <label>03-Sofas &amp; Couches</label>
+            </value>
+            <value>
+                <fullName>04-Sectional Sofas</fullName>
+                <default>false</default>
+                <label>04-Sectional Sofas</label>
+            </value>
+            <value>
+                <fullName>05-Loveseats</fullName>
+                <default>false</default>
+                <label>05-Loveseats</label>
+            </value>
+            <value>
+                <fullName>06-Sofa Beds</fullName>
+                <default>false</default>
+                <label>06-Sofa Beds</label>
+            </value>
+            <value>
+                <fullName>07-Benches &amp; Ottomans</fullName>
+                <default>false</default>
+                <label>07-Benches &amp; Ottomans</label>
+            </value>
+            <value>
+                <fullName>08-Accent Chairs &amp; Recliners</fullName>
+                <default>false</default>
+                <label>08-Accent Chairs &amp; Recliners</label>
+            </value>
+            <value>
+                <fullName>09-Console Tables &amp; Sideboards</fullName>
+                <default>false</default>
+                <label>09-Console Tables &amp; Sideboards</label>
+            </value>
+            <value>
+                <fullName>10-Tv Stands &amp; Entertaiment Centers</fullName>
+                <default>false</default>
+                <label>10-Tv Stands &amp; Entertaiment Centers</label>
+            </value>
+            <value>
+                <fullName>11-Storage Furniture</fullName>
+                <default>false</default>
+                <label>11-Storage Furniture</label>
+            </value>
+            <value>
+                <fullName>01-Dining Chairs</fullName>
+                <default>false</default>
+                <label>01-Dining Chairs</label>
+            </value>
+            <value>
+                <fullName>02-Dining Tables</fullName>
+                <default>false</default>
+                <label>02-Dining Tables</label>
+            </value>
+            <value>
+                <fullName>03-Dining Sets</fullName>
+                <default>false</default>
+                <label>03-Dining Sets</label>
+            </value>
+            <value>
+                <fullName>04-Bar Stools</fullName>
+                <default>false</default>
+                <label>04-Bar Stools</label>
+            </value>
+            <value>
+                <fullName>05-Kitchen Carts &amp; Islands</fullName>
+                <default>false</default>
+                <label>05-Kitchen Carts &amp; Islands</label>
+            </value>
+            <value>
+                <fullName>06-Dining Storage</fullName>
+                <default>false</default>
+                <label>06-Dining Storage</label>
+            </value>
+            <value>
+                <fullName>01-Office Chairs</fullName>
+                <default>false</default>
+                <label>01-Office Chairs</label>
+            </value>
+            <value>
+                <fullName>02-Desks</fullName>
+                <default>false</default>
+                <label>02-Desks</label>
+            </value>
+            <value>
+                <fullName>03-Bookcases</fullName>
+                <default>false</default>
+                <label>03-Bookcases</label>
+            </value>
+            <value>
+                <fullName>04-Office Storage</fullName>
+                <default>false</default>
+                <label>04-Office Storage</label>
+            </value>
+            <value>
+                <fullName>01-Closet Storage</fullName>
+                <default>false</default>
+                <label>01-Closet Storage</label>
+            </value>
+            <value>
+                <fullName>02-Shoe Storage</fullName>
+                <default>false</default>
+                <label>02-Shoe Storage</label>
+            </value>
+            <value>
+                <fullName>03-Storage Carts &amp; Drawers</fullName>
+                <default>false</default>
+                <label>03-Storage Carts &amp; Drawers</label>
+            </value>
+            <value>
+                <fullName>04-Storage Bins &amp; Boxes</fullName>
+                <default>false</default>
+                <label>04-Storage Bins &amp; Boxes</label>
+            </value>
+            <value>
+                <fullName>05-Shelving Units</fullName>
+                <default>false</default>
+                <label>05-Shelving Units</label>
+            </value>
+            <value>
+                <fullName>01-Outdoor Dining Sets</fullName>
+                <default>false</default>
+                <label>01-Outdoor Dining Sets</label>
+            </value>
+            <value>
+                <fullName>02-Outdoor Seating Sets</fullName>
+                <default>false</default>
+                <label>02-Outdoor Seating Sets</label>
+            </value>
+            <value>
+                <fullName>03-Outdoor Chairs &amp; Loungers</fullName>
+                <default>false</default>
+                <label>03-Outdoor Chairs &amp; Loungers</label>
+            </value>
+            <value>
+                <fullName>04-Outdoor Tables</fullName>
+                <default>false</default>
+                <label>04-Outdoor Tables</label>
+            </value>
+            <value>
+                <fullName>05-Outdoor Storage</fullName>
+                <default>false</default>
+                <label>05-Outdoor Storage</label>
+            </value>
+            <value>
+                <fullName>01-Umbrellas</fullName>
+                <default>false</default>
+                <label>01-Umbrellas</label>
+            </value>
+            <value>
+                <fullName>02-Pergolas &amp; Gazebos</fullName>
+                <default>false</default>
+                <label>02-Pergolas &amp; Gazebos</label>
+            </value>
+            <value>
+                <fullName>03-Awnings</fullName>
+                <default>false</default>
+                <label>03-Awnings</label>
+            </value>
+            <value>
+                <fullName>01-Charcoal Grills</fullName>
+                <default>false</default>
+                <label>01-Charcoal Grills</label>
+            </value>
+            <value>
+                <fullName>02-Gas Grills</fullName>
+                <default>false</default>
+                <label>02-Gas Grills</label>
+            </value>
+            <value>
+                <fullName>03-Grill Accesorios</fullName>
+                <default>false</default>
+                <label>03-Grill Accesorios</label>
+            </value>
+            <value>
+                <fullName>01-Camping Tents</fullName>
+                <default>false</default>
+                <label>01-Camping Tents</label>
+            </value>
+            <value>
+                <fullName>02-Camping Chairs &amp; Tables</fullName>
+                <default>false</default>
+                <label>02-Camping Chairs &amp; Tables</label>
+            </value>
+            <value>
+                <fullName>03-Coolers &amp; Thermal Bags</fullName>
+                <default>false</default>
+                <label>03-Coolers &amp; Thermal Bags</label>
+            </value>
+            <value>
+                <fullName>04-Beach Chairs &amp; Umbrellas</fullName>
+                <default>false</default>
+                <label>04-Beach Chairs &amp; Umbrellas</label>
+            </value>
+            <value>
+                <fullName>01-Utility Folding Tables (HDPE)</fullName>
+                <default>false</default>
+                <label>01-Utility Folding Tables (HDPE)</label>
+            </value>
+            <value>
+                <fullName>02-Folding Chairs</fullName>
+                <default>false</default>
+                <label>02-Folding Chairs</label>
+            </value>
+            <value>
+                <fullName>03-Folding  Benches</fullName>
+                <default>false</default>
+                <label>03-Folding  Benches</label>
+            </value>
+            <value>
+                <fullName>04-Folding  Sets (Tables+ Chairs)</fullName>
+                <default>false</default>
+                <label>04-Folding  Sets (Tables+ Chairs)</label>
+            </value>
+            <value>
+                <fullName>01-Stand &amp; Tower Fans</fullName>
+                <default>false</default>
+                <label>01-Stand &amp; Tower Fans</label>
+            </value>
+            <value>
+                <fullName>02-Desk &amp; Floor Fans</fullName>
+                <default>false</default>
+                <label>02-Desk &amp; Floor Fans</label>
+            </value>
+            <value>
+                <fullName>03-Rechargeable Fans</fullName>
+                <default>false</default>
+                <label>03-Rechargeable Fans</label>
+            </value>
+            <value>
+                <fullName>01-Ceramic &amp; Fans Heaters</fullName>
+                <default>false</default>
+                <label>01-Ceramic &amp; Fans Heaters</label>
+            </value>
+            <value>
+                <fullName>02-Quartz &amp; Carbon Heaters</fullName>
+                <default>false</default>
+                <label>02-Quartz &amp; Carbon Heaters</label>
+            </value>
+            <value>
+                <fullName>03-Oil Filled Radiators</fullName>
+                <default>false</default>
+                <label>03-Oil Filled Radiators</label>
+            </value>
+            <value>
+                <fullName>01-Gas Heaters</fullName>
+                <default>false</default>
+                <label>01-Gas Heaters</label>
+            </value>
+            <value>
+                <fullName>02-Infrared &amp; Halogen Heaters</fullName>
+                <default>false</default>
+                <label>02-Infrared &amp; Halogen Heaters</label>
+            </value>
+            <value>
+                <fullName>01-Air Purifiers</fullName>
+                <default>false</default>
+                <label>01-Air Purifiers</label>
+            </value>
+            <value>
+                <fullName>02-Humidifiers &amp; Dehumidifiers</fullName>
+                <default>false</default>
+                <label>02-Humidifiers &amp; Dehumidifiers</label>
+            </value>
+            <value>
+                <fullName>01-Kids&apos; Chairs &amp; tables</fullName>
+                <default>false</default>
+                <label>01-Kids&apos; Chairs &amp; tables</label>
+            </value>
+            <value>
+                <fullName>02-Kids&apos; Beds &amp; Bunk Beds</fullName>
+                <default>false</default>
+                <label>02-Kids&apos; Beds &amp; Bunk Beds</label>
+            </value>
+            <value>
+                <fullName>03-Kids&apos; Storage</fullName>
+                <default>false</default>
+                <label>03-Kids&apos; Storage</label>
+            </value>
+            <value>
+                <fullName>01-Outdoor Playsets</fullName>
+                <default>false</default>
+                <label>01-Outdoor Playsets</label>
+            </value>
+            <value>
+                <fullName>02-Swings &amp; Ride-ons</fullName>
+                <default>false</default>
+                <label>02-Swings &amp; Ride-ons</label>
+            </value>
+            <value>
+                <fullName>05-Office Accessories</fullName>
+                <default>false</default>
+                <label>05-Office Accessories</label>
+            </value>
+            <value>
+                <fullName>06-Hammocks &amp; Swings</fullName>
+                <default>false</default>
+                <label>06-Hammocks &amp; Swings</label>
+            </value>
+            <value>
+                <fullName>07-Outdoor Benches</fullName>
+                <default>false</default>
+                <label>07-Outdoor Benches</label>
+            </value>
+            <value>
+                <fullName>04-Umbrellas Accessories</fullName>
+                <default>false</default>
+                <label>04-Umbrellas Accessories</label>
+            </value>
+            <value>
+                <fullName>04-Fire Pits &amp; Fire Tables</fullName>
+                <default>false</default>
+                <label>04-Fire Pits &amp; Fire Tables</label>
+            </value>
+            <value>
+                <fullName>05-Electric Grills</fullName>
+                <default>false</default>
+                <label>05-Electric Grills</label>
+            </value>
+            <value>
+                <fullName>06-Pizza Oven</fullName>
+                <default>false</default>
+                <label>06-Pizza Oven</label>
+            </value>
+            <value>
+                <fullName>05-Camping Accessories</fullName>
+                <default>false</default>
+                <label>05-Camping Accessories</label>
+            </value>
+            <value>
+                <fullName>06-Beach Carts &amp; Wagons</fullName>
+                <default>false</default>
+                <label>06-Beach Carts &amp; Wagons</label>
+            </value>
+            <value>
+                <fullName>01-Plant containers &amp; Planters</fullName>
+                <default>false</default>
+                <label>01-Plant containers &amp; Planters</label>
+            </value>
+            <value>
+                <fullName>02-Watering &amp; Irrigation</fullName>
+                <default>false</default>
+                <label>02-Watering &amp; Irrigation</label>
+            </value>
+            <value>
+                <fullName>03-Garden Tool &amp; Equipment</fullName>
+                <default>false</default>
+                <label>03-Garden Tool &amp; Equipment</label>
+            </value>
+            <value>
+                <fullName>04-Garden Decoration</fullName>
+                <default>false</default>
+                <label>04-Garden Decoration</label>
+            </value>
+            <value>
+                <fullName>04-Ceiling Fans</fullName>
+                <default>false</default>
+                <label>04-Ceiling Fans</label>
+            </value>
+            <value>
+                <fullName>05-Wall Fans</fullName>
+                <default>false</default>
+                <label>05-Wall Fans</label>
+            </value>
+            <value>
+                <fullName>04-Electric Heaters &amp; Convectors</fullName>
+                <default>false</default>
+                <label>04-Electric Heaters &amp; Convectors</label>
+            </value>
+            <value>
+                <fullName>01-Air Conditioner</fullName>
+                <default>false</default>
+                <label>01-Air Conditioner</label>
+            </value>
+            <value>
+                <fullName>02-Air Cooler</fullName>
+                <default>false</default>
+                <label>02-Air Cooler</label>
+            </value>
+            <value>
+                <fullName>01-Bancos</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>01-Bancos</label>
+            </value>
+            <value>
+                <fullName>01-Barbacoas-Asadores</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>01-Barbacoas-Asadores</label>
+            </value>
+            <value>
+                <fullName>01-Botas de seguridad</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>01-Botas de seguridad</label>
+            </value>
+            <value>
+                <fullName>01-Bricolaje</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>01-Bricolaje</label>
+            </value>
+            <value>
+                <fullName>01-Gimnasios y Móviles</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>01-Gimnasios y Móviles</label>
+            </value>
+            <value>
+                <fullName>01-Manualidades</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>01-Manualidades</label>
+            </value>
+            <value>
+                <fullName>01-Mesas de plancha</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>01-Mesas de plancha</label>
+            </value>
+            <value>
+                <fullName>01-Miniaturas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>01-Miniaturas</label>
+            </value>
+            <value>
+                <fullName>01-Miniaturas vehículos y pistas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>01-Miniaturas vehículos y pistas</label>
+            </value>
+            <value>
+                <fullName>01-Muebles de habitación</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>01-Muebles de habitación</label>
+            </value>
+            <value>
+                <fullName>01-Musicales</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>01-Musicales</label>
+            </value>
+            <value>
+                <fullName>01-Play Sets y Columpios</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>01-Play Sets y Columpios</label>
+            </value>
+            <value>
+                <fullName>01-Play sets</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>01-Play sets</label>
+            </value>
+            <value>
+                <fullName>01-Playa</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>01-Playa</label>
+            </value>
+            <value>
+                <fullName>01-Resina y Plástico</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>01-Resina y Plástico</label>
+            </value>
+            <value>
+                <fullName>01-Riego</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>01-Riego</label>
+            </value>
+            <value>
+                <fullName>01-Sillas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>01-Sillas</label>
+            </value>
+            <value>
+                <fullName>01-Sillas ordenador</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>01-Sillas ordenador</label>
+            </value>
+            <value>
+                <fullName>01-Sillas y Tumbonas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>01-Sillas y Tumbonas</label>
+            </value>
+            <value>
+                <fullName>01-Tiendas de Campaña</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>01-Tiendas de Campaña</label>
+            </value>
+            <value>
+                <fullName>01-Ventiladores</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>01-Ventiladores</label>
+            </value>
+            <value>
+                <fullName>02-Accesorios y Complementos</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>02-Accesorios y Complementos</label>
+            </value>
+            <value>
+                <fullName>02-Automóvil</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>02-Automóvil</label>
+            </value>
+            <value>
+                <fullName>02-Botas de agua</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>02-Botas de agua</label>
+            </value>
+            <value>
+                <fullName>02-Calefactores</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>02-Calefactores</label>
+            </value>
+            <value>
+                <fullName>02-Camping</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>02-Camping</label>
+            </value>
+            <value>
+                <fullName>02-Didácticos</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>02-Didácticos</label>
+            </value>
+            <value>
+                <fullName>02-Didácticos Bebés</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>02-Didácticos Bebés</label>
+            </value>
+            <value>
+                <fullName>02-Disfraces</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>02-Disfraces</label>
+            </value>
+            <value>
+                <fullName>02-Fashion doll</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>02-Fashion doll</label>
+            </value>
+            <value>
+                <fullName>02-Herramienta de Jardín</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>02-Herramienta de Jardín</label>
+            </value>
+            <value>
+                <fullName>02-Rattan y Madera Imitación</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>02-Imitación Rattan y Madera</label>
+            </value>
+            <value>
+                <fullName>02-Juguetes creativos</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>02-Juguetes creativos</label>
+            </value>
+            <value>
+                <fullName>02-Libreros y decoración</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>02-Libreros y decoración</label>
+            </value>
+            <value>
+                <fullName>02-Mesas Escritorio</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>02-Mesas Escritorio</label>
+            </value>
+            <value>
+                <fullName>02-Mobiliario de Camping</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>02-Mobiliario de Camping</label>
+            </value>
+            <value>
+                <fullName>02-Patines</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>02-Patines</label>
+            </value>
+            <value>
+                <fullName>02-Sets y pistas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>02-Sets y pistas</label>
+            </value>
+            <value>
+                <fullName>02-Sillas plásticas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>02-Sillas plásticas</label>
+            </value>
+            <value>
+                <fullName>02-Sombrillas de Playa</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>02-Sombrillas de Playa</label>
+            </value>
+            <value>
+                <fullName>02-Tendales</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>02-Tendales</label>
+            </value>
+            <value>
+                <fullName>03-Accesorios</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>03-Accesorios</label>
+            </value>
+            <value>
+                <fullName>03-Accesorios de Camping</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>03-Accesorios de Camping</label>
+            </value>
+            <value>
+                <fullName>03-Accesorios de juegos</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>03-Accesorios de juegos</label>
+            </value>
+            <value>
+                <fullName>03-Bebés</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>03-Bebés</label>
+            </value>
+            <value>
+                <fullName>03-Complementos de Protección</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>03-Complementos de Protección</label>
+            </value>
+            <value>
+                <fullName>03-Electrónico</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>03-Electrónico</label>
+            </value>
+            <value>
+                <fullName>03-Escaleras y Taburetes Taller</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>03-Escaleras y Taburetes Taller</label>
+            </value>
+            <value>
+                <fullName>03-Hamaca hinchable</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>03-Hamaca hinchable</label>
+            </value>
+            <value>
+                <fullName>03-Juegos de Mesa</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>03-Juegos de Mesa</label>
+            </value>
+            <value>
+                <fullName>03-Macetas y Plantas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>03-Macetas y Plantas</label>
+            </value>
+            <value>
+                <fullName>03-Mueble en KIT</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>03-Mueble en KIT</label>
+            </value>
+            <value>
+                <fullName>03-Piscina/Alberca</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>03-Piscina/Alberca</label>
+            </value>
+            <value>
+                <fullName>03-Plástico</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>03-Plástico</label>
+            </value>
+            <value>
+                <fullName>03-Radiocontrol</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>03-Radiocontrol</label>
+            </value>
+            <value>
+                <fullName>03-Sensoriales</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>03-Sensoriales</label>
+            </value>
+            <value>
+                <fullName>03-Sets de mesas + sillas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>03-Sets de mesas + sillas</label>
+            </value>
+            <value>
+                <fullName>03-Sillas metálicas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>03-Sillas metálicas</label>
+            </value>
+            <value>
+                <fullName>04-Baño, Limpieza y Lavado</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>04-Baño, Limpieza y Lavado</label>
+            </value>
+            <value>
+                <fullName>04-Complementos Escritorio</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>04-Complementos Escritorio</label>
+            </value>
+            <value>
+                <fullName>04-Hornillos a gas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>04-Hornillos a gas</label>
+            </value>
+            <value>
+                <fullName>04-Mueble de Jardin</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>04-Mueble de Jardin</label>
+            </value>
+            <value>
+                <fullName>04-Muebles TV y percheros</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>04-Muebles TV y percheros</label>
+            </value>
+            <value>
+                <fullName>04-Rompecabezas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>04-Rompecabezas</label>
+            </value>
+            <value>
+                <fullName>04-Sets</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>04-Sets</label>
+            </value>
+            <value>
+                <fullName>04-Sillas pata madera, y mesas a juego</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>04-Sillas pata madera, y mesas a juego</label>
+            </value>
+            <value>
+                <fullName>04-Sonajas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>04-Sonajas</label>
+            </value>
+            <value>
+                <fullName>05-Acción</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>05-Acción</label>
+            </value>
+            <value>
+                <fullName>05-BBQ</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>05-BBQ</label>
+            </value>
+            <value>
+                <fullName>05-Limpieza y Lavado</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>05-Limpieza y Lavado</label>
+            </value>
+            <value>
+                <fullName>05-Mesas de sala y apoyo</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>05-Mesas de sala y apoyo</label>
+            </value>
+            <value>
+                <fullName>05-Mueble Infantil</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>05-Mueble Infantil</label>
+            </value>
+            <value>
+                <fullName>05-Mueble de Madera</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>05-Mueble de Madera</label>
+            </value>
+            <value>
+                <fullName>05-Piezas y Bloques</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>05-Piezas y Bloques</label>
+            </value>
+            <value>
+                <fullName>05-Sillas de espera y eventos</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>05-Sillas de espera y eventos</label>
+            </value>
+            <value>
+                <fullName>06-Almacenaje y Ordenación</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>06-Almacenaje y Ordenación</label>
+            </value>
+            <value>
+                <fullName>06-Carpas, Gazebos y Sombrillas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>06-Carpas, Gazebos y Sombrillas</label>
+            </value>
+            <value>
+                <fullName>06-Mangueras</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>06-Mangueras</label>
+            </value>
+            <value>
+                <fullName>06-Mochilas y Accesorios</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>06-Mochilas y Accesorios</label>
+            </value>
+            <value>
+                <fullName>06-Peluches</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>06-Peluches</label>
+            </value>
+            <value>
+                <fullName>06-Taburetes de salón</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>06-Taburetes de salón</label>
+            </value>
+            <value>
+                <fullName>06-Taburetes/Bancos de Bar</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>06-Taburetes/Bancos de Bar</label>
+            </value>
+            <value>
+                <fullName>07-Barra de desayuno</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>07-Barra de desayuno</label>
+            </value>
+            <value>
+                <fullName>07-Fumigadoras</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>07-Fumigadoras</label>
+            </value>
+            <value>
+                <fullName>07-Infantil</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>07-Infantil</label>
+            </value>
+            <value>
+                <fullName>07-Seguridad del Hogar</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>07-Seguridad del Hogar</label>
+            </value>
+            <value>
+                <fullName>07-Sofas reclinables</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>07-Sofas reclinables</label>
+            </value>
+            <value>
+                <fullName>08-Equipaje</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>08-Equipaje</label>
+            </value>
+            <value>
+                <fullName>08-Sets Ahorraespacio</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>08-Sets Ahorraespacio</label>
+            </value>
+            <value>
+                <fullName>08-Sets de Jardín</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>08-Sets de Jardín</label>
+            </value>
+            <value>
+                <fullName>08-Sets de herramientas de Jardin</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>08-Sets de herramientas de Jardin</label>
+            </value>
+            <value>
+                <fullName>08-Sillones</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>08-Sillones</label>
+            </value>
+            <value>
+                <fullName>09-Accesorios Personales</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>09-Accesorios Personales</label>
+            </value>
+            <value>
+                <fullName>09-Carritos de apoyo cocina</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>09-Carritos de apoyo cocina</label>
+            </value>
+            <value>
+                <fullName>09-Decoración Jardin</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>09-Decoración Jardin</label>
+            </value>
+            <value>
+                <fullName>09-Mesas de Jardín</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>09-Mesas de Jardín</label>
+            </value>
+            <value>
+                <fullName>09-Sofas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>09-Sofas</label>
+            </value>
+            <value>
+                <fullName>10-Camas literas y transformers</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>10-Camas literas y transformers</label>
+            </value>
+            <value>
+                <fullName>10-Mochilas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>10-Mochilas</label>
+            </value>
+            <value>
+                <fullName>10-Sets de comedor</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>10-Sets de comedor</label>
+            </value>
+            <value>
+                <fullName>10-Sillas, Sillones y Bancos</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>10-Sillas, Sillones y Bancos</label>
+            </value>
+            <value>
+                <fullName>11-Mesas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>11-Mesas</label>
+            </value>
+            <value>
+                <fullName>11-Sillones y Bancos</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>11-Sillones y Bancos</label>
+            </value>
+            <value>
+                <fullName>11-Tumbonas y Balancines</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>11-Tumbonas y Balancines</label>
+            </value>
+            <value>
+                <fullName>12-Decoración e Iluminación</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>12-Decoración e Iluminación</label>
+            </value>
+            <value>
+                <fullName>12-Muebles</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>12-Muebles</label>
+            </value>
+            <value>
+                <fullName>12-Muebles de Sala</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>12-Muebles de Sala</label>
+            </value>
+            <value>
+                <fullName>13-Almacenaje y Organización</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>13-Almacenaje y Organización</label>
+            </value>
+            <value>
+                <fullName>13-Complementos</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>13-Complementos</label>
+            </value>
+            <value>
+                <fullName>13-Muebles de Recámara</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>13-Muebles de Recámara</label>
+            </value>
+            <value>
+                <fullName>14-Estanterías y Repisas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>14-Estanterías y Repisas</label>
+            </value>
+            <value>
+                <fullName>15-Decoración e Iluminación de Interior</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>15-Decoración e Iluminación de Interior</label>
+            </value>
+            <value>
+                <fullName>16-Muebles de TV</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>16-Muebles de TV</label>
+            </value>
+            <value>
+                <fullName>22-Extra</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>22-Extra</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>1-Fans</controllingFieldValue>
+            <valueName>01-Stand &amp; Tower Fans</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Fans</controllingFieldValue>
+            <valueName>02-Desk &amp; Floor Fans</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Fans</controllingFieldValue>
+            <valueName>03-Rechargeable Fans</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Fans</controllingFieldValue>
+            <valueName>04-Ceiling Fans</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Fans</controllingFieldValue>
+            <valueName>05-Wall Fans</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>2-Indoor Heaters</controllingFieldValue>
+            <valueName>01-Ceramic &amp; Fans Heaters</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>2-Indoor Heaters</controllingFieldValue>
+            <valueName>02-Quartz &amp; Carbon Heaters</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>2-Indoor Heaters</controllingFieldValue>
+            <valueName>03-Oil Filled Radiators</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>2-Indoor Heaters</controllingFieldValue>
+            <valueName>04-Electric Heaters &amp; Convectors</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Living Room Furniture</controllingFieldValue>
+            <valueName>01-Chairs</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Living Room Furniture</controllingFieldValue>
+            <valueName>02-Coffe Tables, Side &amp; End Tables</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Living Room Furniture</controllingFieldValue>
+            <valueName>03-Sofas &amp; Couches</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Living Room Furniture</controllingFieldValue>
+            <valueName>04-Sectional Sofas</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Living Room Furniture</controllingFieldValue>
+            <valueName>05-Loveseats</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Living Room Furniture</controllingFieldValue>
+            <valueName>06-Sofa Beds</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Living Room Furniture</controllingFieldValue>
+            <valueName>07-Benches &amp; Ottomans</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Living Room Furniture</controllingFieldValue>
+            <valueName>08-Accent Chairs &amp; Recliners</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Living Room Furniture</controllingFieldValue>
+            <valueName>09-Console Tables &amp; Sideboards</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Living Room Furniture</controllingFieldValue>
+            <valueName>10-Tv Stands &amp; Entertaiment Centers</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Living Room Furniture</controllingFieldValue>
+            <valueName>11-Storage Furniture</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>3-Outdoor Heaters</controllingFieldValue>
+            <valueName>01-Gas Heaters</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>3-Outdoor Heaters</controllingFieldValue>
+            <valueName>02-Infrared &amp; Halogen Heaters</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>2-Kitchen &amp; Dining Furniture</controllingFieldValue>
+            <valueName>01-Dining Chairs</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>2-Kitchen &amp; Dining Furniture</controllingFieldValue>
+            <valueName>02-Dining Tables</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>2-Kitchen &amp; Dining Furniture</controllingFieldValue>
+            <valueName>03-Dining Sets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>2-Kitchen &amp; Dining Furniture</controllingFieldValue>
+            <valueName>04-Bar Stools</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>2-Kitchen &amp; Dining Furniture</controllingFieldValue>
+            <valueName>05-Kitchen Carts &amp; Islands</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>2-Kitchen &amp; Dining Furniture</controllingFieldValue>
+            <valueName>06-Dining Storage</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>3-Office Furniture</controllingFieldValue>
+            <valueName>01-Office Chairs</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>3-Office Furniture</controllingFieldValue>
+            <valueName>02-Desks</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>3-Office Furniture</controllingFieldValue>
+            <valueName>03-Bookcases</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>3-Office Furniture</controllingFieldValue>
+            <valueName>04-Office Storage</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>3-Office Furniture</controllingFieldValue>
+            <valueName>05-Office Accessories</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Kids&apos; furniture</controllingFieldValue>
+            <valueName>01-Kids&apos; Chairs &amp; tables</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Kids&apos; furniture</controllingFieldValue>
+            <valueName>02-Kids&apos; Beds &amp; Bunk Beds</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Kids&apos; furniture</controllingFieldValue>
+            <valueName>03-Kids&apos; Storage</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>4-Storage &amp; Organization</controllingFieldValue>
+            <valueName>01-Closet Storage</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>4-Storage &amp; Organization</controllingFieldValue>
+            <valueName>02-Shoe Storage</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>4-Storage &amp; Organization</controllingFieldValue>
+            <valueName>03-Storage Carts &amp; Drawers</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>4-Storage &amp; Organization</controllingFieldValue>
+            <valueName>04-Storage Bins &amp; Boxes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>4-Storage &amp; Organization</controllingFieldValue>
+            <valueName>05-Shelving Units</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>2-Outdoor Toys</controllingFieldValue>
+            <valueName>01-Outdoor Playsets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>2-Outdoor Toys</controllingFieldValue>
+            <valueName>02-Swings &amp; Ride-ons</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Outdoor Furniture</controllingFieldValue>
+            <valueName>01-Outdoor Dining Sets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Outdoor Furniture</controllingFieldValue>
+            <valueName>02-Outdoor Seating Sets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Outdoor Furniture</controllingFieldValue>
+            <valueName>03-Outdoor Chairs &amp; Loungers</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Outdoor Furniture</controllingFieldValue>
+            <valueName>04-Outdoor Tables</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Outdoor Furniture</controllingFieldValue>
+            <valueName>05-Outdoor Storage</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Outdoor Furniture</controllingFieldValue>
+            <valueName>06-Hammocks &amp; Swings</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1-Outdoor Furniture</controllingFieldValue>
+            <valueName>07-Outdoor Benches</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>6-Outdoor Gardening</controllingFieldValue>
+            <valueName>01-Plant containers &amp; Planters</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>6-Outdoor Gardening</controllingFieldValue>
+            <valueName>02-Watering &amp; Irrigation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>6-Outdoor Gardening</controllingFieldValue>
+            <valueName>03-Garden Tool &amp; Equipment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>6-Outdoor Gardening</controllingFieldValue>
+            <valueName>04-Garden Decoration</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>2-Outdoor Shades &amp; Structures</controllingFieldValue>
+            <valueName>01-Umbrellas</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>2-Outdoor Shades &amp; Structures</controllingFieldValue>
+            <valueName>02-Pergolas &amp; Gazebos</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>2-Outdoor Shades &amp; Structures</controllingFieldValue>
+            <valueName>03-Awnings</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>2-Outdoor Shades &amp; Structures</controllingFieldValue>
+            <valueName>04-Umbrellas Accessories</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>4-Air Treatment</controllingFieldValue>
+            <valueName>01-Air Purifiers</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>4-Air Treatment</controllingFieldValue>
+            <valueName>02-Humidifiers &amp; Dehumidifiers</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>3-Outdoor Cooking</controllingFieldValue>
+            <valueName>01-Charcoal Grills</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>3-Outdoor Cooking</controllingFieldValue>
+            <valueName>02-Gas Grills</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>3-Outdoor Cooking</controllingFieldValue>
+            <valueName>03-Grill Accesorios</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>3-Outdoor Cooking</controllingFieldValue>
+            <valueName>04-Fire Pits &amp; Fire Tables</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>3-Outdoor Cooking</controllingFieldValue>
+            <valueName>05-Electric Grills</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>3-Outdoor Cooking</controllingFieldValue>
+            <valueName>06-Pizza Oven</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>5-Air Conditioner</controllingFieldValue>
+            <valueName>01-Air Conditioner</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>5-Air Conditioner</controllingFieldValue>
+            <valueName>02-Air Cooler</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>4-Camping &amp; Beach</controllingFieldValue>
+            <valueName>01-Camping Tents</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>4-Camping &amp; Beach</controllingFieldValue>
+            <valueName>02-Camping Chairs &amp; Tables</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>4-Camping &amp; Beach</controllingFieldValue>
+            <valueName>03-Coolers &amp; Thermal Bags</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>4-Camping &amp; Beach</controllingFieldValue>
+            <valueName>04-Beach Chairs &amp; Umbrellas</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>4-Camping &amp; Beach</controllingFieldValue>
+            <valueName>05-Camping Accessories</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>4-Camping &amp; Beach</controllingFieldValue>
+            <valueName>06-Beach Carts &amp; Wagons</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>5-Folding Furniture</controllingFieldValue>
+            <valueName>01-Utility Folding Tables (HDPE)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>5-Folding Furniture</controllingFieldValue>
+            <valueName>02-Folding Chairs</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>5-Folding Furniture</controllingFieldValue>
+            <valueName>03-Folding  Benches</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>5-Folding Furniture</controllingFieldValue>
+            <valueName>04-Folding  Sets (Tables+ Chairs)</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

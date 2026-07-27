@@ -1,0 +1,21 @@
+REPORTE DE FUNCIONALIDADES DESPLEGADAS EN PRODUCCIÓN
+
+Las siguientes funcionalidades (basadas en los requerimientos del proyecto) ya se encuentran implementadas, probadas y activas en el entorno de Producción:
+
+1. Importación Masiva de Productos (Mass Product Import)
+Se habilitó un asistente que permite la creación o actualización masiva de múltiples productos al mismo tiempo. El proceso puede realizarse a través de un flujo asistido o mediante la lectura directa de archivos externos, agilizando enormemente la carga y actualización de catálogos sin depender de herramientas de terceros.
+
+2. Integración con OneDrive para Gestión de Imágenes (OneDrive Integration / Image Manager)
+Se completó la conexión segura de extremo a extremo con Microsoft Azure y OneDrive. Esto permite consultar, previsualizar y enlazar imágenes en tiempo real directamente desde las carpetas corporativas de OneDrive hacia los registros de producto en Salesforce, optimizando la gestión visual sin consumir almacenamiento interno de la plataforma.
+
+3. Formulario Personalizado de Nuevo Producto (Custom New Product Form)
+Se reemplazó la pantalla de creación estándar por un formulario dinámico y personalizado. Este nuevo formulario está disponible tanto desde la vista de lista de productos como mediante acciones globales, mejorando la experiencia del usuario y garantizando que se capture la información correcta al crear un artículo.
+
+4. Historial de Compras y Órdenes por Producto (Product Order History)
+Se habilitó un panel de inteligencia de ventas que muestra el detalle de movimiento de cada producto. Los ejecutivos pueden ver rápidamente qué clientes han comprado el producto, las cantidades y en qué números de orden está incluido, todo desde la misma pantalla.
+
+5. Visualizador de Productos Relacionados y Alternativos (Related Products View)
+Se agregó una interfaz visual para mostrar de forma amigable los artículos relacionados (como accesorios, complementos o productos sustitutos). Esto facilita la navegación del catálogo y potencia las oportunidades de venta cruzada (cross-selling).
+
+6. Gestión de Cajas Maestras y Empaques (Master Boxes UI)
+Se implementó una sección específica para la administración logística del producto. Permite a los usuarios controlar y visualizar rápidamente las dimensiones, pesos y unidades por caja maestra, manteniendo la información de distribución estructurada.

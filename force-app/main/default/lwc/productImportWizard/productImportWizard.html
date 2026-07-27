@@ -1,0 +1,299 @@
+<template>
+    <lightning-card>
+        <!-- ══ HEADER ══════════════════════════════════════════════════════ -->
+        <div slot="title" class="wizard-header">
+            <lightning-icon icon-name="standard:product" size="small" class="slds-m-right_x-small"></lightning-icon>
+            <span class="wizard-title">Asistente de Importación de Productos</span>
+        </div>
+
+        <div class="wizard-body">
+
+            <!-- ── Progress bar ──────────────────────────────────────────── -->
+            <div class="slds-p-horizontal_large slds-p-top_medium">
+                <lightning-progress-indicator current-step={currentStep} type="path" variant="base">
+                    <lightning-progress-step label="Configuración"  value="step1"></lightning-progress-step>
+                    <lightning-progress-step label="Subir CSV"      value="step2"></lightning-progress-step>
+                    <lightning-progress-step label="Mapear Campos"  value="step3"></lightning-progress-step>
+                    <lightning-progress-step label="Importar"       value="step4"></lightning-progress-step>
+                </lightning-progress-indicator>
+            </div>
+
+            <!-- ── Step content ──────────────────────────────────────────── -->
+            <div class="wizard-step-content">
+
+                <!-- STEP 1 ─ Configuración -->
+                <template lwc:if={isStep1}>
+                    <div class="step-header">
+                        <div class="step-number">1</div>
+                        <div>
+                            <h2 class="step-title">¿Qué deseas hacer con los datos?</h2>
+                            <p class="step-subtitle">Selecciona la operación que se aplicará a cada fila del CSV.</p>
+                        </div>
+                    </div>
+
+                    <div class="operation-cards">
+                        <!-- INSERT -->
+                        <div class={insertCardClass} onclick={handleOperationCardClick} data-value="insert">
+                            <lightning-icon icon-name="utility:add" size="medium" class="op-icon"></lightning-icon>
+                            <div class="op-label">Insertar</div>
+                            <div class="op-desc">Crea registros nuevos. Falla si el producto ya existe.</div>
+                        </div>
+                        <!-- UPDATE -->
+                        <div class={updateCardClass} onclick={handleOperationCardClick} data-value="update">
+                            <lightning-icon icon-name="utility:edit" size="medium" class="op-icon"></lightning-icon>
+                            <div class="op-label">Actualizar</div>
+                            <div class="op-desc">Modifica productos existentes. No crea nuevos.</div>
+                        </div>
+                        <!-- UPSERT -->
+                        <div class={upsertCardClass} onclick={handleOperationCardClick} data-value="upsert">
+                            <lightning-icon icon-name="utility:refresh" size="medium" class="op-icon"></lightning-icon>
+                            <div class="op-label">Upsert</div>
+                            <div class="op-desc">Crea nuevos y actualiza existentes en una sola pasada.</div>
+                        </div>
+                    </div>
+
+                    <!-- Match field (Update / Upsert) -->
+                    <template lwc:if={needsMatchField}>
+                        <div class="match-field-box">
+                            <div class="match-field-header">
+                                <lightning-icon icon-name="utility:key" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                                <strong>Campo de coincidencia</strong>
+                            </div>
+                            <p class="match-field-hint">
+                                Salesforce usará este campo para identificar qué registro actualizar.
+                                <template lwc:if={isUpsert}>Si no existe, se creará uno nuevo.</template>
+                                <template lwc:if={isUpdate}>Si no se encuentra el registro, esa fila fallará.</template>
+                            </p>
+                            <lightning-combobox
+                                name="matchField"
+                                label=""
+                                value={matchField}
+                                placeholder="Selecciona el identificador único..."
+                                options={matchFieldOptions}
+                                onchange={handleMatchFieldChange}
+                                required>
+                            </lightning-combobox>
+                        </div>
+                    </template>
+                </template>
+
+                <!-- STEP 2 ─ Subir CSV -->
+                <template lwc:if={isStep2}>
+                    <div class="step-header">
+                        <div class="step-number">2</div>
+                        <div>
+                            <h2 class="step-title">Selecciona tu archivo CSV</h2>
+                            <p class="step-subtitle">El sistema utilizará PapaParse para leer el archivo con precisión.</p>
+                        </div>
+                    </div>
+
+                    <div class="upload-zone">
+                        <input type="file" accept=".csv" onchange={handleFileUpload}
+                               class="slds-hide" id="file-upload-input" />
+                        <label for="file-upload-input" class="upload-label">
+                            <lightning-icon icon-name="doctype:csv" size="large" class="upload-icon"></lightning-icon>
+                            <template lwc:if={fileName}>
+                                <div class="upload-filename">
+                                    <lightning-icon icon-name="utility:check" size="small"
+                                                   alternative-text="ok" class="check-icon"></lightning-icon>
+                                    {fileName}
+                                </div>
+                                <span class="upload-hint">Haz clic para cambiar el archivo</span>
+                            </template>
+                            <template lwc:else>
+                                <span class="upload-cta">Haz clic para seleccionar un archivo CSV</span>
+                                <span class="upload-hint">Solo archivos .csv</span>
+                            </template>
+                        </label>
+                    </div>
+
+                    <template lwc:if={fileName}>
+                        <div class="file-stats">
+                            <lightning-icon icon-name="utility:rows" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                            <strong>{parsedData.length}</strong>&nbsp;filas detectadas
+                            &nbsp;·&nbsp;
+                            <lightning-icon icon-name="utility:table" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                            <strong>{csvHeaders.length}</strong>&nbsp;columnas
+                        </div>
+                    </template>
+                </template>
+
+                <!-- STEP 3 ─ Mapear Campos -->
+                <template lwc:if={isStep3}>
+                    <div class="step-header">
+                        <div class="step-number">3</div>
+                        <div>
+                            <h2 class="step-title">Mapear Columnas del CSV</h2>
+                            <p class="step-subtitle">Asocia cada columna del archivo con el campo correspondiente en Salesforce.</p>
+                        </div>
+                    </div>
+
+                    <div class="mapping-table-wrap">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_fixed-layout mapping-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:35%">Columna en CSV</th>
+                                    <th style="width:30%">Dato de ejemplo</th>
+                                    <th style="width:35%">Campo en Salesforce</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={csvHeaders} for:item="header">
+                                    <tr key={header.name} class="mapping-row">
+                                        <td>
+                                            <div class="col-name">{header.name}</div>
+                                        </td>
+                                        <td>
+                                            <div class="col-sample">{header.sample}</div>
+                                        </td>
+                                        <td>
+                                            <lightning-combobox
+                                                name={header.name}
+                                                value={header.mappedField}
+                                                placeholder="— No mapear —"
+                                                options={productFieldOptions}
+                                                onchange={handleFieldMapping}>
+                                            </lightning-combobox>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </template>
+
+                <!-- STEP 4 ─ Resumen e Importación -->
+                <template lwc:if={isStep4}>
+                    <div class="step-header">
+                        <div class="step-number">4</div>
+                        <div>
+                            <h2 class="step-title">Resumen e Importación</h2>
+                            <p class="step-subtitle">Revisa el resumen y confirma la operación.</p>
+                        </div>
+                    </div>
+
+                    <!-- Summary cards -->
+                    <div class="summary-cards">
+                        <div class="summary-card">
+                            <div class="summary-value">{parsedData.length}</div>
+                            <div class="summary-label">Registros a procesar</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-value op-badge">{operationName}</div>
+                            <div class="summary-label">Operación</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-value">{mappedFieldCount}</div>
+                            <div class="summary-label">Campos mapeados</div>
+                        </div>
+                    </div>
+
+                    <!-- Result Modal -->
+                    <template lwc:if={showResultModal}>
+                        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large">
+                            <div class="slds-modal__container" style="max-width: 80rem; width: 80%;">
+                                <header class="slds-modal__header">
+                                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Cerrar" onclick={closeResultModal}>
+                                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small"></lightning-icon>
+                                    </button>
+                                    <h2 class="slds-text-heading_medium slds-hyphenate">Resultados de Importación</h2>
+                                </header>
+                                <div class="slds-modal__content slds-p-around_medium">
+                                    <div class="slds-grid slds-gutters slds-m-bottom_medium">
+                                        <div class="slds-col slds-size_1-of-2">
+                                            <div class="slds-box slds-theme_success slds-theme_alert-texture">
+                                                <h3 class="slds-text-heading_small">Éxitos: {importResult.totalSuccess}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-2">
+                                            <div class="slds-box slds-theme_error slds-theme_alert-texture">
+                                                <h3 class="slds-text-heading_small">Errores: {importResult.totalErrors}</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <template lwc:if={importResult.errorRecords.length}>
+                                        <h3 class="slds-text-heading_small slds-text-color_error slds-m-bottom_x-small">Registros con Error</h3>
+                                        <div class="slds-scrollable_y" style="max-height: 250px;">
+                                            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                                                <thead>
+                                                    <tr class="slds-line-height_reset">
+                                                        <th scope="col" style="width: 100px;"><div class="slds-truncate">Fila CSV</div></th>
+                                                        <th scope="col"><div class="slds-truncate">Mensaje de Error</div></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <template for:each={importResult.errorRecords} for:item="err">
+                                                        <tr key={err.rowIndex}>
+                                                            <td data-label="Fila CSV"><div class="slds-truncate">{err.rowIndex}</div></td>
+                                                            <td data-label="Error"><div class="slds-cell-wrap" style="color:red; white-space: pre-wrap;">{err.errorMessage}</div></td>
+                                                        </tr>
+                                                    </template>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </template>
+
+                                    <template lwc:if={importResult.successRecords.length}>
+                                        <h3 class="slds-text-heading_small slds-text-color_success slds-m-top_medium slds-m-bottom_x-small">Registros Creados / Actualizados</h3>
+                                        <div class="slds-scrollable_y" style="max-height: 250px;">
+                                            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                                                <thead>
+                                                    <tr class="slds-line-height_reset">
+                                                        <th scope="col" style="width: 100px;"><div class="slds-truncate">Fila CSV</div></th>
+                                                        <th scope="col"><div class="slds-truncate">Salesforce ID</div></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <template for:each={importResult.successRecords} for:item="succ">
+                                                        <tr key={succ.rowIndex}>
+                                                            <td data-label="Fila CSV"><div class="slds-truncate">{succ.rowIndex}</div></td>
+                                                            <td data-label="ID"><div class="slds-truncate">{succ.recordId}</div></td>
+                                                        </tr>
+                                                    </template>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </template>
+
+                                </div>
+                                <footer class="slds-modal__footer">
+                                    <button class="slds-button slds-button_brand" onclick={closeResultModal}>Aceptar y Finalizar</button>
+                                </footer>
+                            </div>
+                        </section>
+                        <div class="slds-backdrop slds-backdrop_open"></div>
+                    </template>
+
+                    <template lwc:if={isProcessing}>
+                        <div class="processing-box">
+                            <lightning-spinner alternative-text="Procesando..." size="medium"></lightning-spinner>
+                            <p class="slds-m-top_medium">Procesando {parsedData.length} registros en Salesforce…</p>
+                        </div>
+                    </template>
+                </template>
+
+            </div><!-- /step-content -->
+        </div><!-- /wizard-body -->
+
+        <!-- ── Footer ─────────────────────────────────────────────────────── -->
+        <div slot="footer" class="wizard-footer">
+            <lightning-button label="Cancelar / Cerrar" onclick={handleClose}></lightning-button>
+            <div class="slds-button-group">
+                <lightning-button
+                    label="← Atrás"
+                    class="slds-m-right_x-small"
+                    onclick={handlePrevious}
+                    disabled={isFirstStep}>
+                </lightning-button>
+                <lightning-button
+                    label={nextButtonLabel}
+                    variant="brand"
+                    onclick={handleNext}
+                    disabled={isNextDisabled}>
+                </lightning-button>
+            </div>
+        </div>
+
+    </lightning-card>
+</template>

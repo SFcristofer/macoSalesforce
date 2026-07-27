@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>image_uploaded_s3__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>field used in massive image loading from salesforce to aws s3</description>
+    <label>image uploaded s3</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

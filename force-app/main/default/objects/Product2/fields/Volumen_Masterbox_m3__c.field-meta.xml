@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Volumen_Masterbox_m3__c</fullName>
+    <externalId>false</externalId>
+    <formula>( VALUE(MasterboxAltoCm__c) / 100 ) * ( VALUE(MasterboxAnchoCm__c) / 100 ) * ( VALUE(MasterboxLargoCm__c) / 100 )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Master Box 1 (CBM) calculado</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

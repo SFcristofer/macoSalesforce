@@ -1,0 +1,464 @@
+<template>
+    <lightning-record-edit-form object-api-name="Product2" onsuccess={handleSuccess}>
+        <article class="slds-card slds-card_boundary">
+            
+            <!-- HEADER PRO -->
+            <div class="slds-page-header slds-page-header_record-home">
+                <div class="slds-page-header__row">
+                    <div class="slds-page-header__col-title">
+                        <div class="slds-media">
+                            <div class="slds-media__figure">
+                                <span class="slds-icon_container slds-icon-standard-product">
+                                    <lightning-icon icon-name="standard:product" size="medium"></lightning-icon>
+                                </span>
+                            </div>
+                            <div class="slds-media__body">
+                                <div class="slds-page-header__name">
+                                    <div class="slds-page-header__name-title">
+                                        <h1 class="slds-page-header__title slds-truncate" title="Nuevo Producto">Nuevo Producto</h1>
+                                    </div>
+                                </div>
+                                <p class="slds-page-header__name-meta">Completa la información del producto y configura sus cajas.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- INDICADOR DE CBM -->
+                    <div class="slds-page-header__col-actions">
+                        <div class="slds-page-header__controls">
+                            <div class="slds-page-header__control">
+                                <span class="slds-badge slds-p-around_x-small slds-text-title_caps" style="letter-spacing: 0.5px; border-radius: 4px; background-color: #04844b; color: #ffffff;">
+                                    <lightning-icon icon-name="utility:metrics_segments" size="xx-small" variant="inverse" class="slds-m-right_xx-small"></lightning-icon>
+                                    Volumen Total: {totalCBM} CBM
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slds-card__body slds-card__body_inner slds-p-top_medium">
+                                <!-- SECCIONES DEL FORMULARIO CON ACCORDION -->
+                <div class="slds-form slds-form_stacked slds-m-bottom_x-large">
+                    <lightning-accordion allow-multiple-sections-open active-section-name={activeFormSections}>
+                        
+                        <lightning-accordion-section name="Product Information" label="Product Information">
+                            <lightning-layout multiple-rows class="slds-form__row">
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Name" required></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="IsActive"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="ProductName__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Clasificacion_producto__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Color__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Family"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="ProductCode"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Subfamilia__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Codigo_EAN__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Clase__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Codigo_DUN_14__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Marca__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="CodigoArancelario__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Packaging__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Item_Cliente__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="PackagingPersonalizado__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Fabrica__c"></lightning-input-field></lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-accordion-section>
+
+                        <lightning-accordion-section name="Description Information" label="Description Information">
+                            <lightning-layout multiple-rows class="slds-form__row">
+                                <lightning-layout-item size="12" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Description"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Material__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Listado_en_catalogo__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="ComposicionEnPorcentaje__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Garantia__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="ManualDeInstrucciones__c"></lightning-input-field></lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-accordion-section>
+
+                        <lightning-accordion-section name="Product (dimensions, weight and volume)" label="Product (dimensions, weight and volume)">
+                            <lightning-layout multiple-rows class="slds-form__row">
+                                <lightning-layout-item size="12" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto_detalle__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="ProductoLargoCm__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="ProductoM3__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="ProductoAnchoCm__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="ProductoPesoKg__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="ProductoAltoCm__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="G_W_del__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="ProductoDiametroCm__c"></lightning-input-field></lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-accordion-section>
+
+                        <lightning-accordion-section name="Additional product measurements (dimensions, weight and volume)" label="Additional product measurements (dimensions, weight and volume)">
+
+                            <!-- PRODUCTO 2 -->
+                            <template if:true={showProduct2}>
+                                <div class="slds-box slds-box_xx-small slds-m-bottom_medium slds-theme_default custom-box-shadow">
+                                    <div class="slds-grid slds-grid_align-spread slds-p-around_small slds-border_bottom">
+                                        <h4 class="slds-text-heading_small slds-text-color_default slds-font-weight_bold">📦 Producto 2</h4>
+                                        <lightning-button-icon icon-name="utility:delete" variant="bare" alternative-text="Eliminar" onclick={handleRemoveProduct2}></lightning-button-icon>
+                                    </div>
+                                    <div class="slds-p-around_small">
+                                        <lightning-layout multiple-rows>
+                                            <lightning-layout-item size="12" medium-device-size="12" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto2_detalle__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto2LargoCm__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto2AnchoCm__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto2AltoCm__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto2DiametroCm__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto2M3__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto2PesoKg__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto2PesoBruto__c"></lightning-input-field></lightning-layout-item>
+                                        </lightning-layout>
+                                    </div>
+                                </div>
+                            </template>
+        
+                            <!-- PRODUCTO 3 -->
+                            <template if:true={showProduct3}>
+                                <div class="slds-box slds-box_xx-small slds-m-bottom_medium slds-theme_default custom-box-shadow">
+                                    <div class="slds-grid slds-grid_align-spread slds-p-around_small slds-border_bottom">
+                                        <h4 class="slds-text-heading_small slds-text-color_default slds-font-weight_bold">📦 Producto 3</h4>
+                                        <lightning-button-icon icon-name="utility:delete" variant="bare" alternative-text="Eliminar" onclick={handleRemoveProduct3}></lightning-button-icon>
+                                    </div>
+                                    <div class="slds-p-around_small">
+                                        <lightning-layout multiple-rows>
+                                            <lightning-layout-item size="12" medium-device-size="12" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto3_detalle__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto3LargoCm__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto3AnchoCm__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto3AltoCm__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto3DiametroCm__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto3M3__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto3PesoKg__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto3PesoBruto__c"></lightning-input-field></lightning-layout-item>
+                                        </lightning-layout>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <!-- PRODUCTO 4 -->
+                            <template if:true={showProduct4}>
+                                <div class="slds-box slds-box_xx-small slds-m-bottom_medium slds-theme_default custom-box-shadow">
+                                    <div class="slds-grid slds-grid_align-spread slds-p-around_small slds-border_bottom">
+                                        <h4 class="slds-text-heading_small slds-text-color_default slds-font-weight_bold">📦 Producto 4</h4>
+                                        <lightning-button-icon icon-name="utility:delete" variant="bare" alternative-text="Eliminar" onclick={handleRemoveProduct4}></lightning-button-icon>
+                                    </div>
+                                    <div class="slds-p-around_small">
+                                        <lightning-layout multiple-rows>
+                                            <lightning-layout-item size="12" medium-device-size="12" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto4_detalle__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto4LargoCm__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto4AnchoCm__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto4AltoCm__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto4DiametroCm__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto4M3__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto4PesoKg__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto4PesoBruto__c"></lightning-input-field></lightning-layout-item>
+                                        </lightning-layout>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <!-- PRODUCTO 5 -->
+                            <template if:true={showProduct5}>
+                                <div class="slds-box slds-box_xx-small slds-m-bottom_medium slds-theme_default custom-box-shadow">
+                                    <div class="slds-grid slds-grid_align-spread slds-p-around_small slds-border_bottom">
+                                        <h4 class="slds-text-heading_small slds-text-color_default slds-font-weight_bold">📦 Producto 5</h4>
+                                        <lightning-button-icon icon-name="utility:delete" variant="bare" alternative-text="Eliminar" onclick={handleRemoveProduct5}></lightning-button-icon>
+                                    </div>
+                                    <div class="slds-p-around_small">
+                                        <lightning-layout multiple-rows>
+                                            <lightning-layout-item size="12" medium-device-size="12" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto5_detalle__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto5LargoCm__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto5AnchoCm__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto5AltoCm__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto5DiametroCm__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto5M3__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto5PesoKg__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto5PesoBruto__c"></lightning-input-field></lightning-layout-item>
+                                        </lightning-layout>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <!-- PRODUCTO 6 -->
+                            <template if:true={showProduct6}>
+                                <div class="slds-box slds-box_xx-small slds-m-bottom_medium slds-theme_default custom-box-shadow">
+                                    <div class="slds-grid slds-grid_align-spread slds-p-around_small slds-border_bottom">
+                                        <h4 class="slds-text-heading_small slds-text-color_default slds-font-weight_bold">📦 Producto 6</h4>
+                                        <lightning-button-icon icon-name="utility:delete" variant="bare" alternative-text="Eliminar" onclick={handleRemoveProduct6}></lightning-button-icon>
+                                    </div>
+                                    <div class="slds-p-around_small">
+                                        <lightning-layout multiple-rows>
+                                            <lightning-layout-item size="12" medium-device-size="12" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto6_detalle__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto6LargoCm__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto6AnchoCm__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto6AltoCm__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto6DiametroCm__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto6M3__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto6PesoKg__c"></lightning-input-field></lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Producto6PesoBruto__c"></lightning-input-field></lightning-layout-item>
+                                        </lightning-layout>
+                                    </div>
+                                </div>
+                            </template>
+        
+                            <!-- ADD BUTTON -->
+                            <template if:true={canAddMoreProducts}>
+                                <div class="slds-text-align_center slds-m-top_medium">
+                                    <lightning-button variant="base" label="+ Agregar Producto Adicional" onclick={handleAddProduct} class="slds-text-link"></lightning-button>
+                                </div>
+                            </template>
+                        
+                        </lightning-accordion-section>
+
+                        <lightning-accordion-section name="Unit Box (dimensions, weight and volume)" label="Unit Box (dimensions, weight and volume)">
+                            <lightning-layout multiple-rows class="slds-form__row">
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="CajaLargoCm__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="CajaM3__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="CajaAnchoCm__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="CajaPesoKg__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="CajaAltoCm__c"></lightning-input-field></lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-accordion-section>
+                        
+                        <lightning-accordion-section name="Masterbox (dimensions, weight and volume)" label="Masterbox (dimensions, weight and volume)">
+                            <!-- BOX 1 -->
+                            <template if:true={showBox1}>
+                                <div class="slds-box slds-box_xx-small slds-m-bottom_medium slds-theme_default custom-box-shadow">
+                                    <div class="slds-grid slds-grid_align-spread slds-p-around_small slds-border_bottom">
+                                        <h4 class="slds-text-heading_small slds-text-color_default slds-font-weight_bold">📦 Master Box 1 (Principal)</h4>
+                                    </div>
+                                    <div class="slds-p-around_small">
+                                        <lightning-layout multiple-rows>
+                                            <lightning-layout-item size="12" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox1_detalle__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <!-- Dimensiones en una fila -->
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="MasterboxLargoCm__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="MasterboxAnchoCm__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="MasterboxAltoCm__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="MasterboxPesoKg__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="MasterboxM3__c" onchange={handleCBMChange}></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="UnidadesPorMasterBox__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </div>
+                                </div>
+                            </template>
+        
+                            <!-- BOX 2 -->
+                            <template if:true={showBox2}>
+                                <div class="slds-box slds-box_xx-small slds-m-bottom_medium slds-theme_default custom-box-shadow">
+                                    <div class="slds-grid slds-grid_align-spread slds-p-around_small slds-border_bottom">
+                                        <h4 class="slds-text-heading_small slds-text-color_default slds-font-weight_bold">📦 Master Box 2</h4>
+                                        <lightning-button-icon icon-name="utility:delete" variant="bare" alternative-text="Eliminar" onclick={handleRemoveBox2}></lightning-button-icon>
+                                    </div>
+                                    <div class="slds-p-around_small">
+                                        <lightning-layout multiple-rows>
+                                            <lightning-layout-item size="12" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox2_detalle__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox2LargoCm__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox2AnchoCm__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox2AltoCm__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox2PesoKg__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox2M3__c" onchange={handleCBMChange}></lightning-input-field>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </div>
+                                </div>
+                            </template>
+        
+                            <!-- BOX 3 -->
+                            <template if:true={showBox3}>
+                                <div class="slds-box slds-box_xx-small slds-m-bottom_medium slds-theme_default custom-box-shadow">
+                                    <div class="slds-grid slds-grid_align-spread slds-p-around_small slds-border_bottom">
+                                        <h4 class="slds-text-heading_small slds-text-color_default slds-font-weight_bold">📦 Master Box 3</h4>
+                                        <lightning-button-icon icon-name="utility:delete" variant="bare" alternative-text="Eliminar" onclick={handleRemoveBox3}></lightning-button-icon>
+                                    </div>
+                                    <div class="slds-p-around_small">
+                                        <lightning-layout multiple-rows>
+                                            <lightning-layout-item size="12" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox3_detalle__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox3LargoCm__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox3AnchoCm__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox3AltoCm__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox3PesoKg__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox3M3__c" onchange={handleCBMChange}></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Units_per_Master_Box_3__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <!-- BOX 4 -->
+                            <template if:true={showBox4}>
+                                <div class="slds-box slds-box_xx-small slds-m-bottom_medium slds-theme_default custom-box-shadow">
+                                    <div class="slds-grid slds-grid_align-spread slds-p-around_small slds-border_bottom">
+                                        <h4 class="slds-text-heading_small slds-text-color_default slds-font-weight_bold">📦 Master Box 4</h4>
+                                        <lightning-button-icon icon-name="utility:delete" variant="bare" alternative-text="Eliminar" onclick={handleRemoveBox4}></lightning-button-icon>
+                                    </div>
+                                    <div class="slds-p-around_small">
+                                        <lightning-layout multiple-rows>
+                                            <lightning-layout-item size="12" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox4_detalle__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox4LargoCm__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox4AnchoCm__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox4AltoCm__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox4PesoKg__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox4M3__c" onchange={handleCBMChange}></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Units_per_Master_Box_4__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <!-- BOX 5 -->
+                            <template if:true={showBox5}>
+                                <div class="slds-box slds-box_xx-small slds-m-bottom_medium slds-theme_default custom-box-shadow">
+                                    <div class="slds-grid slds-grid_align-spread slds-p-around_small slds-border_bottom">
+                                        <h4 class="slds-text-heading_small slds-text-color_default slds-font-weight_bold">📦 Master Box 5</h4>
+                                        <lightning-button-icon icon-name="utility:delete" variant="bare" alternative-text="Eliminar" onclick={handleRemoveBox5}></lightning-button-icon>
+                                    </div>
+                                    <div class="slds-p-around_small">
+                                        <lightning-layout multiple-rows>
+                                            <lightning-layout-item size="12" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox5_detalle__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox5LargoCm__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox5AnchoCm__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox5AltoCm__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox5PesoKg__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox5M3__c" onchange={handleCBMChange}></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Units_per_Master_Box_5__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <!-- BOX 6 -->
+                            <template if:true={showBox6}>
+                                <div class="slds-box slds-box_xx-small slds-m-bottom_medium slds-theme_default custom-box-shadow">
+                                    <div class="slds-grid slds-grid_align-spread slds-p-around_small slds-border_bottom">
+                                        <h4 class="slds-text-heading_small slds-text-color_default slds-font-weight_bold">📦 Master Box 6</h4>
+                                        <lightning-button-icon icon-name="utility:delete" variant="bare" alternative-text="Eliminar" onclick={handleRemoveBox6}></lightning-button-icon>
+                                    </div>
+                                    <div class="slds-p-around_small">
+                                        <lightning-layout multiple-rows>
+                                            <lightning-layout-item size="12" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox6_detalle__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox6LargoCm__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox6AnchoCm__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox6AltoCm__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox6PesoKg__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Masterbox6M3__c" onchange={handleCBMChange}></lightning-input-field>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small">
+                                                <lightning-input-field field-name="Units_per_Master_Box_6__c"></lightning-input-field>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </div>
+                                </div>
+                            </template>
+        
+                            <!-- ADD BUTTON -->
+                            <template if:true={canAddMore}>
+                                <div class="slds-text-align_center slds-m-top_medium">
+                                    <lightning-button variant="base" label="+ Agregar Masterbox" onclick={handleAddBox} class="slds-text-link"></lightning-button>
+                                </div>
+                            </template>
+                        </lightning-accordion-section>
+
+                        <lightning-accordion-section name="Units per container" label="Units per container">
+                            <lightning-layout multiple-rows class="slds-form__row">
+                                <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="UnidadesHQ__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="UnidadesContainer40__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="UnidadesContainer20__c"></lightning-input-field></lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-accordion-section>
+                        
+                        <lightning-accordion-section name="Images (OneDrive) & Upload" label="Images (OneDrive) & Upload">
+                            <div class="slds-m-bottom_small slds-p-horizontal_small">
+                                <c-tech-product-images-manager hide-save-button="true" class="product-images-mgr"></c-tech-product-images-manager>
+                            </div>
+                        </lightning-accordion-section>
+
+                    </lightning-accordion>
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <footer class="slds-card__footer slds-theme_shade slds-p-around_medium" style="border-top: 1px solid #d8dde6;">
+                <div class="slds-grid slds-grid_align-end">
+                    <lightning-button variant="brand" type="submit" label="Guardar Producto" icon-name="utility:save" class="slds-m-left_x-small"></lightning-button>
+                </div>
+            </footer>
+
+        </article>
+    </lightning-record-edit-form>
+</template>

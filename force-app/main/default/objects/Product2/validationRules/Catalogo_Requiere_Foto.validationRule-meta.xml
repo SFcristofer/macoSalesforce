@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Catalogo_Requiere_Foto</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    Listado_en_catalogo__c = TRUE,
+    ISBLANK(IDImagen1__c),
+    ISBLANK(IDImagen2__c),
+    ISBLANK(IDImagen3__c),
+    ISBLANK(IDImagen4__c)
+)</errorConditionFormula>
+    <errorDisplayField>Listado_en_catalogo__c</errorDisplayField>
+    <errorMessage>RV04: No se puede listar este producto en el Catálogo sin una foto. 
+Por favor, cargá al menos una imagen antes de activar &quot;Listado en Catálogo&quot;.</errorMessage>
+</ValidationRule>

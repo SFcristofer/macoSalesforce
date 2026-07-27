@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Packaging__c</fullName>
+    <label>Packaging</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>1-BROWN BOX</fullName>
+                <default>false</default>
+                <label>1-BROWN BOX</label>
+            </value>
+            <value>
+                <fullName>2-BROWN BOX + HANGTAG</fullName>
+                <default>false</default>
+                <label>2-BROWN BOX + HANGTAG</label>
+            </value>
+            <value>
+                <fullName>3-BROWN BOX + COLOR LABEL</fullName>
+                <default>false</default>
+                <label>3-BROWN BOX + COLOR LABEL</label>
+            </value>
+            <value>
+                <fullName>7-WHITE BOX + COLOR LABEL</fullName>
+                <default>false</default>
+                <label>7-WHITE BOX + COLOR LABEL</label>
+            </value>
+            <value>
+                <fullName>9-COLOR BOX</fullName>
+                <default>false</default>
+                <label>9-COLOR BOX</label>
+            </value>
+            <value>
+                <fullName>11-WINDOW BOX</fullName>
+                <default>false</default>
+                <label>11-WINDOW BOX</label>
+            </value>
+            <value>
+                <fullName>12-BLISTER</fullName>
+                <default>false</default>
+                <label>12-BLISTER</label>
+            </value>
+            <value>
+                <fullName>13-STACK</fullName>
+                <default>false</default>
+                <label>13-STACK</label>
+            </value>
+            <value>
+                <fullName>15-PDQ</fullName>
+                <default>false</default>
+                <label>15-PDQ</label>
+            </value>
+            <value>
+                <fullName>BOLSA RETRÁCTIL CON ETIQUETA COLOR Y CAJA MÁSTER</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>BOLSA RETRÁCTIL CON ETIQUETA COLOR Y CAJA MÁSTER</label>
+            </value>
+            <value>
+                <fullName>CAJA  MASTER + ETIQUETA COLGANTE</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA  MASTER + ETIQUETA COLGANTE</label>
+            </value>
+            <value>
+                <fullName>CAJA + ETIQUETA A COLOR</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA + ETIQUETA A COLOR</label>
+            </value>
+            <value>
+                <fullName>CAJA BLANCA + PEGATINA A COLOR</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA BLANCA + PEGATINA A COLOR</label>
+            </value>
+            <value>
+                <fullName>CAJA BLANCA CON A3 A COLOR</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA BLANCA CON A3 A COLOR</label>
+            </value>
+            <value>
+                <fullName>CAJA BLANCA CON PEGATINA A COLOR</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA BLANCA CON PEGATINA A COLOR</label>
+            </value>
+            <value>
+                <fullName>CAJA BLANCA CON STICKER A COLOR</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA BLANCA CON STICKER A COLOR</label>
+            </value>
+            <value>
+                <fullName>CAJA BLANCA ETIQUETA A COLOR</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA BLANCA ETIQUETA A COLOR</label>
+            </value>
+            <value>
+                <fullName>CAJA BLANCA ETIQUETA A COLOR Y HANGTAG</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA BLANCA ETIQUETA A COLOR Y HANGTAG</label>
+            </value>
+            <value>
+                <fullName>CAJA BLANCA SERIFRAFIADA PEGATINA A COLOR HANGTAG</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA BLANCA SERIFRAFIADA PEGATINA A COLOR HANGTAG</label>
+            </value>
+            <value>
+                <fullName>CAJA BLANCA STICKER UNIDAD</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA BLANCA STICKER UNIDAD</label>
+            </value>
+            <value>
+                <fullName>CAJA FULL COLOR</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA FULL COLOR</label>
+            </value>
+            <value>
+                <fullName>CAJA FULL COLOR ETIQUETA COLOR</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA FULL COLOR ETIQUETA COLOR</label>
+            </value>
+            <value>
+                <fullName>CAJA MARRON SERIGRAFIADA
+A3 A COLOR</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA MARRON SERIGRAFIADA
+A3 A COLOR</label>
+            </value>
+            <value>
+                <fullName>CAJA MARRÓN + A3 A COLOR</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA MARRÓN + A3 A COLOR</label>
+            </value>
+            <value>
+                <fullName>CAJA MARRÓN CON A3 A COLOR</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA MARRÓN CON A3 A COLOR</label>
+            </value>
+            <value>
+                <fullName>CAJA MARRÓN CON ETIQUETA A COLOR IMPRESA</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA MARRÓN CON ETIQUETA A COLOR IMPRESA</label>
+            </value>
+            <value>
+                <fullName>CAJA MARRÓN CON ETIQUETA COLGANTE</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA MARRÓN CON ETIQUETA COLGANTE</label>
+            </value>
+            <value>
+                <fullName>CAJA MARRÓN ETIQUETA HANGTAG</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA MARRÓN ETIQUETA HANGTAG</label>
+            </value>
+            <value>
+                <fullName>CAJA MARRÓN SERIGRAFIADA</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA MARRÓN SERIGRAFIADA</label>
+            </value>
+            <value>
+                <fullName>CAJA MARRÓN STICKER A COLOR</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA MARRÓN STICKER A COLOR</label>
+            </value>
+            <value>
+                <fullName>CAJA MARRÓN STICKER UNIDAD</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA MARRÓN STICKER UNIDAD</label>
+            </value>
+            <value>
+                <fullName>CAJA MÁSTER A COLOR Y ETIQUETA COLGANTE EN UNIDAD</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA MÁSTER A COLOR Y ETIQUETA COLGANTE EN UNIDAD</label>
+            </value>
+            <value>
+                <fullName>CAJA MÁSTER BLANCA CON PEGATINA A COLOR MÁS ETIQUETA COLGANTE UNIDAD</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA MÁSTER BLANCA CON PEGATINA A COLOR MÁS ETIQUETA COLGANTE UNIDAD</label>
+            </value>
+            <value>
+                <fullName>CAJA MÁSTER CARTÓN CON PEGATINA A COLOR Y HANGTAG UNIDAD</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA MÁSTER CARTÓN CON PEGATINA A COLOR Y HANGTAG UNIDAD</label>
+            </value>
+            <value>
+                <fullName>CAJA MÁSTER MARRON + HANGTAG UNIDAD</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA MÁSTER MARRON + HANGTAG UNIDAD</label>
+            </value>
+            <value>
+                <fullName>CAJA MÁSTER MARRÓN  + HANGTAG A COLOR</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA MÁSTER MARRÓN  + HANGTAG A COLOR</label>
+            </value>
+            <value>
+                <fullName>CAJA MÁSTER MARRÓN CAJA UNIDAD A COLOR PEGATINA PRODUCTO PEGATINA ADAPTADOR</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA MÁSTER MARRÓN CAJA UNIDAD A COLOR PEGATINA PRODUCTO PEGATINA ADAPTADOR</label>
+            </value>
+            <value>
+                <fullName>CAJA MÁSTER Y  ETIQUETA UNIDAD</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA MÁSTER Y  ETIQUETA UNIDAD</label>
+            </value>
+            <value>
+                <fullName>CAJA MÁSTER Y BOLSA RETRACTIL + ETIQUETA UNIDAD</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA MÁSTER Y BOLSA RETRACTIL + ETIQUETA UNIDAD</label>
+            </value>
+            <value>
+                <fullName>CAJA MÁSTER Y ETIQUETA COLGANTE</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CAJA MÁSTER Y ETIQUETA COLGANTE</label>
+            </value>
+            <value>
+                <fullName>ENVUELTO</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>ENVUELTO</label>
+            </value>
+            <value>
+                <fullName>ETIQUETA COSIDA + ETIQUETA HANGTAG + ETIQUETA EXPOSITOR</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>ETIQUETA COSIDA + ETIQUETA HANGTAG + ETIQUETA EXPOSITOR</label>
+            </value>
+            <value>
+                <fullName>WINDOW BOX CON STICKER A COLOR</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>WINDOW BOX CON STICKER A COLOR</label>
+            </value>
+            <value>
+                <fullName>WINDOW BOX ETIQUETA A COLOR</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>WINDOW BOX ETIQUETA A COLOR</label>
+            </value>
+            <value>
+                <fullName>WINDOW BOX ETIQUETA A COLOR Y HANGTAG</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>WINDOW BOX ETIQUETA A COLOR Y HANGTAG</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProductoBase__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Producto base</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>El producto no existe o no es un producto base.</errorMessage>
+        <filterItems>
+            <field>Product2.RecordType.Name</field>
+            <operation>equals</operation>
+            <value>1-Producto</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Product2</referenceTo>
+    <relationshipLabel>Fábricas del producto</relationshipLabel>
+    <relationshipName>FabricasDelProducto</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

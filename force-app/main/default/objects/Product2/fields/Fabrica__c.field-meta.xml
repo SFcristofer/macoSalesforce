@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fabrica__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Fábrica</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>La cuenta de proveedor no existe o no es una fábrica.</errorMessage>
+        <filterItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Proveedor</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Productos de la fábrica</relationshipLabel>
+    <relationshipName>ProductosDeLaFabrica</relationshipName>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <type>Lookup</type>
+</CustomField>

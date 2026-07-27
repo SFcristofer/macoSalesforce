@@ -1,0 +1,116 @@
+<template>
+    <lightning-card title="High Quality Picture Folder" icon-name="custom:custom38">
+        <div class="slds-p-around_medium">
+            
+            <!-- Link a OneDrive -->
+            <div class="slds-m-bottom_medium">
+                <lightning-input 
+                    type="url" 
+                    label="OneDrive Folder Link" 
+                    value={onedriveLink} 
+                    onchange={handleLinkChange}
+                    placeholder="https://onedrive.live.com/...">
+                </lightning-input>
+            </div>
+
+            <!-- Vista previa de OneDrive -->
+            <template if:true={isLoadingThumbnails}>
+                <div class="slds-is-relative slds-m-vertical_medium" style="height: 50px;">
+                    <lightning-spinner alternative-text="Cargando miniaturas" size="small"></lightning-spinner>
+                </div>
+            </template>
+            <template if:true={onedriveThumbnails.length}>
+                <div class="slds-m-top_medium slds-box slds-theme_default">
+                    <p class="slds-text-heading_small slds-m-bottom_small">Vista Previa de OneDrive</p>
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <template for:each={onedriveThumbnails} for:item="thumb">
+                            <div key={thumb} class="slds-col slds-size_1-of-2 slds-medium-size_1-of-4 slds-m-bottom_medium slds-text-align_center">
+                                <img src={thumb} alt="OneDrive Preview" style="max-height: 120px; width: auto; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);"/>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </template>
+
+            <!-- Upload local images -->
+            <div class="slds-m-top_large">
+                <h3 class="slds-text-heading_small slds-m-bottom_small">Upload Images (Up to 4)</h3>
+                <p class="slds-text-color_weak slds-m-bottom_medium">Upload up to 4 images to display on the product record.</p>
+
+                <lightning-layout multiple-rows>
+                    <!-- Image 1 -->
+                    <lightning-layout-item size="12" medium-device-size="6" large-device-size="3" class="slds-p-around_x-small">
+                        <div class="image-card slds-box">
+                            <lightning-input type="file" label="Image 1" accept="image/*" onchange={handleFileChange} data-index="1"></lightning-input>
+                            <template if:true={image1Preview}>
+                                <div class="preview-container slds-m-top_small">
+                                    <img src={image1Preview} alt="Img 1" class="img-preview" />
+                                </div>
+                            </template>
+                            <div class="slds-m-top_small">
+                                <lightning-input type="checkbox" label="Resize image (2048px / High 90%)" data-index="1" checked></lightning-input>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+
+                    <!-- Image 2 -->
+                    <lightning-layout-item size="12" medium-device-size="6" large-device-size="3" class="slds-p-around_x-small">
+                        <div class="image-card slds-box">
+                            <lightning-input type="file" label="Image 2" accept="image/*" onchange={handleFileChange} data-index="2"></lightning-input>
+                            <template if:true={image2Preview}>
+                                <div class="preview-container slds-m-top_small">
+                                    <img src={image2Preview} alt="Img 2" class="img-preview" />
+                                </div>
+                            </template>
+                            <div class="slds-m-top_small">
+                                <lightning-input type="checkbox" label="Resize image (2048px / High 90%)" data-index="2" checked></lightning-input>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+
+                    <!-- Image 3 -->
+                    <lightning-layout-item size="12" medium-device-size="6" large-device-size="3" class="slds-p-around_x-small">
+                        <div class="image-card slds-box">
+                            <lightning-input type="file" label="Image 3" accept="image/*" onchange={handleFileChange} data-index="3"></lightning-input>
+                            <template if:true={image3Preview}>
+                                <div class="preview-container slds-m-top_small">
+                                    <img src={image3Preview} alt="Img 3" class="img-preview" />
+                                </div>
+                            </template>
+                            <div class="slds-m-top_small">
+                                <lightning-input type="checkbox" label="Resize image (2048px / High 90%)" data-index="3" checked></lightning-input>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+
+                    <!-- Image 4 -->
+                    <lightning-layout-item size="12" medium-device-size="6" large-device-size="3" class="slds-p-around_x-small">
+                        <div class="image-card slds-box">
+                            <lightning-input type="file" label="Image 4" accept="image/*" onchange={handleFileChange} data-index="4"></lightning-input>
+                            <template if:true={image4Preview}>
+                                <div class="preview-container slds-m-top_small">
+                                    <img src={image4Preview} alt="Img 4" class="img-preview" />
+                                </div>
+                            </template>
+                            <div class="slds-m-top_small">
+                                <lightning-input type="checkbox" label="Resize image (2048px / High 90%)" data-index="4" checked></lightning-input>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+
+            </div>
+
+            <!-- Footer con Botón Guardar -->
+            <template if:false={hideSaveButton}>
+                <div class="slds-m-top_medium slds-text-align_right">
+                    <lightning-button variant="brand" label="Save Images & Link" onclick={handleSave} disabled={isSaving}></lightning-button>
+                </div>
+            </template>
+            
+            <template if:true={isSaving}>
+                <lightning-spinner alternative-text="Saving" size="medium"></lightning-spinner>
+            </template>
+        </div>
+    </lightning-card>
+</template>
