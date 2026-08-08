@@ -539,8 +539,6 @@
         </platformActionListItems>
     </platformActionList>
     <relatedLists>
-        <excludeButtons>Add</excludeButtons>
-        <excludeButtons>CreateNewProduct</excludeButtons>
         <fields>PRODUCT2.NAME</fields>
         <fields>PrecioDeFabrica__c</fields>
         <fields>Fabrica__c</fields>

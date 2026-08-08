@@ -2,6 +2,7 @@
 <RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>ProductoDeFabrica</fullName>
     <active>true</active>
+    <compactLayoutAssignment>Resumen_Fabrica</compactLayoutAssignment>
     <description>Use este tipo de registro para los productos producidos por una fábrica</description>
     <label>2-Producto de Fábrica</label>
     <picklistValues>
