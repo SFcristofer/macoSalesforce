@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Notificar_a_Ruben_Aprobacion</fullName>
+        <description>Notificar a Rubén Aprobación</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>ruben.bernardo@pacificglob.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Notificacion_de_aprobacion</template>
+    </alerts>
+    <alerts>
+        <fullName>Notificar_a_Ruben_Rechazo</fullName>
+        <description>Notificar a Rubén Rechazo</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>ruben.bernardo@pacificglob.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Notificacion_de_aprobacion</template>
+    </alerts>
+    <alerts>
+        <fullName>Recordatorio_Solicitud_de_Aprobacion</fullName>
+        <description>Recordatorio Solicitud de Aprobación</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>kareny.benavides@pacificglob.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>ruben.bernardo@pacificglob.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Rec_Solicitud_de_Aprobacion</template>
+    </alerts>
+    <alerts>
+        <fullName>S_Recordatorio_Solicitud_de_Aprobacion</fullName>
+        <description>2do Recordatorio Solicitud de Aprobación</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>kareny.benavides@pacificglob.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>ruben.bernardo@pacificglob.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/S_Rec_Solicitud_de_Aprobacion</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Aprobado_Direccion</fullName>
+        <description>Se marca como &quot;Aprobado Dirección&quot;</description>
+        <field>Aprobado_Direccion__c</field>
+        <literalValue>1</literalValue>
+        <name>Aprobado Dirección</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Desbloqueo</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Principal</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Desbloqueo</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FechaAprobacionDireccion</fullName>
+        <field>FechaAprobacionDireccion__c</field>
+        <formula>NOW()</formula>
+        <name>Fecha Aprobación Dirección</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FechaEnviadoAprobacion</fullName>
+        <field>FechaEnviadoAprobacion__c</field>
+        <formula>NOW()</formula>
+        <name>Fecha Enviado Aprobación</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Resultado_Aprobada</fullName>
+        <field>Resultado_Aprobacion__c</field>
+        <literalValue>Aprobada</literalValue>
+        <name>Resultado: Aprobada</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Resultado_Enviada</fullName>
+        <field>Resultado_Aprobacion__c</field>
+        <literalValue>Enviada</literalValue>
+        <name>Resultado: Enviada</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Resultado_Rechazada</fullName>
+        <field>Resultado_Aprobacion__c</field>
+        <literalValue>Rechazada</literalValue>
+        <name>Resultado: Rechazada</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+</Workflow>

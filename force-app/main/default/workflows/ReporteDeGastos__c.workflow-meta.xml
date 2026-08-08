@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>AprobacionReporteDeGastos</fullName>
+        <description>Aprobación Reporte de Gastos</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>ReportesDeGastos/AprobacionReporteDeGastos</template>
+    </alerts>
+    <alerts>
+        <fullName>RechazoReporteDeGastos</fullName>
+        <description>Rechazo Reporte de Gastos</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>ReportesDeGastos/RechazoReporteDeGastos</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>EstadoAprobado</fullName>
+        <field>Estado__c</field>
+        <literalValue>Aprobado</literalValue>
+        <name>Estado=Aprobado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>EstadoEnAprobacion</fullName>
+        <field>Estado__c</field>
+        <literalValue>En Aprobación</literalValue>
+        <name>Estado=En Aprobación</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>EstadoRechazado</fullName>
+        <field>Estado__c</field>
+        <literalValue>Rechazado</literalValue>
+        <name>Estado=Rechazado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FinAprobacion</fullName>
+        <field>FinAprobacion__c</field>
+        <formula>NOW()</formula>
+        <name>Fin aprobación</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>InicioAprobacion</fullName>
+        <field>InicioAprobacion__c</field>
+        <formula>NOW()</formula>
+        <name>Inicio aprobación</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+</Workflow>

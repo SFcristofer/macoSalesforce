@@ -1,5 +1,5 @@
 <template>
-    <lightning-record-edit-form object-api-name="Product2" onsuccess={handleSuccess}>
+    <lightning-record-edit-form object-api-name="Product2" record-id={recordId} onsuccess={handleSuccess} onload={handleLoad}>
         <article class="slds-card slds-card_boundary">
             
             <!-- HEADER PRO -->
@@ -15,7 +15,7 @@
                             <div class="slds-media__body">
                                 <div class="slds-page-header__name">
                                     <div class="slds-page-header__name-title">
-                                        <h1 class="slds-page-header__title slds-truncate" title="Nuevo Producto">Nuevo Producto</h1>
+                                        <h1 class="slds-page-header__title slds-truncate" title={formTitle}>{formTitle}</h1>
                                     </div>
                                 </div>
                                 <p class="slds-page-header__name-meta">Completa la información del producto y configura sus cajas.</p>
@@ -60,6 +60,8 @@
                                 <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Item_Cliente__c"></lightning-input-field></lightning-layout-item>
                                 <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="PackagingPersonalizado__c"></lightning-input-field></lightning-layout-item>
                                 <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Fabrica__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="PrecioDeFabrica__c"></lightning-input-field></lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-m-bottom_small"><lightning-input-field field-name="Precio_Vigente__c"></lightning-input-field></lightning-layout-item>
                             </lightning-layout>
                         </lightning-accordion-section>
 

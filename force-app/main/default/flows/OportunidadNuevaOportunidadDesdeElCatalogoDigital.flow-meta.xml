@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Email de oportunidad creada desde el catálogo digital</description>
+        <name>Email</name>
+        <label>Email</label>
+        <locationX>176</locationX>
+        <locationY>1271</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddressesArray</name>
+            <value>
+                <elementReference>emailsNotificacion</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderType</name>
+            <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>OrgWideEmailAddress</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderAddress</name>
+            <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>info@pacificglob.com</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>tituloAsuntoNotificacion</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>cuerpoEmail</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <actionCalls>
+        <description>Notificación personalizada (escritorio y móvil) de oportunidad creada desde el catálogo digital</description>
+        <name>Notificacion</name>
+        <label>Notificación</label>
+        <locationX>176</locationX>
+        <locationY>1163</locationY>
+        <actionName>customNotificationAction</actionName>
+        <actionType>customNotificationAction</actionType>
+        <connector>
+            <targetReference>Email</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>body</name>
+            <value>
+                <elementReference>cuerpoNotificacion</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>targetId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>customNotifTypeId</name>
+            <value>
+                <elementReference>ObtenerNotificacionPersonalizada.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientIds</name>
+            <value>
+                <elementReference>usuariosNotificacion</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>title</name>
+            <value>
+                <elementReference>tituloAsuntoNotificacion</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>customNotificationAction</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <apiVersion>57.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Asigna el Id del propietario de la cuenta relacionada y el email del propietario de la cuenta relacionada a las variables de alerta (notificación, email).</description>
+        <name>AgregarPropietarioDeCuentaRelacionadaListadoDeNotificaciones</name>
+        <label>Agregar propietario de cuenta relacionada a listado de notificaciones</label>
+        <locationX>176</locationX>
+        <locationY>539</locationY>
+        <assignmentItems>
+            <assignToReference>usuariosNotificacion</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>$Record.Account.OwnerId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>emailsNotificacion</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>$Record.Account.Owner.Email</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>ObtenerFuncionGerenciaVentas</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Agrega el Id y el email del usuario &apos;Gerencia Ventas&apos; a las colecciones de usuarios a notificar</description>
+        <name>AgregarUsuarioGerenciaVentasColecciones</name>
+        <label>Agregar usuario Gerencia Ventas a colecciones</label>
+        <locationX>264</locationX>
+        <locationY>971</locationY>
+        <assignmentItems>
+            <assignToReference>emailsNotificacion</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>BucleUsuariosGerenciaVentas.Email</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>usuariosNotificacion</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>BucleUsuariosGerenciaVentas.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>BucleUsuariosGerenciaVentas</targetReference>
+        </connector>
+    </assignments>
+    <description>Al crearse una oportunidad desde el catálogo digital: (1) Actualiza el propietario de la oportunidad al propietario de la cuenta relacionada; (2) Alerta al propietario de la cuenta relacionada y a los usuarios asignados a la función &apos;Gerencia Ventas&apos; con una notificación personalizada (escritorio+móvil) y un email.</description>
+    <environments>Default</environments>
+    <interviewLabel>Oportunidad: Nueva oportunidad desde el catálogo digital {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Oportunidad: Nueva oportunidad desde el catálogo digital</label>
+    <loops>
+        <description>Recorre la colección de usuarios activos asignados a la función &apos;Gerencia Ventas&apos;.</description>
+        <name>BucleUsuariosGerenciaVentas</name>
+        <label>Bucle usuarios Gerencia Ventas</label>
+        <locationX>176</locationX>
+        <locationY>863</locationY>
+        <collectionReference>ObtenerUsuariosGerenciaVentas</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>AgregarUsuarioGerenciaVentasColecciones</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Notificacion</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Obtiene la función &apos;Gerencia Ventas&apos;.</description>
+        <name>ObtenerFuncionGerenciaVentas</name>
+        <label>Obtener función &apos;Gerencia Ventas&apos;</label>
+        <locationX>176</locationX>
+        <locationY>647</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>ObtenerUsuariosGerenciaVentas</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Gerencia_Ventas</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>UserRole</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtiene la notificación personalizada con el nombre API &apos;NotificacionEscritorioMovil&apos;</description>
+        <name>ObtenerNotificacionPersonalizada</name>
+        <label>Obtener notificación personalizada</label>
+        <locationX>176</locationX>
+        <locationY>431</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>AgregarPropietarioDeCuentaRelacionadaListadoDeNotificaciones</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>NotificacionEscritorioMovil</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>CustomNotificationType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtiene los usuarios activos asignados a la función &apos;Gerencia Ventas&apos;.</description>
+        <name>ObtenerUsuariosGerenciaVentas</name>
+        <label>Obtener usuarios &apos;Gerencia Ventas&apos;</label>
+        <locationX>176</locationX>
+        <locationY>755</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>BucleUsuariosGerenciaVentas</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>UserRoleId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>ObtenerFuncionGerenciaVentas.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>IsActive</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>User</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Actualiza el propietario de la oportunidad con el propietario de la cuenta asociada.</description>
+        <name>ActualizarOportunidad</name>
+        <label>Actualizar oportunidad</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <connector>
+            <targetReference>ObtenerNotificacionPersonalizada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>$Record.Account.OwnerId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>StageName</field>
+            <value>
+                <stringValue>Cold Call</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>ActualizarOportunidad</targetReference>
+        </connector>
+        <filterFormula>{!$Record.CreatedBy.FirstName} = &quot;portal&quot;
+&amp;&amp; {!$Record.CreatedBy.LastName} = &quot;Site Guest User&quot;</filterFormula>
+        <object>Opportunity</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <description>Cuerpo del email de nueva oportunidad creada desde el catálogo digital.</description>
+        <name>cuerpoEmail</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Se ha creado la oportunidad {!$Record.Name} para la cuenta {!$Record.Account.Name} desde el catálogo digital.
+
+Para acceder a la oportunidad, haga clic aquí: https://pacificglobal.lightning.force.com/lightning/r/Opportunity/{!$Record.Id}/view</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Cuerpo de la notificación de nueva oportunidad creada desde el catálogo digital.</description>
+        <name>cuerpoNotificacion</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Se ha creado la oportunidad {!$Record.Name} para la cuenta {!$Record.Account.Name} desde el catálogo digital.</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Título/asunto de la notificación/email de nueva oportunidad creada desde el catálogo digital.</description>
+        <name>tituloAsuntoNotificacion</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Se ha creado una nueva oportunidad desde el catálogo digital en una cuenta de su propiedad</text>
+    </textTemplates>
+    <variables>
+        <description>Emails que serán usados para el alerta de creación de oportunidad desde el catálogo digital.</description>
+        <name>emailsNotificacion</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Usuarios que serán notificados de la creación de la oportunidad desde el catálogo digital.</description>
+        <name>usuariosNotificacion</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

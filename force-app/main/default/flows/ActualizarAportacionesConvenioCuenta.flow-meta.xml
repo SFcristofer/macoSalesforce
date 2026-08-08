@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <environments>Default</environments>
+    <interviewLabel>ActualizarAportacionesConvenioCuenta {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>ActualizarAportacionesConvenioCuenta</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>ActualizarCommercialPlanning</name>
+        <label>Actualizar Commercial Planning</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <inputAssignments>
+            <field>PorcentajeAportaciones__c</field>
+            <value>
+                <elementReference>$Record.PorcentajeAportaciones__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>PorcentajeConvenio__c</field>
+            <value>
+                <elementReference>$Record.PorcentajeConvenio__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.Cuenta__r</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>ActualizarCommercialPlanning</targetReference>
+        </connector>
+        <filterFormula>( ISNEW() &amp;&amp; {!$Record.Activa__c} )
+|| ( NOT ( ISNEW() ) &amp;&amp; ISCHANGED ( {!$Record.Activa__c} ) &amp;&amp; {!$Record.Activa__c} )</filterFormula>
+        <object>PlanificacionComercial__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Se actualiza el campo &apos;Fecha solicitud booking naviera&apos; con la fecha actual.</description>
+        <name>ActualizarFechaSolicitudBookingNaviera</name>
+        <label>Actualizar fecha solicitud booking naviera</label>
+        <locationX>176</locationX>
+        <locationY>311</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.FechaSolicitudBookingNaviera__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <description>A nivel del Pedido se actualiza el campo &apos;Fecha solicitud booking naviera&apos; cuando se marca la casilla &apos;Solicitud booking naviera&apos; antes de guardar el registro.</description>
+    <environments>Default</environments>
+    <interviewLabel>Pedido: Actualizar fecha solicitud booking naviera {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Pedido: Actualizar fecha solicitud booking naviera</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>ActualizarFechaSolicitudBookingNaviera</targetReference>
+        </connector>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Solicitud_booking_enviada__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>PedidoDeCompra__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

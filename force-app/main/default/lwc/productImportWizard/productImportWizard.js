@@ -294,6 +294,12 @@ export default class ProductImportWizard extends LightningElement {
             matchField:    this.matchField
         })
         .then(result => {
+            if (result && result.successRecords) {
+                result.successRecords = result.successRecords.map(rec => ({
+                    ...rec,
+                    recordUrl: `/lightning/r/Product2/${rec.recordId}/view`
+                }));
+            }
             this.importResult = result;
             this.isSuccess    = result.totalErrors === 0;
             this.showResultModal = true;

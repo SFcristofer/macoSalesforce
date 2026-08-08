@@ -241,6 +241,7 @@
                                                 <thead>
                                                     <tr class="slds-line-height_reset">
                                                         <th scope="col" style="width: 100px;"><div class="slds-truncate">Fila CSV</div></th>
+                                                        <th scope="col"><div class="slds-truncate">Nombre de Producto</div></th>
                                                         <th scope="col"><div class="slds-truncate">Salesforce ID</div></th>
                                                     </tr>
                                                 </thead>
@@ -248,6 +249,11 @@
                                                     <template for:each={importResult.successRecords} for:item="succ">
                                                         <tr key={succ.rowIndex}>
                                                             <td data-label="Fila CSV"><div class="slds-truncate">{succ.rowIndex}</div></td>
+                                                            <td data-label="Nombre">
+                                                                <div class="slds-truncate">
+                                                                    <a href={succ.recordUrl} target="_blank">{succ.recordName}</a>
+                                                                </div>
+                                                            </td>
                                                             <td data-label="ID"><div class="slds-truncate">{succ.recordId}</div></td>
                                                         </tr>
                                                     </template>

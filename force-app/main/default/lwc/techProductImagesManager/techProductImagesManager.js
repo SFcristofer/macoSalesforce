@@ -23,6 +23,8 @@ export default class TechProductImagesManager extends LightningElement {
     @track image4Preview = null;
     @track onedriveThumbnails = [];
     @track isLoadingThumbnails = false;
+    @track isEditMode = false;
+    isLinkLocked = false;
     
     // Store files to upload
     filesToUpload = { 1: null, 2: null, 3: null, 4: null };
@@ -36,7 +38,10 @@ export default class TechProductImagesManager extends LightningElement {
             if (this.onedriveLink !== currentLink) {
                 this.onedriveLink = currentLink;
                 if (this.onedriveLink) {
+                    this.isLinkLocked = true;
                     this.loadThumbnails();
+                } else {
+                    this.isLinkLocked = false;
                 }
             }
             // Load existing base64 images from DB into preview if available
@@ -50,6 +55,16 @@ export default class TechProductImagesManager extends LightningElement {
     handleLinkChange(event) {
         this.onedriveLink = event.target.value;
         this.loadThumbnails();
+    }
+
+    unlockLink() {
+        this.isLinkLocked = false;
+    }
+
+    toggleEditMode() {
+        this.isEditMode = !this.isEditMode;
+        // Si cancela edición, podríamos recargar los datos originales, 
+        // pero por ahora solo ocultamos los controles.
     }
 
     loadThumbnails() {
@@ -128,6 +143,8 @@ export default class TechProductImagesManager extends LightningElement {
             }
             // Clear file buffer (keep previews)
             this.filesToUpload = { 1: null, 2: null, 3: null, 4: null };
+            // Volver a modo lectura
+            this.isEditMode = false;
             
         } catch (error) {
             this.showToast('Error', error.body?.message || error.message, 'error');

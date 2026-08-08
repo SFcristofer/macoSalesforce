@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>57.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>Actualiza la proforma relacionada con el documento PG, cuando el tipo de documento es &quot;Proforma Confirmación Cliente&quot; y aprobado es igual a &quot;Verdadero&quot;.</description>
+    <environments>Default</environments>
+    <interviewLabel>Confirmación aprobbada {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Documento PG: Proforma confirmación cliente aprobada</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>En la Proforma relacionada con el Documento PG, marca como verdadero &quot;Conf. Cliente aprobada&quot;.</description>
+        <name>ActualizarProforma</name>
+        <label>Actualizar Proforma</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Proforma__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>ConfirmacionCliente__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <object>Proforma__c</object>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>ActualizarProforma</targetReference>
+        </connector>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Tipo_de_Documento__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Proforma Confirmación Cliente</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Aprobado__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>Documento__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <triggerOrder>200</triggerOrder>
+</Flow>

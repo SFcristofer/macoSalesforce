@@ -1,21 +1,92 @@
-.image-card {
+.custom-main-border {
+    border: 2px solid #dddbda;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+/* Glassmorphism & Hover effects for Local Upload Cards */
+.modern-card {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+    padding: 1rem;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
+
+.modern-card:hover {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* OneDrive Preview Images */
+.preview-image {
+    max-height: 120px; 
+    width: auto; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.preview-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+/* Local Image Previews */
 .preview-container {
     text-align: center;
-    background-color: #f3f3f3;
-    border-radius: 4px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
     padding: 8px;
     height: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
+
 .img-preview {
     max-height: 100%;
     max-width: 100%;
     object-fit: contain;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.img-preview:hover {
+    transform: scale(1.05);
+}
+
+/* Empty State Container */
+.empty-state-container {
+    text-align: center;
+    background-color: #f8f9fa;
+    border: 2px dashed #d8dde6;
+    border-radius: 8px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #706e6b;
+    transition: background-color 0.3s ease;
+}
+.empty-state-container:hover {
+    background-color: #f1f3f4;
+}
+
+/* Animations for Edit Mode */
+.fade-in {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
 }

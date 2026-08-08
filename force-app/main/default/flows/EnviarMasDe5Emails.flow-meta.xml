@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>59.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Asigna la colección original de emails a una colección temporal que se usa para procesar la lógica de extraer los primeros 5 emails para procesarlos en el alerta de email, para luego actualizar la colección original de emails y su conteo.</description>
+        <name>AsignarColeccionOriginalColeccionParaProcesamiento</name>
+        <label>Asignar colección original a colección para procesamiento</label>
+        <locationX>176</locationX>
+        <locationY>134</locationY>
+        <assignmentItems>
+            <assignToReference>emailsNotificacionProcesamiento</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>emailsNotificacion</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>SeleccionarPrimeros5EmailsDeColeccionDeProcesamiento</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Asigna los primeros 5 emails de la colección de procesamiento a una variable de colección para el alerta de email.</description>
+        <name>AsignarPrimeros5EmailsLote</name>
+        <label>Asignar primeros 5 emails a lote</label>
+        <locationX>176</locationX>
+        <locationY>350</locationY>
+        <assignmentItems>
+            <assignToReference>emailsNotificacionLote</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>emailsNotificacionProcesamiento</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>BucleEmailsNotificacionEnLote</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Elimina los primeros 5 emails de la colección original.</description>
+        <name>EliminarPrimeros5EmailsDeColeccionOriginal</name>
+        <label>Eliminar primeros 5 emails de colección original</label>
+        <locationX>176</locationX>
+        <locationY>758</locationY>
+        <assignmentItems>
+            <assignToReference>emailsNotificacion</assignToReference>
+            <operator>RemoveAll</operator>
+            <value>
+                <elementReference>emailsNotificacionLote</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <description>Resta 1 por cada email en el lote de notificación al contador de colección original.</description>
+        <name>RestarEmailDeNotificacionEnLoteContador</name>
+        <label>Restar email de notificación en lote a contador</label>
+        <locationX>264</locationX>
+        <locationY>566</locationY>
+        <assignmentItems>
+            <assignToReference>emailsNotificacionConteo</assignToReference>
+            <operator>Subtract</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>BucleEmailsNotificacionEnLote</targetReference>
+        </connector>
+    </assignments>
+    <collectionProcessors>
+        <description>Selecciona los primeros 5 emails de la colección de procesamiento al organizar de manera ascendente y limitar a 5.</description>
+        <name>SeleccionarPrimeros5EmailsDeColeccionDeProcesamiento</name>
+        <elementSubtype>SortCollectionProcessor</elementSubtype>
+        <label>Seleccionar primeros 5 emails de colección de procesamiento</label>
+        <locationX>176</locationX>
+        <locationY>242</locationY>
+        <collectionProcessorType>SortCollectionProcessor</collectionProcessorType>
+        <collectionReference>emailsNotificacionProcesamiento</collectionReference>
+        <connector>
+            <targetReference>AsignarPrimeros5EmailsLote</targetReference>
+        </connector>
+        <limit>5</limit>
+        <sortOptions>
+            <doesPutEmptyStringAndNullFirst>false</doesPutEmptyStringAndNullFirst>
+            <sortOrder>Asc</sortOrder>
+        </sortOptions>
+    </collectionProcessors>
+    <environments>Default</environments>
+    <interviewLabel>Enviar &gt;5 emails {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Enviar &gt;5 emails</label>
+    <loops>
+        <description>Bucle de emails de notificación en lote para su conteo.</description>
+        <name>BucleEmailsNotificacionEnLote</name>
+        <label>Bucle emails notificación en lote</label>
+        <locationX>176</locationX>
+        <locationY>458</locationY>
+        <collectionReference>emailsNotificacionLote</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>RestarEmailDeNotificacionEnLoteContador</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>EliminarPrimeros5EmailsDeColeccionOriginal</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>AsignarColeccionOriginalColeccionParaProcesamiento</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>emailsNotificacion</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>emailsNotificacionConteo</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <scale>0</scale>
+    </variables>
+    <variables>
+        <name>emailsNotificacionLote</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>emailsNotificacionProcesamiento</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

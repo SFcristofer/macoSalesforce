@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Alerta de email de actualización de guía DHL</description>
+        <name>AlertaDeEmail</name>
+        <label>Alerta de email</label>
+        <locationX>176</locationX>
+        <locationY>695</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>asuntoNotificacionGuiaDhl</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>cuerpoEmailGuiaDhl</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailAddressesArray</name>
+            <value>
+                <elementReference>emailsNotificacion</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <actionCalls>
+        <description>Notificación personalizada (escritorio y móvil) de actualización de guía DHL</description>
+        <name>Notificacion</name>
+        <label>Notificación</label>
+        <locationX>176</locationX>
+        <locationY>575</locationY>
+        <actionName>customNotificationAction</actionName>
+        <actionType>customNotificationAction</actionType>
+        <connector>
+            <targetReference>AlertaDeEmail</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>body</name>
+            <value>
+                <elementReference>cuerpoNotificacionGuiaDhl</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>targetId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>customNotifTypeId</name>
+            <value>
+                <elementReference>ObtenerNotificacionPersonalizada.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientIds</name>
+            <value>
+                <elementReference>usuariosNotificacion</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>title</name>
+            <value>
+                <elementReference>tituloNotificacionGuiaDhl</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>customNotificationAction</nameSegment>
+    </actionCalls>
+    <apiVersion>57.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Asigna el Id y el email del propietario del seguimiento de muestra asociado a la muestra a las colecciones para la notificación y alerta de email</description>
+        <name>AsignacinDeUsuarioColecciones</name>
+        <label>Asignación de usuario a colecciones</label>
+        <locationX>176</locationX>
+        <locationY>455</locationY>
+        <assignmentItems>
+            <assignToReference>usuariosNotificacion</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>$Record.Solicitud_de_Muestra__r.Owner:User.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>emailsNotificacion</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>$Record.Solicitud_de_Muestra__r.Owner:User.Email</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Notificacion</targetReference>
+        </connector>
+    </assignments>
+    <description>Envía un email y una notificación al propietario del seguimiento de la muestra asociada a la muestra cuando se ingresa o cambia el número de guía DHL de la muestra.</description>
+    <environments>Default</environments>
+    <interviewLabel>Muestra: Número de guía DHL {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Muestra: Número de guía DHL</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Obtiene la notificación personalizada con el nombre API &apos;NotificacionEscritorioMovil&apos;</description>
+        <name>ObtenerNotificacionPersonalizada</name>
+        <label>Obtener notificación personalizada</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>AsignacinDeUsuarioColecciones</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>NotificacionEscritorioMovil</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>CustomNotificationType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>ObtenerNotificacionPersonalizada</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Numero_de_gu_a_DHL__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Numero_de_gu_a_DHL__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>Muestra__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <description>Asunto de la notificación de actualización de guía DHL</description>
+        <name>asuntoNotificacionGuiaDhl</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Se ha creado/actualizado el número de guía DHL en la muestra {!$Record.Name}</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Cuerpo del email de actualización de guía DHL</description>
+        <name>cuerpoEmailGuiaDhl</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Se ha creado/actualizado la guía DHL de la muestra {!$Record.Name} relacionada con el seguimiento de muestra {!$Record.Solicitud_de_Muestra__r.Name} de la oportunidad {!$Record.Solicitud_de_Muestra__r.Oportunidad__r.Name} del cliente {!$Record.Solicitud_de_Muestra__r.Oportunidad__r.Account.Name}</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Cuerpo de la notificación de actualización de guía DHL</description>
+        <name>cuerpoNotificacionGuiaDhl</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Se ha creado/actualizado la guía DHL de la muestra {!$Record.Name} relacionada con el seguimiento de muestra {!$Record.Solicitud_de_Muestra__r.Name} de la oportunidad {!$Record.Solicitud_de_Muestra__r.Oportunidad__r.Name} del cliente {!$Record.Solicitud_de_Muestra__r.Oportunidad__r.Account.Name}</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Título de la notificación de actualización de guía DHL</description>
+        <name>tituloNotificacionGuiaDhl</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Se ha creado/actualizado el número de guía DHL en la muestra {!$Record.Name}</text>
+    </textTemplates>
+    <variables>
+        <name>emailsNotificacion</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>usuariosNotificacion</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

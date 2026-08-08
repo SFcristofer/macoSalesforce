@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Envía una alerta de email al propietario del pedido.</description>
+        <name>EmailPropietarioDePedido</name>
+        <label>Email propietario de pedido</label>
+        <locationX>308</locationX>
+        <locationY>288</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>asuntoEmailFechaAuditoriaCalidad</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>cuerpoEmailFechaAuditoriaCalidad</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>$Record.Owner:User.Email</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <apiVersion>57.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>Programa el envío de una alerta de email 1 día después de la fecha de auditoría de calidad.</description>
+    <environments>Default</environments>
+    <interviewLabel>Pedido: Alerta fecha de auditoría de calidad {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Pedido: Alerta fecha de auditoría de calidad</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Fecha_de_Auditoria__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>PedidoDeCompra__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <scheduledPaths>
+            <name>X1DiaDespuesDeFac</name>
+            <connector>
+                <targetReference>EmailPropietarioDePedido</targetReference>
+            </connector>
+            <label>1 día después de FAC</label>
+            <offsetNumber>1</offsetNumber>
+            <offsetUnit>Days</offsetUnit>
+            <recordField>Fecha_de_Auditoria__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <description>Asunto del email de alerta para la fecha de auditoría de calidad.</description>
+        <name>asuntoEmailFechaAuditoriaCalidad</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Alerta de auditoría de calidad para el pedido {!$Record.Name}</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Cuerpo del email de alerta para la fecha de auditoría de calidad.</description>
+        <name>cuerpoEmailFechaAuditoriaCalidad</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Ha pasado 1 día después de la auditoría de calidad para el pedido {!$Record.Name}.</text>
+    </textTemplates>
+</Flow>

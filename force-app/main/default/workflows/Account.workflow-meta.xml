@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Providers_Portal_Modify_Products_Price_Access</fullName>
+        <description>Providers Portal: Modify Products Price Access</description>
+        <protected>false</protected>
+        <recipients>
+            <field>EmailComercial__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Provider_Modify_Products_Cost_Portal</template>
+    </alerts>
+    <alerts>
+        <fullName>Providers_Portal_Upload_Products_Access</fullName>
+        <description>Providers Portal: Upload Products Access</description>
+        <protected>false</protected>
+        <recipients>
+            <field>EmailComercial__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Provider_Upload_Products_Portal_Access</template>
+    </alerts>
+</Workflow>

@@ -20,47 +20,70 @@ private class ProductImportWizardControllerTest {
             new Product2(Id=existingProd.Id, Name='WizUpdate')
         };
         
+        // Esto fallará el DML ya que no tiene campos requeridos
+        List<Product2> badProd = new List<Product2>{ new Product2() };
+        
         String jsonInsert = JSON.serialize(toInsert);
         String jsonUpdate = JSON.serialize(toUpdate);
+        String jsonBad = JSON.serialize(badProd);
         
         Test.startTest();
         
-        // Test Insert
-        Map<String, Object> resInsert = ProductImportWizardController.importProducts(jsonInsert, 'insert', null);
+        // Test Insert Success
+        ProductImportWizardController.importProducts(jsonInsert, 'insert', null);
+        
+        // Test Insert Fail (cubre la línea de fallos en buildSaveResultMap)
+        ProductImportWizardController.importProducts(jsonBad, 'insert', null);
         
         // Test Update
-        Map<String, Object> resUpdate = ProductImportWizardController.importProducts(jsonUpdate, 'update', null);
+        ProductImportWizardController.importProducts(jsonUpdate, 'update', null);
         
-        // Test Upsert
-        Map<String, Object> resUpsert = ProductImportWizardController.importProducts(jsonUpdate, 'upsert', 'Id');
+        // Test Upsert con ID
+        ProductImportWizardController.importProducts(jsonUpdate, 'upsert', 'Id');
         
-        // Test Exceptions
+        // Test Upsert Fail (cubre la línea de fallos en buildUpsertResultMap)
+        ProductImportWizardController.importProducts(jsonBad, 'upsert', 'Id');
+        
+        // Test Upsert con valid External ID
+        try {
+            ProductImportWizardController.importProducts(jsonUpdate, 'upsert', 'ProductCode');
+        } catch(Exception e) {}
+
+        // Test Upsert con Invalid External ID
+        try {
+            ProductImportWizardController.importProducts(jsonUpdate, 'upsert', 'InvalidField__c');
+        } catch(AuraHandledException e) {}
+        
+        // Test Empty List
         try {
             ProductImportWizardController.importProducts('[]', 'insert', null);
         } catch(AuraHandledException e) {}
         
+        // Test Invalid Operation
         try {
-            ProductImportWizardController.importProducts(jsonInsert, 'invalid', null);
+            ProductImportWizardController.importProducts(jsonInsert, 'invalid_operation', null);
         } catch(AuraHandledException e) {}
         
+        // Test Generic Exception parsing (malformed JSON)
         try {
-            ProductImportWizardController.importProducts(jsonUpdate, 'upsert', 'InvalidFieldDoesNotExist__c');
-        } catch(AuraHandledException e) {}
-        
-        // Test Governor Limit
-        List<Product2> manyProds = new List<Product2>();
-        for(Integer i=0; i< 10001; i++){
-            manyProds.add(new Product2(Name='Test'));
+            ProductImportWizardController.importProducts('BAD_JSON_NOT_VALID', 'insert', null);
+        } catch(Exception e) {}
+
+        Test.stopTest();
+    }
+    
+    @isTest
+    static void testGovernorLimits() {
+        List<Product2> limitProds = new List<Product2>();
+        Integer limitRows = Limits.getLimitDmlRows();
+        for(Integer i=0; i < limitRows + 1; i++) {
+            limitProds.add(new Product2(Name='Lim' + i));
         }
+        
+        Test.startTest();
         try {
-            ProductImportWizardController.importProducts(JSON.serialize(manyProds), 'insert', null);
+            ProductImportWizardController.importProducts(JSON.serialize(limitProds), 'insert', null);
         } catch(AuraHandledException e) {}
-        
-        // Test DML Failure
-        List<Product2> failInsert = new List<Product2>{ new Product2() }; // Empty product, should fail
-        ProductImportWizardController.importProducts(JSON.serialize(failInsert), 'insert', null);
-        ProductImportWizardController.importProducts(JSON.serialize(failInsert), 'upsert', 'Id');
-        
         Test.stopTest();
     }
 }

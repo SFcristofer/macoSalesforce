@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>57.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>Actualiza el pedido de compra relacionado con el documento PG, cuando el tipo de documento es &quot;Fotos final de producción&quot; y aprobado es &quot;Verdadero&quot;.</description>
+    <environments>Default</environments>
+    <interviewLabel>Documento PG: Informe de auditoría de calidad {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Documento PG: Final de producción</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>En el Pedido de Compra relacionado con el Documento PG, marca como verdadero &quot;Fotos fin producción&quot;.</description>
+        <name>ActualizarPedidoDeCompra</name>
+        <label>Actualizar Pedido de Compra</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.PedidoDeCompra__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>fotos_fin_produccion__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <object>PedidoDeCompra__c</object>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>ActualizarPedidoDeCompra</targetReference>
+        </connector>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Tipo_de_Documento__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Fotos final de Producción</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Aprobado__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>Documento__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <triggerOrder>600</triggerOrder>
+</Flow>

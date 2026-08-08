@@ -1,8 +1,37 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement, track, api } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { NavigationMixin } from 'lightning/navigation';
 
 export default class TechNewProductForm extends NavigationMixin(LightningElement) {
+    @api recordId;
+
+    get formTitle() {
+        return this.recordId ? 'Editar Producto' : 'Nuevo Producto';
+    }
+
+    handleLoad(event) {
+        const record = event.detail.records;
+        if (record && this.recordId) {
+            const fields = record[this.recordId].fields;
+            if (fields) {
+                if (fields.Producto2_detalle__c && fields.Producto2_detalle__c.value) this.showProduct2 = true;
+                if (fields.Producto3_detalle__c && fields.Producto3_detalle__c.value) this.showProduct3 = true;
+                if (fields.Producto4_detalle__c && fields.Producto4_detalle__c.value) this.showProduct4 = true;
+                if (fields.Producto5_detalle__c && fields.Producto5_detalle__c.value) this.showProduct5 = true;
+                if (fields.Producto6_detalle__c && fields.Producto6_detalle__c.value) this.showProduct6 = true;
+
+                if (fields.Masterbox2_detalle__c && fields.Masterbox2_detalle__c.value) this.showBox2 = true;
+                if (fields.Masterbox3_detalle__c && fields.Masterbox3_detalle__c.value) this.showBox3 = true;
+                if (fields.Masterbox4_detalle__c && fields.Masterbox4_detalle__c.value) this.showBox4 = true;
+                if (fields.Masterbox5_detalle__c && fields.Masterbox5_detalle__c.value) this.showBox5 = true;
+                if (fields.Masterbox6_detalle__c && fields.Masterbox6_detalle__c.value) this.showBox6 = true;
+            }
+            setTimeout(() => {
+                this.recalculateCBM();
+            }, 500);
+        }
+    }
+
     @track showBox1 = true;
     @track showBox2 = false;
     @track showBox3 = false;

@@ -1,22 +1,26 @@
 <template>
-    <lightning-card title="Related Product View" icon-name="standard:product_item">
-        <div class="slds-p-horizontal_medium">
-            <template if:true={data}>
-                <template if:true={data.length}>
-                    <lightning-datatable
-                        key-field="Id"
-                        data={data}
-                        columns={columns}
-                        hide-checkbox-column>
-                    </lightning-datatable>
+    <div class="custom-main-border slds-m-bottom_medium">
+        <lightning-card title="Related Product View" icon-name="standard:product_item">
+            <div class="slds-p-horizontal_medium">
+                <template if:true={data}>
+                    <template if:true={data.length}>
+                        <lightning-datatable
+                            key-field="Id"
+                            data={data}
+                            columns={columns}
+                            hide-checkbox-column
+                            onsave={handleSave}
+                            draft-values={draftValues}>
+                        </lightning-datatable>
+                    </template>
+                    <template if:false={data.length}>
+                        <p class="slds-text-align_center slds-text-color_weak slds-p-vertical_medium">No related products found.</p>
+                    </template>
                 </template>
-                <template if:false={data.length}>
-                    <p class="slds-text-align_center slds-text-color_weak slds-p-vertical_medium">No related products found.</p>
+                <template if:true={error}>
+                    <p class="slds-text-color_error">Error loading related products: {error.body.message}</p>
                 </template>
-            </template>
-            <template if:true={error}>
-                <p class="slds-text-color_error">Error loading related products: {error.body.message}</p>
-            </template>
-        </div>
-    </lightning-card>
+            </div>
+        </lightning-card>
+    </div>
 </template>

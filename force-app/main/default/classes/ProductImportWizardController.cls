@@ -54,11 +54,11 @@ public with sharing class ProductImportWizardController {
 
             if (operationType == 'insert') {
                 List<Database.SaveResult> results = Database.insert(productsToProcess, false);
-                return buildSaveResultMap(results);
+                return buildSaveResultMap(results, productsToProcess);
 
             } else if (operationType == 'update') {
                 List<Database.SaveResult> results = Database.update(productsToProcess, false);
-                return buildSaveResultMap(results);
+                return buildSaveResultMap(results, productsToProcess);
 
             } else if (operationType == 'upsert') {
                 List<Database.UpsertResult> upsertResults;
@@ -76,7 +76,7 @@ public with sharing class ProductImportWizardController {
                     // Upsert por Id (campo estándar)
                     upsertResults = Database.upsert(productsToProcess, false);
                 }
-                return buildUpsertResultMap(upsertResults);
+                return buildUpsertResultMap(upsertResults, productsToProcess);
 
             } else {
                 throw new AuraHandledException('Operación no reconocida: ' + operationType);
@@ -135,7 +135,7 @@ public with sharing class ProductImportWizardController {
         return cleanMsg.trim();
     }
 
-    private static Map<String, Object> buildSaveResultMap(List<Database.SaveResult> results) {
+    private static Map<String, Object> buildSaveResultMap(List<Database.SaveResult> results, List<Product2> productsToProcess) {
         Integer exitosos = 0;
         Integer fallidos = 0;
         List<Map<String, Object>> successList = new List<Map<String, Object>>();
@@ -146,7 +146,8 @@ public with sharing class ProductImportWizardController {
                 exitosos++;
                 successList.add(new Map<String, Object>{
                     'rowIndex' => i + 1,
-                    'recordId' => results[i].getId()
+                    'recordId' => results[i].getId(),
+                    'recordName' => productsToProcess[i].Name != null ? productsToProcess[i].Name : 'Producto sin nombre'
                 });
             } else {
                 fallidos++;
@@ -169,7 +170,7 @@ public with sharing class ProductImportWizardController {
         };
     }
 
-    private static Map<String, Object> buildUpsertResultMap(List<Database.UpsertResult> results) {
+    private static Map<String, Object> buildUpsertResultMap(List<Database.UpsertResult> results, List<Product2> productsToProcess) {
         Integer insertados  = 0;
         Integer actualizados = 0;
         Integer fallidos    = 0;
@@ -181,7 +182,8 @@ public with sharing class ProductImportWizardController {
                 if (results[i].isCreated()) { insertados++; } else { actualizados++; }
                 successList.add(new Map<String, Object>{
                     'rowIndex' => i + 1,
-                    'recordId' => results[i].getId()
+                    'recordId' => results[i].getId(),
+                    'recordName' => productsToProcess[i].Name != null ? productsToProcess[i].Name : 'Producto sin nombre'
                 });
             } else {
                 fallidos++;

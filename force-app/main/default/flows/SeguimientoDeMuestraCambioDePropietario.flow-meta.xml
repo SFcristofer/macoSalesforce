@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Alerta de email de cambio de propietario de seguimiento de muestra</description>
+        <name>AlertaDeEmail</name>
+        <label>Alerta de email</label>
+        <locationX>176</locationX>
+        <locationY>695</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>asuntoEmailCambioPropietario</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>cuerpoEmailCambioPropietario</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailAddressesArray</name>
+            <value>
+                <elementReference>emailsNotificacion</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <actionCalls>
+        <description>Notificación personalizada (escritorio y móvil) de cambio de propietario  de seguimiento de muestra</description>
+        <name>Notificacion</name>
+        <label>Notificación</label>
+        <locationX>176</locationX>
+        <locationY>575</locationY>
+        <actionName>customNotificationAction</actionName>
+        <actionType>customNotificationAction</actionType>
+        <connector>
+            <targetReference>AlertaDeEmail</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>body</name>
+            <value>
+                <elementReference>cuerpoNotificacionCambioPropietario</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>targetId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>customNotifTypeId</name>
+            <value>
+                <elementReference>ObtenerNotificacionPersonalizada.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientIds</name>
+            <value>
+                <elementReference>usuariosNotificacion</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>title</name>
+            <value>
+                <elementReference>tituloNotificacionCambioPropietario</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>customNotificationAction</nameSegment>
+    </actionCalls>
+    <apiVersion>57.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Asigna el Id y el email del propietario anterior y del nuevo propietario a las variables para la notificación y alerta de email</description>
+        <name>AsignacionDeUsuariosVariables</name>
+        <label>Asignación de usuarios a variables</label>
+        <locationX>176</locationX>
+        <locationY>455</locationY>
+        <assignmentItems>
+            <assignToReference>usuariosNotificacion</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>$Record__Prior.Owner:User.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>usuariosNotificacion</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>$Record.Owner:User.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>emailsNotificacion</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>$Record__Prior.Owner:User.Email</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>emailsNotificacion</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>$Record.Owner:User.Email</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Notificacion</targetReference>
+        </connector>
+    </assignments>
+    <description>Envía una notificación y un email cuando cambia el propietario del seguimiento de muestra, tanto al propietario anterior como al nuevo propietario</description>
+    <environments>Default</environments>
+    <interviewLabel>Seguimiento de muestra: Cambio de propietario {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Seguimiento de muestra: Cambio de propietario</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Obtiene la notificación personalizada con el nombre API &apos;NotificacionEscritorioMovil&apos;</description>
+        <name>ObtenerNotificacionPersonalizada</name>
+        <label>Obtener notificación personalizada</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>AsignacionDeUsuariosVariables</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>NotificacionEscritorioMovil</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>CustomNotificationType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>ObtenerNotificacionPersonalizada</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>OwnerId</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>Solicitud_de_Muestra__c</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <description>Asunto del email de cambio de propietario</description>
+        <name>asuntoEmailCambioPropietario</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Ha cambiado el propietario del seguimiento de muestra {!$Record.Name}</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Cuerpo del email de cambio de propietario del seguimiento de muestra</description>
+        <name>cuerpoEmailCambioPropietario</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Ha cambiado el propietario del seguimiento de muestra {!$Record.Name} relacionado con la oportunidad {!$Record.Oportunidad__r.Name} del cliente {!$Record.Oportunidad__r.Account.Name}
+
+Propietario anterior: {!$Record__Prior.Owner:User.Name}
+Nuevo propietario: {!$Record.Owner:User.Name}</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Cuerpo de la notificación de cambio de propietario del seguimiento de muestra</description>
+        <name>cuerpoNotificacionCambioPropietario</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Ha cambiado el propietario del seguimiento de muestra {!$Record.Name} relacionado con la oportunidad {!$Record.Oportunidad__r.Name} del cliente {!$Record.Oportunidad__r.Account.Name}
+
+Propietario anterior: {!$Record__Prior.Owner:User.Name}
+Nuevo propietario: {!$Record.Owner:User.Name}</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Título de la notificación de cambio de propietario</description>
+        <name>tituloNotificacionCambioPropietario</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Ha cambiado el propietario del seguimiento de muestra {!$Record.Name}</text>
+    </textTemplates>
+    <triggerOrder>700</triggerOrder>
+    <variables>
+        <name>emailsNotificacion</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>usuariosNotificacion</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

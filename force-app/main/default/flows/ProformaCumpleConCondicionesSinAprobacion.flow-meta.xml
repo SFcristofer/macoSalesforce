@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Alerta de email de proforma que cumple con criterios</description>
+        <name>AlertaDeEmail</name>
+        <label>Alerta de email</label>
+        <locationX>176</locationX>
+        <locationY>1391</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>asuntoEmailProformaCumpleCriterios</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>cuerpoEmailProformaCumpleCriterios</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailAddressesArray</name>
+            <value>
+                <elementReference>emailsNotificacion</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <actionCalls>
+        <description>Notificación personalizada (escritorio y móvil) de proforma que cumple con criterios</description>
+        <name>Notificacion</name>
+        <label>Notificación</label>
+        <locationX>176</locationX>
+        <locationY>1271</locationY>
+        <actionName>customNotificationAction</actionName>
+        <actionType>customNotificationAction</actionType>
+        <connector>
+            <targetReference>AlertaDeEmail</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>body</name>
+            <value>
+                <elementReference>cuerpoNotificacionProformaCumpleCriterios</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>targetId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>customNotifTypeId</name>
+            <value>
+                <elementReference>ObtenerNotificacionPersonalizada.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientIds</name>
+            <value>
+                <elementReference>usuariosNotificacion</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>title</name>
+            <value>
+                <elementReference>tituloEmailProformaCumpleCriterios</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>customNotificationAction</nameSegment>
+    </actionCalls>
+    <apiVersion>57.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Asignación del Id y del email de los usuarios activos asignados a la función &apos;Gerencia Ventas&apos; a las colecciones de notificación.</description>
+        <name>AsignacionDeUsuariosGerenciaVentasColecciones</name>
+        <label>Asignación de usuarios &apos;Gerencia Ventas&apos; a colecciones</label>
+        <locationX>264</locationX>
+        <locationY>1055</locationY>
+        <assignmentItems>
+            <assignToReference>emailsNotificacion</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>BucleUsuariosGerenciaVentas.Email</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>usuariosNotificacion</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>BucleUsuariosGerenciaVentas.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>BucleUsuariosGerenciaVentas</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Agrega el Id y el email del propietario de la oportunidad de la proforma a las colecciones de usuarios a notificar</description>
+        <name>AsignarPropietarioDeOportunidadColecciones</name>
+        <label>Asignar propietario de oportunidad a colecciones</label>
+        <locationX>176</locationX>
+        <locationY>575</locationY>
+        <assignmentItems>
+            <assignToReference>usuariosNotificacion</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>$Record.Oportunidad__r.OwnerId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>emailsNotificacion</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>$Record.Oportunidad__r.Owner.Email</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>ObtenerFuncionGerenciaVentas</targetReference>
+        </connector>
+    </assignments>
+    <description>Cuando se crea o actualiza una proforma para cumplir con las condiciones: (1) El margen de la operación es ≥18% Y (2) El balance de la cuenta padre de la cuenta de la proforma MENOS el importe total da cero o un número positivo ENTONCES envía una notificación y un email al propietario de la oportunidad y a la gerencia de ventas.</description>
+    <environments>Default</environments>
+    <interviewLabel>Proforma: Cumple con condiciones sin aprobación {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Proforma: Cumple con condiciones sin aprobación</label>
+    <loops>
+        <description>Recorre la colección de usuarios activos asignados a la función &apos;Gerencia Ventas&apos;.</description>
+        <name>BucleUsuariosGerenciaVentas</name>
+        <label>Bucle usuarios Gerencia Ventas</label>
+        <locationX>176</locationX>
+        <locationY>935</locationY>
+        <collectionReference>ObtenerUsuariosGerenciaVentas</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>AsignacionDeUsuariosGerenciaVentasColecciones</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Notificacion</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Obtiene la función &apos;Gerencia Ventas&apos;.</description>
+        <name>ObtenerFuncionGerenciaVentas</name>
+        <label>Obtener función &apos;Gerencia Ventas&apos;</label>
+        <locationX>176</locationX>
+        <locationY>695</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>ObtenerUsuariosGerenciaVentas</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Gerencia_Ventas</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>UserRole</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtiene la notificación personalizada con el nombre API &apos;NotificacionEscritorioMovil&apos;</description>
+        <name>ObtenerNotificacionPersonalizada</name>
+        <label>Obtener notificación personalizada</label>
+        <locationX>176</locationX>
+        <locationY>455</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>AsignarPropietarioDeOportunidadColecciones</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>NotificacionEscritorioMovil</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>CustomNotificationType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtiene los usuarios activos asignados a la función &apos;Gerencia Ventas&apos;.</description>
+        <name>ObtenerUsuariosGerenciaVentas</name>
+        <label>Obtener usuarios &apos;Gerencia Ventas&apos;</label>
+        <locationX>176</locationX>
+        <locationY>815</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>BucleUsuariosGerenciaVentas</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>UserRoleId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>ObtenerFuncionGerenciaVentas.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>IsActive</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>User</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>CompartirConGerenciaDeVentas</name>
+        <label>Compartir con Gerencia de Ventas</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <connector>
+            <targetReference>ObtenerNotificacionPersonalizada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>AccesoGerenciaDeVentas__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>CompartirConGerenciaDeVentas</targetReference>
+        </connector>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterFormula>{!$Record.RecordType.DeveloperName} &lt;&gt; &quot;Bloqueada&quot;
+&amp;&amp; NOT ( {!$Record.Aprobado_Direccion__c} )
+&amp;&amp; {!$Record.MargenOperacion__c} &gt;= 0.18
+&amp;&amp; ( {!$Record.Cuenta__r.Parent.Balance_Cuenta__c} - {!$Record.ImporteTotal__c} ) &gt;= 0</filterFormula>
+        <object>Proforma__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <description>Asunto del email de proforma que cumple con los criterios</description>
+        <name>asuntoEmailProformaCumpleCriterios</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Se ha creado/actualizado la proforma {!$Record.Name} cumpliendo con los criterios de control</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Cuerpo del email de proforma que cumple con criterios</description>
+        <name>cuerpoEmailProformaCumpleCriterios</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Se ha creado/actualizado la proforma {!$Record.Name} relacionada con la oportunidad {!$Record.Oportunidad__r.Name} del cliente {!$Record.Cuenta__r.Name} cumpliendo con los criterios de control.</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Cuerpo de la notificación de proforma que cumple con criterios</description>
+        <name>cuerpoNotificacionProformaCumpleCriterios</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Se ha creado/actualizado la proforma {!$Record.Name} relacionada con la oportunidad {!$Record.Oportunidad__r.Name} del cliente {!$Record.Cuenta__r.Name} cumpliendo con los criterios de control.</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Título de la notificación de proforma que cumple con los criterios</description>
+        <name>tituloEmailProformaCumpleCriterios</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Se ha creado/actualizado la proforma {!$Record.Name} cumpliendo con los criterios de control</text>
+    </textTemplates>
+    <variables>
+        <name>emailsNotificacion</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>usuariosNotificacion</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

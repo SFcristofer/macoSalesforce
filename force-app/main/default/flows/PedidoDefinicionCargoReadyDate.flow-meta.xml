@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Envía una alerta de email al propietario del pedido.</description>
+        <name>EmailPropietarioDePedido</name>
+        <label>Email propietario de pedido</label>
+        <locationX>572</locationX>
+        <locationY>276</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>asuntoEmailCargoReadyDate</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>cuerpoEmailCargoReadyDate</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>$Record.Owner:User.Email</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <apiVersion>57.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>AsignarValoresVariablesCreacionFacturaProveedor</name>
+        <label>Asignar valores variables creación factura proveedor</label>
+        <locationX>308</locationX>
+        <locationY>384</locationY>
+        <assignmentItems>
+            <assignToReference>tipoFactura</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Balance</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>porcentajeFactura</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>calculoPorcentajeFactura</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>fechaVencimiento</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>calculoFechaVencimiento</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>CrearFacturaProveedor</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>ProveedorRequiereBalance</name>
+        <label>Proveedor requiere balance</label>
+        <locationX>176</locationX>
+        <locationY>276</locationY>
+        <defaultConnector>
+            <targetReference>AsignarValoresVariablesCreacionFacturaProveedor</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Sí</defaultConnectorLabel>
+        <rules>
+            <name>ProveedorRequiereBalance_No</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Proveedor__r.PorcentajeDeposito__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>100</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>pedidoEsSimulacion</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>No</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>calculoFechaVencimiento</name>
+        <dataType>Date</dataType>
+        <expression>{!$Record.Fecha_de_Compromiso_con_el_Cliente__c}
++ (
+IF ( ISPICKVAL ( {!$Record.Proveedor__r.PlazoPago__c} , &quot;&quot; ) || ISPICKVAL ( {!$Record.Proveedor__r.PlazoPago__c} , &quot;0&quot; ) ,
+0 ,
+VALUE ( TEXT ( {!$Record.Proveedor__r.PlazoPago__c} ) )
+)
++ 10
+)</expression>
+    </formulas>
+    <formulas>
+        <name>calculoPlazoDePago</name>
+        <dataType>Number</dataType>
+        <expression>IF ( 
+( ISPICKVAL ( {!$Record.Proveedor__r.PlazoPago__c} , &quot;&quot; ) || ISPICKVAL ( {!$Record.Proveedor__r.PlazoPago__c} , &quot;0&quot; ) ) ,
+5 ,
+VALUE ( TEXT ( {!$Record.Proveedor__r.PlazoPago__c} ) )
+)</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>calculoPorcentajeFactura</name>
+        <dataType>Number</dataType>
+        <expression>100 - VALUE ( TEXT ( {!$Record.Proveedor__r.PorcentajeDeposito__c} ) )</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>pedidoEsSimulacion</name>
+        <dataType>Boolean</dataType>
+        <expression>{!$Record.RecordType.DeveloperName} = &quot;Simulacion&quot;
+|| {!$Record.RecordType.DeveloperName} = &quot;Simulacion_Aprobador&quot;</expression>
+    </formulas>
+    <interviewLabel>Pedido: Definición cargo ready date {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Pedido: Definición cargo ready date</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Fecha_de_Compromiso_con_el_Cliente__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>PedidoDeCompra__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <scheduledPaths>
+            <connector>
+                <targetReference>ProveedorRequiereBalance</targetReference>
+            </connector>
+            <pathType>AsyncAfterCommit</pathType>
+        </scheduledPaths>
+        <scheduledPaths>
+            <name>X10DiasAntesDeCrd</name>
+            <connector>
+                <targetReference>EmailPropietarioDePedido</targetReference>
+            </connector>
+            <label>10 días antes de CRD</label>
+            <offsetNumber>-10</offsetNumber>
+            <offsetUnit>Days</offsetUnit>
+            <recordField>Fecha_de_Compromiso_con_el_Cliente__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <subflows>
+        <name>CrearFacturaProveedor</name>
+        <label>Crear factura proveedor</label>
+        <locationX>308</locationX>
+        <locationY>492</locationY>
+        <flowName>SubflujoCrearFacturaProveedor</flowName>
+        <inputAssignments>
+            <name>fechaVencimiento</name>
+            <value>
+                <elementReference>fechaVencimiento</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>pedido</name>
+            <value>
+                <elementReference>$Record</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>porcentajeFactura</name>
+            <value>
+                <elementReference>porcentajeFactura</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>tipoFactura</name>
+            <value>
+                <elementReference>tipoFactura</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <textTemplates>
+        <name>asuntoEmailCargoReadyDate</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Alerta de cargo ready date para el pedido {!$Record.Name}</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Cuerpo del email de alerta para el cargo ready date.</description>
+        <name>cuerpoEmailCargoReadyDate</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Faltan 10 días para el Cargo Ready Date del pedido {!$Record.Name}.</text>
+    </textTemplates>
+    <triggerOrder>800</triggerOrder>
+    <variables>
+        <name>fechaVencimiento</name>
+        <dataType>Date</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>plazoDePago</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+    </variables>
+    <variables>
+        <name>porcentajeFactura</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+    </variables>
+    <variables>
+        <name>tipoFactura</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

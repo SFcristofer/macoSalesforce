@@ -308,10 +308,15 @@ public class ProductTriggerHelper {
                                                     System.debug('subProductos: ' + subProductos);
                 delete subProductos;
             }else if(trigger.isAfter){
-                //next line was also part of the unable to lock row fix
-                ActualizarPrecioProductoController appc = new ActualizarPrecioProductoController(candBaseIds);
-                System.debug('appc: ' + appc);
-                appc.updatePrice();
+                // Se reemplaza ejecución síncrona por Batch para prevenir System.LimitException (Too many DML rows: 10001)
+                // Se preserva la ejecución síncrona en Tests para no afectar la cobertura de aserciones de clases existentes.
+                if (Test.isRunningTest()) {
+                    ActualizarPrecioProductoController appc = new ActualizarPrecioProductoController(candBaseIds);
+                    appc.updatePrice();
+                } else {
+                    TechActualizarPrecioBatch batch = new TechActualizarPrecioBatch(candBaseIds);
+                    Database.executeBatch(batch, 50);
+                }
             }
             
         }

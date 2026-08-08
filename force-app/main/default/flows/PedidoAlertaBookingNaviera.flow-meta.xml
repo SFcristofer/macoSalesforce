@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Envía una alerta de email al propietario del pedido.</description>
+        <name>EmailPropietarioDePedido</name>
+        <label>Email propietario de pedido</label>
+        <locationX>132</locationX>
+        <locationY>288</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>asuntoEmailSolicitudBookingNaviera</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>cuerpoEmailSolicitudBookingNaviera</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>$Record.Owner:User.Email</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <actionCalls>
+        <description>Envía una alerta de email a los usuarios activos asignados a la función &apos;Gerencia Compras&apos;.</description>
+        <name>EmailUsuariosGerenciaCompras</name>
+        <label>Email usuarios Gerencia Compras</label>
+        <locationX>484</locationX>
+        <locationY>864</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>asuntoEmailSolicitudBookingNaviera</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>cuerpoEmailSolicitudBookingNaviera</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailAddressesArray</name>
+            <value>
+                <elementReference>emailsGerenciaCompras</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <apiVersion>56.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Agrega el email del usuario a colección de emails.</description>
+        <name>AgregarEmailColeccion</name>
+        <label>Agregar email a colección</label>
+        <locationX>572</locationX>
+        <locationY>648</locationY>
+        <assignmentItems>
+            <assignToReference>emailsGerenciaCompras</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>BucleUsuariosGerenciaCompras.Email</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>BucleUsuariosGerenciaCompras</targetReference>
+        </connector>
+    </assignments>
+    <description>Programa el envío de una alerta de email si no se ha solicitado el booking a la naviera, usando como referencia al Initial Shipping Window.</description>
+    <environments>Default</environments>
+    <formulas>
+        <description>Determina el número de días que faltan desde el día en curso hasta el Initial Shipping Window.</description>
+        <name>diasParaInitialShippingWindow</name>
+        <dataType>Number</dataType>
+        <expression>{!$Record.Fecha_Minima_Embarque__c} - TODAY()</expression>
+        <scale>0</scale>
+    </formulas>
+    <interviewLabel>Pedido: Alerta booking naviera {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Pedido: Alerta booking naviera</label>
+    <loops>
+        <description>Recorre la colección de usuarios activos asignados a la función &apos;Gerencia Compras&apos;.</description>
+        <name>BucleUsuariosGerenciaCompras</name>
+        <label>Bucle usuarios Gerencia Compras</label>
+        <locationX>484</locationX>
+        <locationY>528</locationY>
+        <collectionReference>ObtenerUsuariosGerenciaCompras</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>AgregarEmailColeccion</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>EmailUsuariosGerenciaCompras</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Obtiene la función &apos;Gerencia Compras&apos;.</description>
+        <name>ObtenerFuncionGerenciaCompras</name>
+        <label>Obtener función &apos;Gerencia Compras&apos;</label>
+        <locationX>484</locationX>
+        <locationY>288</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>ObtenerUsuariosGerenciaCompras</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Gerencia_Compras</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>UserRole</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtiene los usuarios activos asignados a la función &apos;Gerencia Compras&apos;</description>
+        <name>ObtenerUsuariosGerenciaCompras</name>
+        <label>Obtener usuarios &apos;Gerencia Compras&apos;</label>
+        <locationX>484</locationX>
+        <locationY>408</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>BucleUsuariosGerenciaCompras</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>UserRoleId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>ObtenerFuncionGerenciaCompras.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>IsActive</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>User</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Solicitud_booking_enviada__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>PedidoDeCompra__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <scheduledPaths>
+            <name>X60DiasAntesDeIsw</name>
+            <connector>
+                <targetReference>EmailPropietarioDePedido</targetReference>
+            </connector>
+            <label>60 días antes de ISW</label>
+            <offsetNumber>-60</offsetNumber>
+            <offsetUnit>Days</offsetUnit>
+            <recordField>Fecha_Minima_Embarque__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <scheduledPaths>
+            <name>X45DiasAntesDeIsw</name>
+            <connector>
+                <targetReference>ObtenerFuncionGerenciaCompras</targetReference>
+            </connector>
+            <label>45 días antes de ISW</label>
+            <offsetNumber>-45</offsetNumber>
+            <offsetUnit>Days</offsetUnit>
+            <recordField>Fecha_Minima_Embarque__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <description>Asunto del email de alerta por falta de solicitud de booking a naviera.</description>
+        <name>asuntoEmailSolicitudBookingNaviera</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Alerta de booking a naviera para pedido {!$Record.Name}</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Asunto del email de alerta por falta de solicitud de booking a naviera.</description>
+        <name>cuerpoEmailSolicitudBookingNaviera</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Aún no se ha solicitado el booking a la naviera para el pedido {!$Record.Name}.
+
+En el momento de generarse esta notificación faltan {!diasParaInitialShippingWindow} días para el Initial Shipping Window.</text>
+    </textTemplates>
+    <triggerOrder>600</triggerOrder>
+    <variables>
+        <description>Colección de emails de usuarios activos asignados a la función &apos;Gerencia Compras&apos;.</description>
+        <name>emailsGerenciaCompras</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Usuarios activos asignados a la función &apos;Gerencia Compras&apos;</description>
+        <name>usuariosGerenciaCompras</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>User</objectType>
+    </variables>
+</Flow>

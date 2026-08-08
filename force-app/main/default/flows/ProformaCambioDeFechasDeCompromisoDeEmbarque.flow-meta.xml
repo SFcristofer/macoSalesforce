@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Email</name>
+        <label>Email</label>
+        <locationX>176</locationX>
+        <locationY>647</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddressesArray</name>
+            <value>
+                <elementReference>emailsNotificacion</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>asuntoEmailProformaCambioFechasCompromisoEmbarque</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>cuerpoEmailProformaCambioFechasCompromisoEmbarque</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <actionCalls>
+        <name>Notificacion</name>
+        <label>Notificación</label>
+        <locationX>176</locationX>
+        <locationY>539</locationY>
+        <actionName>customNotificationAction</actionName>
+        <actionType>customNotificationAction</actionType>
+        <connector>
+            <targetReference>Email</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>customNotifTypeId</name>
+            <value>
+                <elementReference>ObtenerNotificacionPersonalizada.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientIds</name>
+            <value>
+                <elementReference>usuariosNotificacion</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>title</name>
+            <value>
+                <elementReference>tituloNotificacionProformaCambioFechasCompromisoEmbarque</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>body</name>
+            <value>
+                <elementReference>cuerpoNotificacionProformaCambioFechasCompromisoEmbarque</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>targetId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>customNotificationAction</nameSegment>
+    </actionCalls>
+    <apiVersion>58.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Agrega el Id y el email del propietario de la proforma a las colecciones de usuarios a notificar</description>
+        <name>AsignarPropietarioDeProformaColecciones</name>
+        <label>Asignar propietario de proforma a colecciones</label>
+        <locationX>176</locationX>
+        <locationY>431</locationY>
+        <assignmentItems>
+            <assignToReference>usuariosNotificacion</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>$Record.OwnerId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>emailsNotificacion</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>$Record.Owner:User.Email</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Notificacion</targetReference>
+        </connector>
+    </assignments>
+    <environments>Default</environments>
+    <formulas>
+        <name>cambioCargoReadyDate</name>
+        <dataType>String</dataType>
+        <expression>IF ( {!$Record.ETD__c} &lt;&gt; {!$Record__Prior.ETD__c} ,
+TEXT ( {!$Record.ETD__c} ) &amp; &quot; (antes &quot; &amp; TEXT ( {!$Record__Prior.ETD__c} ) &amp; &quot;)&quot; ,
+TEXT ( {!$Record.ETD__c} ) &amp; &quot; (sin cambios)&quot;
+)</expression>
+    </formulas>
+    <formulas>
+        <name>cambioFinalShippingWindow</name>
+        <dataType>String</dataType>
+        <expression>IF ( {!$Record.Final_Shipping_Window__c} &lt;&gt; {!$Record__Prior.Final_Shipping_Window__c} ,
+TEXT ( {!$Record.Final_Shipping_Window__c} ) &amp; &quot; (antes &quot; &amp; TEXT ( {!$Record__Prior.Final_Shipping_Window__c} ) &amp; &quot;)&quot; ,
+TEXT ( {!$Record.Final_Shipping_Window__c} ) &amp; &quot; (sin cambios)&quot;
+)</expression>
+    </formulas>
+    <formulas>
+        <name>cambioInitialShippingWindow</name>
+        <dataType>String</dataType>
+        <expression>IF ( {!$Record.Initial_Shipping_Window__c} &lt;&gt; {!$Record__Prior.Initial_Shipping_Window__c} ,
+TEXT ( {!$Record.Initial_Shipping_Window__c} ) &amp; &quot; (antes &quot; &amp; TEXT ( {!$Record__Prior.Initial_Shipping_Window__c} ) &amp; &quot;)&quot; ,
+TEXT ( {!$Record.Initial_Shipping_Window__c} ) &amp; &quot; (sin cambios)&quot;
+)</expression>
+    </formulas>
+    <interviewLabel>Proforma: Cambio de fechas de compromiso de embarque {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Proforma: Cambio de fechas de compromiso de embarque</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Obtiene la notificación personalizada con el nombre API &apos;NotificacionEscritorioMovil&apos;</description>
+        <name>ObtenerNotificacionPersonalizada</name>
+        <label>Obtener notificación personalizada</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>AsignarPropietarioDeProformaColecciones</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>NotificacionEscritorioMovil</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>CustomNotificationType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>ObtenerNotificacionPersonalizada</targetReference>
+        </connector>
+        <filterLogic>or</filterLogic>
+        <filters>
+            <field>ETD__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Initial_Shipping_Window__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Final_Shipping_Window__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>Proforma__c</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>asuntoEmailProformaCambioFechasCompromisoEmbarque</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Se ha cambiado alguna fecha de compromiso de embarque con el cliente en la proforma {!$Record.Name}.</text>
+    </textTemplates>
+    <textTemplates>
+        <name>cuerpoEmailProformaCambioFechasCompromisoEmbarque</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Se ha cambiado alguna fecha de compromiso de embarque con el cliente en la proforma {!$Record.Name} relacionada con la oportunidad {!$Record.Oportunidad__r.Name} del cliente {!$Record.Cuenta__r.Name}:
+Cargo Ready Date: {!cambioCargoReadyDate}
+Initial Shipping Window: {!cambioInitialShippingWindow}
+Final Shipping Window: {!cambioFinalShippingWindow}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>cuerpoNotificacionProformaCambioFechasCompromisoEmbarque</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Se ha cambiado alguna fecha de compromiso de embarque con el cliente en la proforma {!$Record.Name} relacionada con la oportunidad {!$Record.Oportunidad__r.Name} del cliente {!$Record.Cuenta__r.Name}:
+Cargo Ready Date: {!cambioCargoReadyDate}
+Initial Shipping Window: {!cambioInitialShippingWindow}
+Final Shipping Window: {!cambioFinalShippingWindow}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>tituloNotificacionProformaCambioFechasCompromisoEmbarque</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Se ha cambiado alguna fecha de compromiso de embarque con el cliente en la proforma {!$Record.Name}.</text>
+    </textTemplates>
+    <variables>
+        <name>emailsNotificacion</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>usuariosNotificacion</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

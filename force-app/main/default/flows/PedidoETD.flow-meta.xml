@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Alerta de email de actualización de ETD</description>
+        <name>AlertaDeEmail10dIsw</name>
+        <label>Alerta de email (10d ISW)</label>
+        <locationX>132</locationX>
+        <locationY>648</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>asuntoEmailEtd</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>cuerpoEmailEtd</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailAddressesArray</name>
+            <value>
+                <elementReference>emailsNotificacion</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <actionCalls>
+        <description>Alerta de email de actualización de ETD</description>
+        <name>AlertaDeEmail5dIsw</name>
+        <label>Alerta de email (5d ISW)</label>
+        <locationX>484</locationX>
+        <locationY>1224</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>asuntoEmailEtd</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>cuerpoEmailEtd</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailAddressesArray</name>
+            <value>
+                <elementReference>emailsNotificacion</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <actionCalls>
+        <description>Notificación personalizada (escritorio y móvil) actualización ETD</description>
+        <name>Notificacion10dIsw</name>
+        <label>Notificación (10d ISW)</label>
+        <locationX>132</locationX>
+        <locationY>528</locationY>
+        <actionName>customNotificationAction</actionName>
+        <actionType>customNotificationAction</actionType>
+        <connector>
+            <targetReference>AlertaDeEmail10dIsw</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>body</name>
+            <value>
+                <elementReference>cuerpoNotificacionEtd</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>targetId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>customNotifTypeId</name>
+            <value>
+                <elementReference>ObtenerNotificacionPersonalizada10dIsw.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientIds</name>
+            <value>
+                <elementReference>usuariosNotificacion</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>title</name>
+            <value>
+                <elementReference>tituloNotificacionEtd</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>customNotificationAction</nameSegment>
+    </actionCalls>
+    <actionCalls>
+        <description>Notificación personalizada (escritorio y móvil) actualización ETD</description>
+        <name>Notificacion5dIsw</name>
+        <label>Notificación (5d ISW)</label>
+        <locationX>484</locationX>
+        <locationY>1104</locationY>
+        <actionName>customNotificationAction</actionName>
+        <actionType>customNotificationAction</actionType>
+        <connector>
+            <targetReference>AlertaDeEmail5dIsw</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>body</name>
+            <value>
+                <elementReference>cuerpoNotificacionEtd</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>targetId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>customNotifTypeId</name>
+            <value>
+                <elementReference>ObtenerNotificacionPersonalizada5dIsw.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientIds</name>
+            <value>
+                <elementReference>usuariosNotificacion</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>title</name>
+            <value>
+                <elementReference>tituloNotificacionEtd</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>customNotificationAction</nameSegment>
+    </actionCalls>
+    <apiVersion>57.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Agrega el Id y el email del propietario a las colecciones de usuarios a notificar</description>
+        <name>AgregarPropietarioColecciones10dIsw</name>
+        <label>Agregar propietario a colecciones (10d ISW)</label>
+        <locationX>132</locationX>
+        <locationY>408</locationY>
+        <assignmentItems>
+            <assignToReference>emailsNotificacion</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>$Record.Owner:User.Email</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>usuariosNotificacion</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>$Record.Owner:User.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Notificacion10dIsw</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Agrega el Id y el email del propietario a las colecciones de usuarios a notificar</description>
+        <name>AgregarPropietarioColecciones5dIsw</name>
+        <label>Agregar propietario a colecciones (5d ISW)</label>
+        <locationX>484</locationX>
+        <locationY>984</locationY>
+        <assignmentItems>
+            <assignToReference>emailsNotificacion</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>$Record.Owner:User.Email</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>usuariosNotificacion</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>$Record.Owner:User.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Notificacion5dIsw</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Agrega el Id y el email del usuario &apos;Gerencia Compras&apos; a las colecciones de usuarios a notificar</description>
+        <name>AgregarUsuarioGerenciaComprasColecciones</name>
+        <label>Agregar usuario Gerencia Compras a colecciones</label>
+        <locationX>572</locationX>
+        <locationY>768</locationY>
+        <assignmentItems>
+            <assignToReference>emailsNotificacion</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>BucleUsuariosGerenciaCompras.Email</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>usuariosNotificacion</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>BucleUsuariosGerenciaCompras.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>BucleUsuariosGerenciaCompras</targetReference>
+        </connector>
+    </assignments>
+    <environments>Default</environments>
+    <formulas>
+        <description>Determina el número de días que faltan desde el día en curso hasta el Initial Shipping Window.</description>
+        <name>diasParaInitialShippingWindow</name>
+        <dataType>Number</dataType>
+        <expression>{!$Record.Fecha_Minima_Embarque__c} - TODAY()</expression>
+        <scale>0</scale>
+    </formulas>
+    <interviewLabel>Pedido: ETD {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Pedido: ETD</label>
+    <loops>
+        <description>Recorre la colección de usuarios activos asignados a la función &apos;Gerencia Compras&apos;.</description>
+        <name>BucleUsuariosGerenciaCompras</name>
+        <label>Bucle usuarios Gerencia Compras</label>
+        <locationX>484</locationX>
+        <locationY>648</locationY>
+        <collectionReference>ObtenerUsuariosGerenciaCompras</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>AgregarUsuarioGerenciaComprasColecciones</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>AgregarPropietarioColecciones5dIsw</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Obtiene la función &apos;Gerencia Compras&apos;.</description>
+        <name>ObtenerFuncionGerenciaCompras</name>
+        <label>Obtener función &apos;Gerencia Compras&apos;</label>
+        <locationX>484</locationX>
+        <locationY>408</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>ObtenerUsuariosGerenciaCompras</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Gerencia_Compras</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>UserRole</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtiene la notificación personalizada con el nombre API &apos;NotificacionEscritorioMovil&apos;</description>
+        <name>ObtenerNotificacionPersonalizada10dIsw</name>
+        <label>Obtener notificación personalizada (10d ISW)</label>
+        <locationX>132</locationX>
+        <locationY>288</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>AgregarPropietarioColecciones10dIsw</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>NotificacionEscritorioMovil</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>CustomNotificationType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtiene la notificación personalizada con el nombre API &apos;NotificacionEscritorioMovil&apos;</description>
+        <name>ObtenerNotificacionPersonalizada5dIsw</name>
+        <label>Obtener notificación personalizada (5d ISW)</label>
+        <locationX>484</locationX>
+        <locationY>288</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>ObtenerFuncionGerenciaCompras</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>NotificacionEscritorioMovil</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>CustomNotificationType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Obtiene los usuarios activos asignados a la función &apos;Gerencia Compras&apos;.</description>
+        <name>ObtenerUsuariosGerenciaCompras</name>
+        <label>Obtener usuarios &apos;Gerencia Compras&apos;</label>
+        <locationX>484</locationX>
+        <locationY>528</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>BucleUsuariosGerenciaCompras</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>UserRoleId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>ObtenerFuncionGerenciaCompras.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>IsActive</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>User</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ETD__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>PedidoDeCompra__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <scheduledPaths>
+            <name>X10DiasAntesIsw</name>
+            <connector>
+                <targetReference>ObtenerNotificacionPersonalizada10dIsw</targetReference>
+            </connector>
+            <label>10 días antes ISW</label>
+            <offsetNumber>-10</offsetNumber>
+            <offsetUnit>Days</offsetUnit>
+            <recordField>Fecha_Minima_Embarque__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <scheduledPaths>
+            <name>X5DiasAntesIsw</name>
+            <connector>
+                <targetReference>ObtenerNotificacionPersonalizada5dIsw</targetReference>
+            </connector>
+            <label>5 días antes ISW</label>
+            <offsetNumber>-5</offsetNumber>
+            <offsetUnit>Days</offsetUnit>
+            <recordField>Fecha_Minima_Embarque__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <description>Asunto del email de alerta por falta de ETD.</description>
+        <name>asuntoEmailEtd</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Alerta de falta de fecha ETD para pedido {!$Record.Name}</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Cuerpo del email de alerta por falta de ETD.</description>
+        <name>cuerpoEmailEtd</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Aún no se ha definido una fecha ETD para el pedido {!$Record.Name}.
+
+En el momento de generarse esta notificación faltan {!diasParaInitialShippingWindow} días para el Initial Shipping Window.</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Cuerpo de la notificación por falta de ETD.</description>
+        <name>cuerpoNotificacionEtd</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Aún no se ha definido una fecha ETD para el pedido {!$Record.Name}.
+
+En el momento de generarse esta notificación faltan {!diasParaInitialShippingWindow} días para el Initial Shipping Window.</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Título de notificación por falta de ETD.</description>
+        <name>tituloNotificacionEtd</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Alerta de falta de fecha ETD para pedido {!$Record.Name}</text>
+    </textTemplates>
+    <variables>
+        <name>emailsNotificacion</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>usuariosNotificacion</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>
