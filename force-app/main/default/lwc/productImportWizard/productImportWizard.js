@@ -4,9 +4,32 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import PARSER from '@salesforce/resourceUrl/papaparse';
 import getProductFields from '@salesforce/apex/ProductImportWizardController.getProductFields';
 import importProducts from '@salesforce/apex/ProductImportWizardController.importProducts';
+import getRecordTypeIdsByDeveloperName from '@salesforce/apex/ProductImportWizardController.getRecordTypeIdsByDeveloperName';
 
 const MAX_ROWS = 5000;
 const STEPS = ['step1', 'step2', 'step3', 'step4'];
+
+// ── Plantillas de CSV de seguimiento (Fase 2) ──────────────────────────
+// Cuando la importación actual crea productos que sirven de "padre" para
+// otro nivel del modelo (Producto Base → Producto de Fábrica → Opción de
+// Packaging), se ofrece descargar un CSV ya listo con el Id del padre y
+// las columnas típicas que hace falta llenar para el siguiente nivel.
+const FOLLOWUP_TEMPLATES = [
+    {
+        value: 'fabrica',
+        label: 'Producto de Fábrica (a partir de Productos Base)',
+        recordTypeDevName: 'ProductoDeFabrica',
+        parentLookupField: 'ProductoBase__c',
+        extraFields: ['Fabrica__c', 'Codigo_Proveedor__c', 'PrecioDeFabrica__c', 'Incoterm__c', 'MOQ__c', 'PlazoDeFabricacion__c', 'Packaging__c']
+    },
+    {
+        value: 'packaging',
+        label: 'Opción de Packaging (a partir de Productos de Fábrica)',
+        recordTypeDevName: 'OpcionDePackaging',
+        parentLookupField: 'ProductoDeFabrica__c',
+        extraFields: ['Packaging__c', 'PackagingPersonalizado__c', 'CostoPackaging__c']
+    }
+];
 
 export default class ProductImportWizard extends LightningElement {
 
@@ -34,6 +57,22 @@ export default class ProductImportWizard extends LightningElement {
     isSuccess     = false;
     _isProcessing = false;
     papaParseLoaded = false;
+
+    // ── CSV de seguimiento (Fase 2) ─────────────────────────────────────
+    recordTypeIdsByDevName = {};
+    followupTemplateValue  = FOLLOWUP_TEMPLATES[0].value;
+
+    get followupTemplateOptions() {
+        return FOLLOWUP_TEMPLATES.map(t => ({ label: t.label, value: t.value }));
+    }
+
+    get hasSuccessRecords() {
+        return !!(this.importResult && this.importResult.successRecords && this.importResult.successRecords.length > 0);
+    }
+
+    handleFollowupTemplateChange(event) {
+        this.followupTemplateValue = event.detail.value;
+    }
 
     // ══ GETTERS DE PASO ═══════════════════════════════════════════════
     get isStep1() { return this.currentStep === 'step1'; }
@@ -127,6 +166,14 @@ export default class ProductImportWizard extends LightningElement {
         }
     }
 
+    // ══ WIRE: Record Types de Product2 (para el CSV de seguimiento) ══
+    @wire(getRecordTypeIdsByDeveloperName)
+    wiredRecordTypes({ data }) {
+        if (data) {
+            this.recordTypeIdsByDevName = data;
+        }
+    }
+
     // ══ LIFECYCLE ════════════════════════════════════════════════════
     connectedCallback() {
         loadScript(this, PARSER)
@@ -166,7 +213,8 @@ export default class ProductImportWizard extends LightningElement {
             this.fileContent = e.target.result;
             this.parseCSV(this.fileContent);
         };
-        reader.readAsText(file, 'UTF-8');
+        // Cambiado a ISO-8859-1 (Windows-1252) para conservar acentos generados por Excel
+        reader.readAsText(file, 'ISO-8859-1');
     }
 
     parseCSV(csvText) {
@@ -334,6 +382,72 @@ export default class ProductImportWizard extends LightningElement {
         this.fileName = '';
         this.parsedData = [];
         this.importResult = null;
+    }
+
+    /**
+     * Genera y descarga un CSV "de seguimiento" con los productos recién
+     * creados/actualizados exitosamente, listo para volver a subir al wizard
+     * y crear el siguiente nivel del modelo (Producto de Fábrica u Opción
+     * de Packaging). Incluye el Id del padre, el RecordType destino ya
+     * resuelto, y columnas vacías para los campos típicos de ese nivel.
+     */
+    handleDownloadFollowupCsv() {
+        if (!this.papaParseLoaded) {
+            this.showToast('Espera', 'El procesador CSV aún se está cargando. Intenta de nuevo en unos segundos.', 'warning');
+            return;
+        }
+        if (!this.hasSuccessRecords) {
+            this.showToast('Sin registros', 'No hay registros exitosos para generar el CSV de seguimiento.', 'warning');
+            return;
+        }
+
+        const template = FOLLOWUP_TEMPLATES.find(t => t.value === this.followupTemplateValue);
+        if (!template) return;
+
+        const recordTypeId = this.recordTypeIdsByDevName[template.recordTypeDevName] || '';
+        if (!recordTypeId) {
+            this.showToast(
+                'Record Type no encontrado',
+                `No se encontró el Record Type "${template.recordTypeDevName}" en Product2. Verifica la configuración.`,
+                'error'
+            );
+            return;
+        }
+
+        const header = [
+            template.parentLookupField,
+            'Name',
+            'RecordTypeId',
+            'Referencia_Producto_Origen',
+            ...template.extraFields
+        ];
+
+        const rows = this.importResult.successRecords.map(rec => {
+            const row = [rec.recordId, rec.recordName || '', recordTypeId, rec.recordName || ''];
+            template.extraFields.forEach(() => row.push(''));
+            return row;
+        });
+
+        // eslint-disable-next-line no-undef
+        // \uFEFF es el BOM (Byte Order Mark) de UTF-8. Obliga a Excel a reconocer los acentos al abrir.
+        const csvContent = '\uFEFF' + Papa.unparse([header, ...rows]);
+        // Lightning Web Security intercepta Blob/URL.createObjectURL y rechaza
+        // el MIME type aunque sea válido ("Unsupported MIME type"). Se evita
+        // por completo usando una URI de datos directamente en el href.
+        const dataUri = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvContent);
+        const link = document.createElement('a');
+        const timestamp = new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-');
+        link.href = dataUri;
+        link.download = `seguimiento_${template.value}_${timestamp}.csv`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        this.showToast(
+            'CSV generado',
+            `Descarga lista con ${rows.length} fila(s). Llena las columnas vacías y vuelve a subirlo con la operación "Insertar".`,
+            'success'
+        );
     }
 
     /**
