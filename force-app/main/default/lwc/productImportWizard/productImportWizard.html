@@ -234,6 +234,33 @@
                                         </div>
                                     </template>
 
+                                    <template lwc:if={hasSuccessRecords}>
+                                        <div class="followup-box">
+                                            <div class="followup-header">
+                                                <lightning-icon icon-name="utility:download" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                                                <strong>Generar CSV de seguimiento (Fase 2)</strong>
+                                            </div>
+                                            <p class="followup-hint">
+                                                Descarga un CSV con el Id de estos {importResult.totalSuccess} registro(s) ya listo para crear el siguiente nivel del modelo (Record Type y columna de relación incluidos).
+                                            </p>
+                                            <div class="followup-controls">
+                                                <lightning-combobox
+                                                    label="Voy a crear"
+                                                    variant="label-hidden"
+                                                    value={followupTemplateValue}
+                                                    options={followupTemplateOptions}
+                                                    onchange={handleFollowupTemplateChange}
+                                                    class="followup-combobox">
+                                                </lightning-combobox>
+                                                <lightning-button
+                                                    label="Descargar CSV"
+                                                    icon-name="utility:download"
+                                                    onclick={handleDownloadFollowupCsv}>
+                                                </lightning-button>
+                                            </div>
+                                        </div>
+                                    </template>
+
                                     <template lwc:if={importResult.successRecords.length}>
                                         <h3 class="slds-text-heading_small slds-text-color_success slds-m-top_medium slds-m-bottom_x-small">Registros Creados / Actualizados</h3>
                                         <div class="slds-scrollable_y" style="max-height: 250px;">

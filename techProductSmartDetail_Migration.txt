@@ -1,0 +1,45 @@
+DOCUMENTACION PARA MIGRACION - techProductSmartDetail
+======================================================
+Componente: techProductSmartDetail (Lightning Web Component) + Lógicas de Fábrica Primaria/Alternativa
+Objetivo: Migrar el rediseño del layout de producto, así como la regla de negocio que asegura que las fábricas secundarias sean alternativas.
+
+1. COMPONENTES A MIGRAR (Package.xml):
+------------------------------------------------------
+<types>
+    <members>techProductSmartDetail</members>
+    <name>LightningComponentBundle</name>
+</types>
+
+* Archivos contenidos en el bundle:
+  - techProductSmartDetail.html (Estructura visual, acordeones SLDS y Parche para Lookups)
+  - techProductSmartDetail.js (Obtención de metadata vía getRecordUi y análisis de secciones)
+  - techProductSmartDetail.css (Estilos "tech-blue-card" y bloqueo de clics)
+  - techProductSmartDetail.js-meta.xml (Metadatos de Lightning App Builder)
+
+2. CLASES APEX Y TRIGGERS:
+------------------------------------------------------
+* ProductTriggerHelper.cls (Clase Actualizada)
+  - Propósito: Se inyectó lógica bulkificada en el evento "Before Insert". Evalúa si un Producto Base ya tiene asociado un "Producto de Fábrica" Primario (Activo). De ser así, obliga a que cualquier nueva fábrica se marque como Alternativa (`IsActive = false`). Esto blinda la regla desde el servidor, afectando el botón "New", los Flujos y las cargas masivas.
+
+(Nota: Si existe una clase llamada "ProductSmartDetailController" generada en Sandbox, NO se debe migrar).
+
+3. FLUJOS AUTOMÁTICOS (FLOWS):
+------------------------------------------------------
+* Tech_Sync_Fabrica_Primaria_a_Base.flow-meta.xml (Record-Triggered Flow)
+  - Propósito: Flujo "After Save" en Product2. Al crearse o actualizarse un Producto de Fábrica que esté marcado como activo/primario, este flujo transfiere automáticamente los valores de su "Fábrica" y "Código de Proveedor" al Producto Base (Padre).
+
+4. CONFIGURACIONES PARA EL ADMINISTRADOR (Post-Migración):
+------------------------------------------------------
+- Este componente es un espejo inteligente. Todo lo que el administrador configure en el "Page Layout" nativo se dibujará aquí.
+- DISEÑO AUTOMÁTICO (Tarjetas Azules): Para que una sección del layout se transforme visualmente en una tarjeta azul resaltada (ej. Masterbox), el nombre de la sección debe contener al menos una de estas palabras:
+  * "Masterbox"
+  * "Caja"
+  * "Dimensión" (o Dimension)
+  * "Variante"
+  * "Producto"
+- Si se usa cualquier otro nombre de sección (Ej: "Información General", "Sistema"), se renderizará de forma estándar (fondo blanco).
+
+5. PROTECCIONES Y PARCHES IMPLEMENTADOS:
+------------------------------------------------------
+- Bug "Record Type": Se bloqueó el clic sobre cualquier campo que contenga "RecordType" en su API Name mediante la clase CSS `.tech-no-click`, evitando un colapso nativo de Salesforce.
+- Bug "Lookups como IDs": Se programó un interceptor que extrae el "displayValue" (Nombre real) de los campos de búsqueda desde la caché de la API, reemplazando el ID crudo de 18 caracteres y obligándolo a mostrar el enlace azul correcto (ej. en el campo Factory).

@@ -47,7 +47,7 @@ public class QBBillUpdateCallout extends QBCallout {
             
             line = new QBBillLinePayload();
             line.Description = itemFactura.Descripcion__c;
-            line.Amount = String.valueOf(itemFactura.Total__c);
+            line.Amount = String.ValueOf(itemFactura.Total__c);
             line.AccountBasedExpenseLineDetail = itemAccRef;
             lines.add(line);
         }

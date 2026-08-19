@@ -103,6 +103,11 @@ public class ContainerAddItems {
         insert vc;
         for (ContainerItem ci : containerItems){
             if(ci.selected){
+                //Si el vendedor capturo unidades solicitadas, las cajas se recalculan aqui
+                //(respaldo server-side del calculo hecho en el navegador via JS).
+                if (ci.requestedUnits != null && ci.requestedUnits > 0) {
+                    ci.numBoxes = calculateBoxes(ci.oli.Product2, ci.requestedUnits);
+                }
                 //Modified to account for previous modifications to Costs and Prices on a Simulation
                 assignContainer.add(new ProformaLineItem__c(Id = ci.pli == null? null : ci.pli.Id,
                                                         NumeroDeCajas__c = ci.numBoxes,
@@ -320,6 +325,7 @@ public class ContainerAddItems {
                                         UnitPrice,
                                         TotalPrice,
                                         Product2.Unidades_por_Masterbox2__c,
+                                        Product2.Total_Masterbox_Count__c,
                                         Codigo_de_Producto__c,
                                         Product2.Descripcion_Larga__c,
                                         Imagen__c,
@@ -337,6 +343,24 @@ public class ContainerAddItems {
 
     public Integer getClosedContainersNum() {
         return closedContainers.size();
+    }
+
+    /**
+     * Calcula el numero de cajas a partir de las unidades solicitadas por el vendedor.
+     * Formula confirmada con Pacific (2026-08-15): CEILING(unidades / unidadesPorMasterboxCaja1) * totalDeMasterbox.
+     * Cubre tanto el caso simple (1 masterbox con N unidades) como el de sets (varias masterbox por producto).
+     * Antes de aplicar la formula estandar consulta MasterboxExceptionRules por si existe un caso especial.
+     */
+    public static Integer calculateBoxes(Product2 prod, Decimal requestedUnits) {
+        Decimal exceptionBoxes = MasterboxExceptionRules.overrideBoxCount(prod, requestedUnits);
+        if (exceptionBoxes != null) {
+            return (Integer) Math.ceil(exceptionBoxes);
+        }
+        if (requestedUnits == null || prod.Unidades_por_Masterbox2__c == null || prod.Unidades_por_Masterbox2__c == 0) {
+            return 0;
+        }
+        Decimal totalMasterbox = (prod.Total_Masterbox_Count__c == null || prod.Total_Masterbox_Count__c == 0) ? 1 : prod.Total_Masterbox_Count__c;
+        return (Integer) (Math.ceil(requestedUnits / prod.Unidades_por_Masterbox2__c) * totalMasterbox);
     }
 
     private Condiciones_Aprobacion__mdt getConditions() {
@@ -357,6 +381,9 @@ public class ContainerAddItems {
         public OpportunityLineItem oli {get;set;}
         public boolean selected{get;set;}
         public Integer numBoxes{get;set;}
+        //Unidades solicitadas por el vendedor; si viene con valor, numBoxes se recalcula
+        //en el servidor a partir de esta cantidad (ver ContainerAddItems.save()).
+        public Decimal requestedUnits{get;set;}
         public ProformaLineItem__c pli{get;set;}
         //With the addition of multiple containers, now we report the total served, even for this proforma
         public list<ProformaLineItem__c> servedItems{get;set;}
@@ -374,6 +401,7 @@ public class ContainerAddItems {
             this.oli = oli;
             selected = false;
             numBoxes = 0;
+            requestedUnits = 0;
             servedItems = lpli;
             closedPrice = oli.UnitPrice;
             if(oli.Producto_Packaging__c != null) {
@@ -392,10 +420,16 @@ public class ContainerAddItems {
                     served += (Integer)pliIter.NumeroDeCajas__c;
                 }
             }
-            if(oli.Product2.Unidades_por_Masterbox2__c == 0) {
-                return 0;
-            }
-            return (Integer)Math.ceil(oli.Quantity/oli.Product2.Unidades_por_Masterbox2__c) - served;
+            return getSuggestedBoxes() - served;
+        }
+
+        /**
+         * Cajas sugeridas para las unidades solicitadas en el Estudio de Oportunidad (oli.Quantity),
+         * usando la formula unidades->cajas (ver ContainerAddItems.calculateBoxes). Reemplaza el calculo
+         * anterior que no consideraba mas de una Masterbox por producto (caso de sets).
+         */
+        public Integer getSuggestedBoxes() {
+            return ContainerAddItems.calculateBoxes(oli.Product2, oli.Quantity);
         }
     }
 

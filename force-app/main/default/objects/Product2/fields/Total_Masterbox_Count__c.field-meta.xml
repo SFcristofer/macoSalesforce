@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Masterbox_Count__c</fullName>
+    <description>Conteo automatico de cuantas masterbox (1 a 6) tienen datos capturados. La Masterbox 1 siempre cuenta; 2-6 cuentan solo si tienen Largo capturado. Usado para el calculo de piezas-a-cajas del vendedor y para el resumen del Live Jack.</description>
+    <externalId>false</externalId>
+    <formula>IF( RecordType.DeveloperName == &apos;Producto&apos;,
+1 + IF(NOT(ISBLANK(Masterbox2LargoCm__c)),1,0) + IF(NOT(ISBLANK(Masterbox3LargoCm__c)),1,0) + IF(NOT(ISBLANK(Masterbox4LargoCm__c)),1,0) + IF(NOT(ISBLANK(Masterbox5LargoCm__c)),1,0) + IF(NOT(ISBLANK(Masterbox6LargoCm__c)),1,0),
+IF(RecordType.DeveloperName == &apos;ProductoDeFabrica&apos;,
+1 + IF(NOT(ISBLANK(ProductoBase__r.Masterbox2LargoCm__c)),1,0) + IF(NOT(ISBLANK(ProductoBase__r.Masterbox3LargoCm__c)),1,0) + IF(NOT(ISBLANK(ProductoBase__r.Masterbox4LargoCm__c)),1,0) + IF(NOT(ISBLANK(ProductoBase__r.Masterbox5LargoCm__c)),1,0) + IF(NOT(ISBLANK(ProductoBase__r.Masterbox6LargoCm__c)),1,0),
+1 + IF(NOT(ISBLANK(ProductoDeFabrica__r.ProductoBase__r.Masterbox2LargoCm__c)),1,0) + IF(NOT(ISBLANK(ProductoDeFabrica__r.ProductoBase__r.Masterbox3LargoCm__c)),1,0) + IF(NOT(ISBLANK(ProductoDeFabrica__r.ProductoBase__r.Masterbox4LargoCm__c)),1,0) + IF(NOT(ISBLANK(ProductoDeFabrica__r.ProductoBase__r.Masterbox5LargoCm__c)),1,0) + IF(NOT(ISBLANK(ProductoDeFabrica__r.ProductoBase__r.Masterbox6LargoCm__c)),1,0)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Total Masterbox</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

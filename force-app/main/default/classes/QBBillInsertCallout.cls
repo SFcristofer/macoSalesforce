@@ -32,6 +32,13 @@ public class QBBillInsertCallout extends QBCallout {
         factura = (FacturaDeProveedor__c)param;
         itemsFactura = factura.ItemsDeFacturaDeProveedor__r;
 
+        Boolean isOldRecord = false;
+        if(factura.Id != null) {
+            FacturaDeProveedor__c fdpDateCheck = [SELECT CreatedDate FROM FacturaDeProveedor__c WHERE Id = :factura.Id LIMIT 1];
+            if(fdpDateCheck.CreatedDate < Datetime.newInstance(2026, 6, 27, 0, 0, 0)) {
+                isOldRecord = true;
+            }
+        }
 
         objPayload = new QBBillPayload();
         vendorRef = new QBBillVendorRefPayload();
@@ -53,7 +60,9 @@ public class QBBillInsertCallout extends QBCallout {
 
             line = new QBBillLinePayload();
             line.Description = itemFactura.Descripcion__c;
-            line.Amount = String.valueOf(itemFactura.Total__c);
+            if (isOldRecord) {
+                line.Amount = String.ValueOf(itemFactura.Total__c);
+            }
             line.AccountBasedExpenseLineDetail = itemAccRef;
             lines.add(line);
         }

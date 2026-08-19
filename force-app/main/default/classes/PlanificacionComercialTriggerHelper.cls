@@ -15,7 +15,7 @@ public class PlanificacionComercialTriggerHelper {
     public void afterUpdate() {
         Map<Id, PlanificacionComercial__c> changedPlans = new Map<Id, PlanificacionComercial__c>();
         for(PlanificacionComercial__c pc : newRecords) {
-            if(pc.AportacionesPendientes__c != oldMap.get(pc.Id).AportacionesPendientes__c || Test.isRunningTest()) {
+            if(pc.AportacionesPendientes__c != oldMap.get(pc.Id).AportacionesPendientes__c) {
                 changedPlans.put(pc.Id, pc);
             }
         }
@@ -49,14 +49,6 @@ public class PlanificacionComercialTriggerHelper {
             }
             negOppList.add(negOpp);
         }
-        // upsert negOppList;
-        /* 
-         * NOTA: 
-         * Se comenta la instrucción 'upsert negOppList;' a petición del negocio 
-         * ya que generaba Oportunidades negativas con valor cero ("Penalización por 
-         * exceso de aportaciones") que disparaban correos electrónicos innecesarios 
-         * de "Oportunidad Ganada". Al comentarlo, evitamos afectar las pruebas unitarias
-         * u otras integraciones externas, asegurando que la Oportunidad nunca se guarde.
-         */
+        upsert negOppList;
     }
 }

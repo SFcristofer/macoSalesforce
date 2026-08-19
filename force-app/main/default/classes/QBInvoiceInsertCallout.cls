@@ -26,6 +26,14 @@ public class QBInvoiceInsertCallout extends QBCallout {
         factura = (FacturaDeCliente__c)param;
         itemsFactura = factura.ItemsDeFacturaDeCliente__r;
         
+        Boolean isOldRecord = false;
+        if(factura.Id != null) {
+            FacturaDeCliente__c fdcDateCheck = [SELECT CreatedDate FROM FacturaDeCliente__c WHERE Id = :factura.Id LIMIT 1];
+            if(fdcDateCheck.CreatedDate < Datetime.newInstance(2026, 6, 27, 0, 0, 0)) {
+                isOldRecord = true;
+            }
+        }
+        
         objPayload = new QBInvoicePayload();
         customRef = new QBInvoiceCustomerRefPayload();
         lines = new List<QBInvoiceLinePayload>();
@@ -52,7 +60,9 @@ public class QBInvoiceInsertCallout extends QBCallout {
             
             line = new QBInvoiceLinePayload();
             line.Description = itemFactura.Descripcion__c;
-            line.Amount = String.ValueOf(itemFactura.Total__c);
+            if (isOldRecord) {
+                line.Amount = String.ValueOf(itemFactura.Total__c);
+            }
             line.SalesItemLineDetail = lineItemDetail;
             lines.add(line);
         }

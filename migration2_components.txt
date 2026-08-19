@@ -26,8 +26,6 @@
    - Producto 5: Producto5_detalle__c, Producto5LargoCm__c, Producto5AnchoCm__c, Producto5AltoCm__c, Producto5DiametroCm__c, Producto5M3__c, Producto5PesoKg__c, Producto5PesoBruto__c
    - Producto 6: Producto6_detalle__c, Producto6LargoCm__c, Producto6AnchoCm__c, Producto6AltoCm__c, Producto6DiametroCm__c, Producto6M3__c, Producto6PesoKg__c, Producto6PesoBruto__c
 
-6. Perfiles (Seguridad a Nivel de Campo - FLS)
-   - force-app/main/default/profiles/Admin.profile-meta.xml (Habilitada visibilidad para los nuevos campos de Masterboxes y Productos Adicionales)
 
 
 
@@ -40,3 +38,4 @@
 8. Historial de Órdenes (Fase 3 - Feedback)
    - force-app/main/default/classes/TechProductOrderHistoryController.cls (Agregado PedidoDeCompra__r.Name al SOQL)
    - force-app/main/default/lwc/techProductOrderHistory/techProductOrderHistory.js (Agregada columna de 'Order Number')
+

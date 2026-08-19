@@ -27,7 +27,9 @@ public class ActualizarPrecioProductoController {
                                                 Porcentaje_Oficina_GS__c
                                                 FROM ItemsEscandallo__r),
                                 LastModifiedDate
-                                FROM Escandallo__c limit 1];
+                                FROM Escandallo__c
+                                ORDER BY CreatedDate ASC
+                                limit 1];
     }
     
     /**
@@ -48,7 +50,9 @@ public class ActualizarPrecioProductoController {
                                                 FROM ItemsEscandallo__r
                                                 WHERE Producto__c IN :prodIds),
                                 LastModifiedDate
-                                FROM Escandallo__c limit 1];
+                                FROM Escandallo__c
+                                ORDER BY CreatedDate ASC
+                                limit 1];
                                 
         productIds = prodIds;
     }

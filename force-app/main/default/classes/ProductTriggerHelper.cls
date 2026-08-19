@@ -173,6 +173,7 @@ public class ProductTriggerHelper {
             
             Escandallo__c eUnico = [SELECT Id
                                     FROM Escandallo__c
+                                    ORDER BY CreatedDate ASC
                                     limit 1];
             System.debug('PRODUCT trigger helper 2 eunico [' + eUnico + ']');
             list<Pricebook2> pricebooks = [SELECT Id, Name, isStandard FROM Pricebook2];
@@ -181,6 +182,27 @@ public class ProductTriggerHelper {
             System.debug('PRODUCT trigger helper 3 pricebooks [' + pricebooks.size() + ']');
             if(oper == INS){
                 ProductCodesGen codeGenerator = new ProductCodesGen();
+
+                if(trigger.isBefore && !candBaseIds.isEmpty()) {
+                    Set<Id> basesConPrimaria = new Set<Id>();
+                    for(Product2 prodF : [SELECT ProductoBase__c FROM Product2 
+                                            WHERE ProductoBase__c IN :candBaseIds 
+                                            AND RecordType.DeveloperName = :PRODUCTO_FABRICA_RT 
+                                            AND IsActive = true]) {
+                        basesConPrimaria.add(prodF.ProductoBase__c);
+                    }
+                    Id fabricaRT = Schema.sObjectType.Product2.getRecordTypeInfosByDeveloperName().get(PRODUCTO_FABRICA_RT).getRecordTypeId();
+                    for(Product2 p : candidates) {
+                        if(p.RecordTypeId == fabricaRT && p.ProductoBase__c != null) {
+                            if(basesConPrimaria.contains(p.ProductoBase__c)) {
+                                p.IsActive = false;
+                            } else {
+                                p.IsActive = true;
+                                basesConPrimaria.add(p.ProductoBase__c);
+                            }
+                        }
+                    }
+                }
 
                 System.debug('product trigger helper INSSSSSSSSSSSSSSS   ----- [' + oper + ']');
 
@@ -310,7 +332,12 @@ public class ProductTriggerHelper {
             }else if(trigger.isAfter){
                 // Se reemplaza ejecución síncrona por Batch para prevenir System.LimitException (Too many DML rows: 10001)
                 // Se preserva la ejecución síncrona en Tests para no afectar la cobertura de aserciones de clases existentes.
-                if (Test.isRunningTest()) {
+                // Si ya estamos en contexto asincrono (el propio TechActualizarPrecioBatch hace
+                // update sobre Product2 y vuelve a entrar aqui) hay que ejecutar SINCRONO.
+                // Lanzar un batch desde un batch revienta con:
+                //   System.AsyncException: Database.executeBatch cannot be called from a batch
+                // y el rollback deja los PricebookEntry en su valor placeholder UnitPrice = 1.
+                if (Test.isRunningTest() || System.isBatch() || System.isFuture() || System.isQueueable()) {
                     ActualizarPrecioProductoController appc = new ActualizarPrecioProductoController(candBaseIds);
                     appc.updatePrice();
                 } else {

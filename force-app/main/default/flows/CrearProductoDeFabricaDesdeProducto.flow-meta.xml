@@ -2,6 +2,38 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <apiVersion>49.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>AssignIsActiveFalse</name>
+        <label>AssignIsActiveFalse</label>
+        <locationX>500</locationX>
+        <locationY>450</locationY>
+        <assignmentItems>
+            <assignToReference>varIsActive</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>InsertProduct2</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>AssignIsActiveTrue</name>
+        <label>AssignIsActiveTrue</label>
+        <locationX>700</locationX>
+        <locationY>450</locationY>
+        <assignmentItems>
+            <assignToReference>varIsActive</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>InsertProduct2</targetReference>
+        </connector>
+    </assignments>
     <constants>
         <name>conFabrica</name>
         <dataType>String</dataType>
@@ -16,6 +48,31 @@
             <stringValue>2-Producto de Fábrica</stringValue>
         </value>
     </constants>
+    <decisions>
+        <name>CheckIfPrimaryExists</name>
+        <label>CheckIfPrimaryExists</label>
+        <locationX>601</locationX>
+        <locationY>350</locationY>
+        <defaultConnector>
+            <targetReference>AssignIsActiveTrue</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No Existe</defaultConnectorLabel>
+        <rules>
+            <name>PrimaryExists</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>varExistingPrimaryId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>AssignIsActiveFalse</targetReference>
+            </connector>
+            <label>Ya Existe Primario</label>
+        </rules>
+    </decisions>
     <dynamicChoiceSets>
         <name>IncotermOptions</name>
         <dataType>Picklist</dataType>
@@ -102,7 +159,7 @@
         <inputAssignments>
             <field>IsActive</field>
             <value>
-                <booleanValue>true</booleanValue>
+                <elementReference>varIsActive</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -155,6 +212,46 @@
         </inputAssignments>
         <object>Product2</object>
     </recordCreates>
+    <recordLookups>
+        <name>LookupPrimaryFactory</name>
+        <label>LookupPrimaryFactory</label>
+        <locationX>601</locationX>
+        <locationY>200</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>CheckIfPrimaryExists</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>DisplayFault</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ProductoBase__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varProductId</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varRecordTypeId</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>IsActive</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>Product2</object>
+        <outputAssignments>
+            <assignToReference>varExistingPrimaryId</assignToReference>
+            <field>Id</field>
+        </outputAssignments>
+    </recordLookups>
     <recordLookups>
         <name>LookupRecordType</name>
         <label>LookupRecordType</label>
@@ -214,7 +311,7 @@
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>InsertProduct2</targetReference>
+            <targetReference>LookupPrimaryFactory</targetReference>
         </connector>
         <fields>
             <name>Packaging</name>
@@ -394,6 +491,20 @@
     <variables>
         <name>varAccountId</name>
         <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>varExistingPrimaryId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>varIsActive</name>
+        <dataType>Boolean</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>

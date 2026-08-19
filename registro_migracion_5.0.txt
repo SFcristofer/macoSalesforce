@@ -1,0 +1,43 @@
+# Control de Cambios 5.0 para Migración
+
+Este archivo contiene el registro de todos los componentes creados o modificados durante la versión 5.0 para facilitar su posterior migración o despliegue.
+
+--------------------------------------------------
+Fecha: 2026-08-11
+Componente: techProductSmartDetail (LWC - Nuevo)
+Archivos:
+  - force-app/main/default/lwc/techProductSmartDetail/techProductSmartDetail.html
+  - force-app/main/default/lwc/techProductSmartDetail/techProductSmartDetail.js
+  - force-app/main/default/lwc/techProductSmartDetail/techProductSmartDetail.css
+  - force-app/main/default/lwc/techProductSmartDetail/techProductSmartDetail.js-meta.xml
+Descripción: Componente nuevo de solo lectura para el Lightning Record Page de Product2. Muestra un "detalle inteligente" que oculta automáticamente cualquier campo o sección sin información (incluye hasta 6 variantes de Producto y 6 de Masterbox, mostrando solo las que tienen datos capturados). Incluye badge de Volumen Total (CBM) calculado, y barra de estadísticas rápidas (Estado, Precio, CBM, # Masterboxes, # Variantes).
+
+Fecha: 2026-08-11
+Componente: techProductSmartDetail (LWC - Rediseño)
+Descripción: Se reemplazaron las secciones apiladas por un lightning-accordion con badge de conteo por sección (ej. "3 de 6" en Masterboxes) e iconos SLDS, en lugar de emojis, para un acabado más profesional.
+
+Fecha: 2026-08-11
+Componente: techProductSmartDetail (LWC - Edición inline y navegación)
+Descripción: Se agregó un lápiz de edición (aparece al hacer hover, igual que la interfaz estándar de Salesforce) en cada campo que sí es editable según la metadata real de Product2 (se excluyeron campos calculados/fórmula como CostoTotal2__c, Estatus__c, los Calculado de UnidadesContainer, etc.). Al hacer clic se abre un mini lightning-record-edit-form inline con botones de Guardar/Cancelar. Los campos de tipo lookup (Fabrica__c, ProductoBase__c, ProductoDeFabrica__c, Similar_a__c) se muestran como enlaces clicables que navegan al registro relacionado vía NavigationMixin.
+Nota: se corrigieron dos errores de tipo detectados al revisar la metadata (Precio_Vigente__c y Garantia__c/ManualDeInstrucciones__c son campos boolean, no currency/texto como se había asumido inicialmente).
+
+Fecha: 2026-08-11
+Componente: ProductImportWizardController (Clase Apex)
+Archivos:
+  - force-app/main/default/classes/ProductImportWizardController.cls
+  - force-app/main/default/classes/ProductImportWizardControllerTest.cls
+Descripción: Se agregó el método getRecordTypeIdsByDeveloperName() (@AuraEnabled cacheable), que devuelve el Id de cada Record Type activo de Product2 indexado por Developer Name (Producto, ProductoDeFabrica, OpcionDePackaging, Prospecto_de_Producto). Se agregó el test testGetRecordTypeIdsByDeveloperName en la clase de prueba. Cobertura de la clase tras el cambio: ~91%.
+
+Fecha: 2026-08-11
+Componente: productImportWizard (LWC - HTML, JS y CSS)
+Descripción: Se implementó la función "Generar CSV de seguimiento (Fase 2)" en el modal de resultados del wizard de importación. Cuando la importación tiene registros exitosos, se muestra un panel con un combobox ("Producto de Fábrica" u "Opción de Packaging") y un botón "Descargar CSV". El CSV generado incluye: el Id real del producto padre en la columna de lookup correspondiente (ProductoBase__c o ProductoDeFabrica__c), Name pre-llenado como referencia editable, RecordTypeId ya resuelto al Id correcto, una columna de solo referencia (Referencia_Producto_Origen), y columnas vacías listas para llenar según el nivel siguiente del modelo (Fabrica__c, Codigo_Proveedor__c, PrecioDeFabrica__c, Incoterm__c, MOQ__c, PlazoDeFabricacion__c, Packaging__c para Producto de Fábrica; Packaging__c, PackagingPersonalizado__c, CostoPackaging__c para Opción de Packaging). Solo incluye filas exitosas. La generación del CSV reutiliza PapaParse (ya cargado por el wizard) vía Papa.unparse().
+
+Fecha: 2026-08-11
+Componente: productImportWizard (LWC - Fix Lightning Web Security)
+Descripción: La primera implementación de la descarga de CSV usaba Blob + URL.createObjectURL, lo que producía el error "Lightning Web Security: Unsupported MIME type" (LWS intercepta URL.createObjectURL y valida el MIME type contra un allowlist interno que no incluye text/csv, sin importar cómo se declare). Se reemplazó por una URI de datos (data:text/csv;charset=utf-8,...) asignada directamente al href del enlace de descarga, que sí es compatible con Lightning Web Security.
+
+--------------------------------------------------
+Fecha: 2026-08-11
+Acción: Despliegue a Sandbox (PacificGlobalSandbox)
+Descripción: Se desplegaron todos los componentes de la versión 5.0 (techProductSmartDetail, ProductImportWizardController, ProductImportWizardControllerTest, productImportWizard) al sandbox PacificGlobalSandbox. Se corrió ProductImportWizardControllerTest: 4 pruebas, 0 fallos, ~91% de cobertura en ProductImportWizardController.
+Nota: techProductSmartDetail no se agregó a ninguna Flexipage existente — queda disponible en el panel de componentes del Lightning App Builder para que se agregue manualmente a la página de registro de Product2 cuando se decida.

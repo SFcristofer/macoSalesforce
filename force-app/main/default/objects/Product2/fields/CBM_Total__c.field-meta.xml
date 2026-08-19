@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CBM_Total__c</fullName>
+    <description>Suma del CBM (m3) de las 6 masterbox del producto. Reemplaza a MasterboxM3_2__c, que solo tomaba la Masterbox 1.</description>
+    <externalId>false</externalId>
+    <formula>IF( RecordType.DeveloperName == &apos;Producto&apos;,
+MasterboxM3__c + Masterbox2M3__c + Masterbox3M3__c + Masterbox4M3__c + Masterbox5M3__c + Masterbox6M3__c,
+IF(RecordType.DeveloperName == &apos;ProductoDeFabrica&apos;,
+ProductoBase__r.MasterboxM3__c + ProductoBase__r.Masterbox2M3__c + ProductoBase__r.Masterbox3M3__c + ProductoBase__r.Masterbox4M3__c + ProductoBase__r.Masterbox5M3__c + ProductoBase__r.Masterbox6M3__c,
+ProductoDeFabrica__r.ProductoBase__r.MasterboxM3__c + ProductoDeFabrica__r.ProductoBase__r.Masterbox2M3__c + ProductoDeFabrica__r.ProductoBase__r.Masterbox3M3__c + ProductoDeFabrica__r.ProductoBase__r.Masterbox4M3__c + ProductoDeFabrica__r.ProductoBase__r.Masterbox5M3__c + ProductoDeFabrica__r.ProductoBase__r.Masterbox6M3__c))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>CBM Total</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

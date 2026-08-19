@@ -9,6 +9,15 @@ private class ProductImportWizardControllerTest {
     }
     
     @isTest
+    static void testGetRecordTypeIdsByDeveloperName() {
+        Test.startTest();
+        Map<String, String> rtMap = ProductImportWizardController.getRecordTypeIdsByDeveloperName();
+        Test.stopTest();
+        System.assert(rtMap.containsKey('Producto'), 'Should include the base product record type');
+        System.assert(rtMap.containsKey('ProductoDeFabrica'), 'Should include the factory product record type');
+    }
+
+    @isTest
     static void testImportProducts() {
         Product2 existingProd = [SELECT Id FROM Product2 WHERE RecordType.DeveloperName = 'Producto' LIMIT 1];
         Id baseRtId = Schema.SObjectType.Product2.getRecordTypeInfosByDeveloperName().get('Producto').getRecordTypeId();

@@ -1,0 +1,45 @@
+# Control de Cambios 4.0 para Migración
+
+Este archivo contiene el registro de todos los componentes creados o modificados durante la versión 4.0 para facilitar su posterior migración o despliegue.
+
+--------------------------------------------------
+Fecha: 2026-08-03
+Componente: ProductImportWizardController (Clase Apex)
+Componente: productImportWizard (LWC - HTML y JS)
+Descripción: Se modificó el wizard de importación de productos para que la tabla de resultados exitosos retorne y muestre el nombre del producto creado/actualizado, junto con un hipervínculo dinámico que redirige al registro directamente en Salesforce.
+
+Fecha: 2026-08-03
+Componente: techNewProductForm (LWC - HTML)
+Descripción: Se añadieron los campos PrecioDeFabrica__c y Precio_Vigente__c a la sección "Product Information" para resolver el error al crear o modificar productos que exigían un precio.
+
+Fecha: 2026-08-03
+Componente: techProductImagesManager (LWC - HTML y CSS)
+Descripción: Se agregaron bordes estéticos generales al componente (custom-main-border) para delimitar visualmente la sección de imágenes de alta calidad del resto de la página.
+
+Fecha: 2026-08-03
+Componente: techProductImagesManager (LWC - HTML y JS)
+Descripción: Se implementó una arquitectura de "Modo de Lectura / Modo de Edición" controlada por la variable `isEditMode`. Por defecto, el componente se carga bloqueado para evitar modificaciones o borrados accidentales de las imágenes del producto. El usuario debe hacer clic en el botón superior derecho de "Editar Imágenes" para habilitar la carga de nuevos archivos, modificar el enlace de OneDrive y visualizar el botón de Guardar.
+
+Fecha: 2026-08-03
+Componente: techRelatedProductView (LWC - HTML y CSS)
+Descripción: Se crearon estilos CSS (custom-main-border) y se aplicaron bordes estéticos al componente para estandarizar su apariencia visual.
+
+Fecha: 2026-08-03
+Componente: techProductOrderHistory (LWC - HTML y CSS)
+Descripción: Se crearon estilos CSS (custom-main-border) y se aplicaron bordes estéticos al componente para estandarizar su apariencia visual.
+
+Fecha: 2026-08-03
+Acción: Despliegue a Sandbox
+Descripción: Se desplegaron todos los componentes LWC modificados (techProductImagesManager, techRelatedProductView, techProductOrderHistory) al entorno Sandbox.
+
+Fecha: 2026-08-03
+Componente: techProductImagesManager (LWC - HTML y CSS)
+Descripción: Se aplicaron mejoras de diseño UI/UX (Glassmorphism, Hover Effects y Fade-in animations) sin alterar la funcionalidad. Las tarjetas de imágenes ahora usan bordes redondeados (12px) con sombras difuminadas que reaccionan al cursor. Se agregó un "Empty State" con un ícono de utilidad para las fotos inexistentes, y el modo edición cuenta con animaciones fluidas (fade-in) para una mejor experiencia de usuario.
+
+Fecha: 2026-08-03
+Acción: Despliegue a Sandbox
+Descripción: Se desplegó la actualización visual UI/UX del componente techProductImagesManager al entorno Sandbox.
+
+Fecha: 2026-08-03
+Acción: Despliegue a Producción
+Descripción: Se desplegaron todos los componentes de la versión 4.0 al entorno de Producción (ProductImportWizardController, productImportWizard, techNewProductForm, techProductImagesManager, techRelatedProductView, techProductOrderHistory). La clase de prueba cubrió el 91% del código.

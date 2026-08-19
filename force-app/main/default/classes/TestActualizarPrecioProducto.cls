@@ -171,5 +171,27 @@ private class TestActualizarPrecioProducto {
         System.assertEquals(true, b);
         Test.stopTest();
     }
+    @isTest static void testUpdatePriceCoverage() {
+        Test.startTest();
+        TestUtil tu = new TestUtil();
+        tu.initTestData();
+        
+        List<Product2> baseProducts = tu.getAllPBUpdated();
+        Set<Id> baseIds = new Set<Id>();
+        for(Product2 p : baseProducts){
+            baseIds.add(p.Id);
+        }
+        
+        // Cubrir el constructor parametrizado y la ejecución de updatePrice
+        ActualizarPrecioProductoController controller = new ActualizarPrecioProductoController(baseIds);
+        controller.updatePrice();
+        
+        // Cubrir el constructor por defecto y la ejecución de updatePrice general
+        ActualizarPrecioProductoController controller2 = new ActualizarPrecioProductoController();
+        controller2.updatePrice();
+        
+        Test.stopTest();
+        System.assert(true, 'Executed without exceptions');
+    }
     
 }

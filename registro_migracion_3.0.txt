@@ -1,0 +1,18 @@
+# Registro de Implementaciones para Migración 3.0
+
+Este archivo servirá para documentar todos los cambios, componentes creados y modificaciones realizadas durante el desarrollo. 
+El objetivo es mantener un registro limpio y detallado para facilitar la futura migración.
+
+## Cambios Implementados:
+
+- **2026-07-29**: Creación del Flow `Tech_HeredarCamposProductoBase` (Before Save en Product2). Su propósito es copiar los campos estándar `ProductCode` y `Family` desde el `ProductoBase__c` hacia el producto hijo cuando este es creado. Se utilizó el elemento estándar `<assignments>` para asegurar eficiencia y cumplimiento de la API 60.0.
+- **2026-07-29**: Creación del Flow `Tech_BlanquearStatusPadre` (After Save en Product2). Al crear un producto hijo (`ProductoBase__c` lleno), este flow usa el nodo `<recordUpdates>` para ir al registro padre y vaciar (asignar blanco) su campo `Tech_Status__c`.
+- **2026-07-29**: Creación del Flow `Tech_ActualizarFechaRevisionCosto` (Before Save en Product2). Disparado en evento de actualización (`Update`) cuando el campo `PrecioDeFabrica__c` cambia (`IsChanged = true`). Usa un nodo `<assignments>` para colocar la fecha del día de hoy (`$Flow.CurrentDate`) en el campo `Fecha_revision_costo__c`.
+  - **[ESTADO]: MIGRADOS A PRODUCCIÓN Y ACTIVADOS (Etapa 4 Completada)** ✅
+- **2026-07-29**: Refactorización del LWC `techNewProductForm` para soportar contexto de edición recuperando datos vía `record-id` (Lightning Data Service). Se ajustó el JS y HTML para evaluar y expandir dinámicamente las secciones pre-cargadas (Masterboxes, Productos Adicionales).
+  - **[ESTADO]: MIGRADO A PRODUCCIÓN (Etapa 2 Completada)** ✅
+- **2026-07-29**: Creación del Quick Action `Product2.Tech_Editar_Producto` (ScreenAction) vinculado al LWC `techNewProductForm` para reemplazar la edición estándar del objeto Producto sin romper su funcionalidad global.
+  - **[ESTADO]: MIGRADO A PRODUCCIÓN (Etapa 3 Completada - Requiere activación manual en Layouts)** ✅
+- **2026-07-29**: Solución arquitectónica al error de límites DML (Too many DML rows: 10001) al editar Costo de producto. Se creó el Batch Apex `TechActualizarPrecioBatch` y su clase de prueba `TechActualizarPrecioBatchTest`. Se modificó `ProductTriggerHelper.cls` para encolar la actualización de listas de precios masivas asíncronamente vía este Batch, preservando la ejecución síncrona en tests para retrocompatibilidad.
+  - *Nota para despliegue:* Al momento de migrar a Producción, SOLO es necesario empaquetar estos 3 componentes: `TechActualizarPrecioBatch`, `TechActualizarPrecioBatchTest` y `ProductTriggerHelper`. Las pruebas arrojaron 100% de cobertura individual y compatibilidad total.
+  - **[ESTADO]: MIGRADO A PRODUCCIÓN (Etapa 1 Completada)** ✅

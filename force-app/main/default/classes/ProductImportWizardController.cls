@@ -28,6 +28,27 @@ public with sharing class ProductImportWizardController {
     }
 
     /**
+     * Devuelve el Id de cada Record Type activo de Product2, indexado por su
+     * Developer Name (ej. "ProductoDeFabrica" -> 012...). Se usa para armar
+     * el CSV de seguimiento (Fase 2) con el RecordTypeId correcto ya incluido.
+     */
+    @AuraEnabled(cacheable=true)
+    public static Map<String, String> getRecordTypeIdsByDeveloperName() {
+        Map<String, String> result = new Map<String, String>();
+        Map<String, Schema.RecordTypeInfo> rtMap =
+            Schema.SObjectType.Product2.getRecordTypeInfosByDeveloperName();
+
+        for (String devName : rtMap.keySet()) {
+            Schema.RecordTypeInfo rtInfo = rtMap.get(devName);
+            if (rtInfo.isActive()) {
+                result.put(devName, rtInfo.getRecordTypeId());
+            }
+        }
+
+        return result;
+    }
+
+    /**
      * Ejecuta la operación DML (insert / update / upsert) sobre Product2.
      * El JSON ya viene con tipos nativos convertidos desde el LWC.
      * allOrNone=false permite inserción/actualización parcial.

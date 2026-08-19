@@ -1,191 +1,126 @@
 <template>
-    <template if:true={record}>
-        <template if:true={hasData}>
-            <article class="slds-card slds-card_boundary tech-smart-detail">
-                <div class="slds-page-header slds-page-header_record-home">
-                    <div class="slds-page-header__row">
-                        <div class="slds-page-header__col-title">
-                            <div class="slds-media">
-                                <div class="slds-media__figure">
-                                    <span class="slds-icon_container slds-icon-standard-product">
-                                        <lightning-icon icon-name="standard:product" size="medium"></lightning-icon>
-                                    </span>
-                                </div>
-                                <div class="slds-media__body">
-                                    <div class="slds-page-header__name">
-                                        <div class="slds-page-header__name-title">
-                                            <h1 class="slds-page-header__title slds-truncate" title={recordName}>{recordName}</h1>
-                                        </div>
-                                    </div>
-                                    <p class="slds-page-header__name-meta">
-                                        <template if:true={productCode}>{productCode} · </template>
-                                        <template if:true={recordTypeLabel}>{recordTypeLabel}</template>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slds-page-header__col-actions">
-                            <div class="slds-page-header__controls">
-                                <div class="slds-page-header__control">
-                                    <span class={statusBadgeClass}>{statusLabel}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <article class="slds-card slds-card_boundary tech-smart-detail">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span class="slds-text-heading_small">Detalles del Producto</span>
+                    </h2>
                 </div>
-
-                <div class="tech-stats-bar">
-                    <template for:each={quickStats} for:item="stat">
-                        <div key={stat.key} class="tech-stat-tile">
-                            <p class="tech-stat-label">{stat.label}</p>
-                            <p class="tech-stat-value">{stat.value}</p>
-                        </div>
+                <div class="slds-no-flex">
+                    <template if:false={isEditMode}>
+                        <lightning-button-icon icon-name="utility:edit" variant="border-filled" onclick={toggleEditMode} tooltip="Editar Layout"></lightning-button-icon>
+                    </template>
+                    <template if:true={isEditMode}>
+                        <lightning-button label="Cancelar" variant="neutral" onclick={toggleEditMode} class="slds-m-right_x-small"></lightning-button>
                     </template>
                 </div>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner slds-p-top_small">
+            
+            <template if:true={sections.length}>
+                <lightning-record-edit-form object-api-name="Product2" record-id={recordId} onsuccess={handleSuccess} onerror={handleError}>
+                    
+                    <template if:true={isEditMode}>
+                        <div class="slds-m-bottom_medium slds-text-align_right">
+                            <lightning-button variant="brand" type="submit" label="Guardar Cambios"></lightning-button>
+                        </div>
+                    </template>
 
-                <div class="slds-card__body slds-card__body_inner slds-p-top_medium">
-                    <lightning-accordion allow-multiple-sections-open active-section-name={activeSectionNames}>
-
-                        <template for:each={sections} for:item="section">
-                            <lightning-accordion-section key={section.key} name={section.key} label={section.title}>
-                                <span slot="actions" class="tech-accordion-actions">
-                                    <lightning-icon icon-name={section.icon} size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
-                                    <span class="slds-badge tech-count-badge">{section.count}</span>
-                                </span>
-                                <dl class="tech-field-grid">
-                                    <template for:each={section.fields} for:item="f">
-                                        <div key={f.key} class={f.itemClass}>
-                                            <dt class="tech-field-label">{f.label}</dt>
-                                            <template if:false={f.isEditing}>
-                                                <dd class="tech-field-value-row">
-                                                    <template if:true={f.isReference}>
-                                                        <a href="javascript:void(0)" data-id={f.refId} data-object={f.refObject} onclick={handleNavigate} class="tech-field-value tech-field-link">{f.displayValue}</a>
+                    <lightning-accordion allow-multiple-sections-open active-section-name={activeSections}>
+                        
+                        <template for:each={sections} for:item="sec">
+                            <lightning-accordion-section key={sec.id} name={sec.id} label={sec.label}>
+                                
+                                <template if:false={sec.isCard}>
+                                    <lightning-layout multiple-rows>
+                                        <template for:each={sec.fields} for:item="f">
+                                            <lightning-layout-item key={f.name} size="12" medium-device-size="6" padding="horizontal-small">
+                                                
+                                                <!-- Modo de Solo Lectura -->
+                                                <template if:false={isEditMode}>
+                                                    <template if:false={f.isCustomLookup}>
+                                                        <lightning-output-field field-name={f.name} class={f.cssClass}></lightning-output-field>
                                                     </template>
-                                                    <template if:false={f.isReference}>
-                                                        <span class="tech-field-value">{f.displayValue}</span>
-                                                    </template>
-                                                    <template if:true={f.editable}>
-                                                        <lightning-button-icon icon-name="utility:edit" size="xx-small" variant="bare" class="tech-edit-pencil" data-field={f.key} onclick={startInlineEdit} alternative-text="Editar"></lightning-button-icon>
-                                                    </template>
-                                                </dd>
-                                            </template>
-                                            <template if:true={f.isEditing}>
-                                                <lightning-record-edit-form record-id={recordId} object-api-name="Product2" class="tech-inline-form" onsuccess={handleInlineSuccess} onerror={handleInlineError}>
-                                                    <div class="tech-inline-row">
-                                                        <lightning-input-field field-name={f.key} variant="label-hidden" class="tech-inline-input"></lightning-input-field>
-                                                        <lightning-button-icon icon-name="utility:check" variant="brand" size="x-small" onclick={saveInlineEdit} alternative-text="Guardar" class="slds-m-left_x-small"></lightning-button-icon>
-                                                        <lightning-button-icon icon-name="utility:close" size="x-small" onclick={cancelInlineEdit} alternative-text="Cancelar" class="slds-m-left_xx-small"></lightning-button-icon>
-                                                    </div>
-                                                </lightning-record-edit-form>
-                                            </template>
-                                        </div>
-                                    </template>
-                                </dl>
-                            </lightning-accordion-section>
-                        </template>
-
-                        <template if:true={hasProductVariants}>
-                            <lightning-accordion-section name="productVariants" label="Dimensiones de Producto">
-                                <span slot="actions" class="tech-accordion-actions">
-                                    <lightning-icon icon-name={productVariantsIcon} size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
-                                    <span class="slds-badge tech-count-badge">{productVariantsBadge}</span>
-                                </span>
-                                <template for:each={productVariants} for:item="variant">
-                                    <div key={variant.key} class="tech-variant-card">
-                                        <h4 class="tech-variant-title">{variant.title}</h4>
-                                        <dl class="tech-field-grid">
-                                            <template for:each={variant.fields} for:item="f">
-                                                <div key={f.key} class={f.itemClass}>
-                                                    <dt class="tech-field-label">{f.label}</dt>
-                                                    <template if:false={f.isEditing}>
-                                                        <dd class="tech-field-value-row">
-                                                            <span class="tech-field-value">{f.displayValue}</span>
-                                                            <template if:true={f.editable}>
-                                                                <lightning-button-icon icon-name="utility:edit" size="xx-small" variant="bare" class="tech-edit-pencil" data-field={f.key} onclick={startInlineEdit} alternative-text="Editar"></lightning-button-icon>
-                                                            </template>
-                                                        </dd>
-                                                    </template>
-                                                    <template if:true={f.isEditing}>
-                                                        <lightning-record-edit-form record-id={recordId} object-api-name="Product2" class="tech-inline-form" onsuccess={handleInlineSuccess} onerror={handleInlineError}>
-                                                            <div class="tech-inline-row">
-                                                                <lightning-input-field field-name={f.key} variant="label-hidden" class="tech-inline-input"></lightning-input-field>
-                                                                <lightning-button-icon icon-name="utility:check" variant="brand" size="x-small" onclick={saveInlineEdit} alternative-text="Guardar" class="slds-m-left_x-small"></lightning-button-icon>
-                                                                <lightning-button-icon icon-name="utility:close" size="x-small" onclick={cancelInlineEdit} alternative-text="Cancelar" class="slds-m-left_xx-small"></lightning-button-icon>
+                                                    <template if:true={f.isCustomLookup}>
+                                                        <div class="slds-form-element slds-form-element_readonly slds-m-bottom_small">
+                                                            <span class="slds-form-element__label">{f.label}</span>
+                                                            <div class="slds-form-element__control">
+                                                                <div class="slds-form-element__static">
+                                                                    <a href={f.recordLink} target="_blank">{f.displayValue}</a>
+                                                                </div>
                                                             </div>
-                                                        </lightning-record-edit-form>
+                                                        </div>
                                                     </template>
-                                                </div>
+                                                </template>
+
+                                                <!-- Modo de Edición -->
+                                                <template if:true={isEditMode}>
+                                                    <lightning-input-field field-name={f.name}></lightning-input-field>
+                                                </template>
+
+                                            </lightning-layout-item>
+                                        </template>
+                                    </lightning-layout>
+                                </template>
+
+                                <template if:true={sec.isCard}>
+                                    <div class="tech-blue-card">
+                                        <h3 class="slds-text-heading_small slds-m-bottom_small slds-text-color_weak">{sec.icon}{sec.label}</h3>
+                                        <lightning-layout multiple-rows>
+                                            <template for:each={sec.fields} for:item="f">
+                                                <lightning-layout-item key={f.name} size="12" medium-device-size="6" padding="horizontal-small">
+                                                    
+                                                    <!-- Modo de Solo Lectura -->
+                                                    <template if:false={isEditMode}>
+                                                        <template if:false={f.isCustomLookup}>
+                                                            <lightning-output-field field-name={f.name} class={f.cssClass}></lightning-output-field>
+                                                        </template>
+                                                        <template if:true={f.isCustomLookup}>
+                                                            <div class="slds-form-element slds-form-element_readonly slds-m-bottom_small">
+                                                                <span class="slds-form-element__label">{f.label}</span>
+                                                                <div class="slds-form-element__control">
+                                                                    <div class="slds-form-element__static">
+                                                                        <a href={f.recordLink} target="_blank">{f.displayValue}</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </template>
+                                                    </template>
+
+                                                    <!-- Modo de Edición -->
+                                                    <template if:true={isEditMode}>
+                                                        <lightning-input-field field-name={f.name}></lightning-input-field>
+                                                    </template>
+
+                                                </lightning-layout-item>
                                             </template>
-                                        </dl>
+                                        </lightning-layout>
                                     </div>
                                 </template>
-                            </lightning-accordion-section>
-                        </template>
 
-                        <template if:true={hasMasterboxVariants}>
-                            <lightning-accordion-section name="masterboxVariants" label="Masterboxes">
-                                <span slot="actions" class="tech-accordion-actions">
-                                    <lightning-icon icon-name={masterboxVariantsIcon} size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
-                                    <span class="slds-badge tech-count-badge">{masterboxVariantsBadge}</span>
-                                </span>
-                                <template for:each={masterboxVariants} for:item="variant">
-                                    <div key={variant.key} class="tech-variant-card">
-                                        <h4 class="tech-variant-title">{variant.title}</h4>
-                                        <dl class="tech-field-grid">
-                                            <template for:each={variant.fields} for:item="f">
-                                                <div key={f.key} class={f.itemClass}>
-                                                    <dt class="tech-field-label">{f.label}</dt>
-                                                    <template if:false={f.isEditing}>
-                                                        <dd class="tech-field-value-row">
-                                                            <span class="tech-field-value">{f.displayValue}</span>
-                                                            <template if:true={f.editable}>
-                                                                <lightning-button-icon icon-name="utility:edit" size="xx-small" variant="bare" class="tech-edit-pencil" data-field={f.key} onclick={startInlineEdit} alternative-text="Editar"></lightning-button-icon>
-                                                            </template>
-                                                        </dd>
-                                                    </template>
-                                                    <template if:true={f.isEditing}>
-                                                        <lightning-record-edit-form record-id={recordId} object-api-name="Product2" class="tech-inline-form" onsuccess={handleInlineSuccess} onerror={handleInlineError}>
-                                                            <div class="tech-inline-row">
-                                                                <lightning-input-field field-name={f.key} variant="label-hidden" class="tech-inline-input"></lightning-input-field>
-                                                                <lightning-button-icon icon-name="utility:check" variant="brand" size="x-small" onclick={saveInlineEdit} alternative-text="Guardar" class="slds-m-left_x-small"></lightning-button-icon>
-                                                                <lightning-button-icon icon-name="utility:close" size="x-small" onclick={cancelInlineEdit} alternative-text="Cancelar" class="slds-m-left_xx-small"></lightning-button-icon>
-                                                            </div>
-                                                        </lightning-record-edit-form>
-                                                    </template>
-                                                </div>
-                                            </template>
-                                        </dl>
-                                    </div>
-                                </template>
-                            </lightning-accordion-section>
-                        </template>
-
-                        <template if:true={hasImages}>
-                            <lightning-accordion-section name="images" label="Imágenes">
-                                <span slot="actions" class="tech-accordion-actions">
-                                    <lightning-icon icon-name={imagesIcon} size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
-                                    <span class="slds-badge tech-count-badge">{imagesBadge}</span>
-                                </span>
-                                <div class="tech-image-gallery">
-                                    <template for:each={images} for:item="img">
-                                        <a key={img.key} href={img.url} target="_blank" rel="noopener noreferrer" class="tech-image-thumb">
-                                            <img src={img.url} alt={img.key} />
-                                        </a>
-                                    </template>
-                                </div>
                             </lightning-accordion-section>
                         </template>
 
                     </lightning-accordion>
-                </div>
-            </article>
-        </template>
+                    
+                    <template if:true={isEditMode}>
+                        <div class="slds-m-top_medium slds-text-align_right">
+                            <lightning-button label="Cancelar" variant="neutral" onclick={toggleEditMode} class="slds-m-right_x-small"></lightning-button>
+                            <lightning-button variant="brand" type="submit" label="Guardar Cambios"></lightning-button>
+                        </div>
+                    </template>
 
-        <template if:false={hasData}>
-            <div class="slds-illustration slds-illustration_small slds-p-around_large slds-text-align_center tech-empty-state">
-                <lightning-icon icon-name="utility:info" size="medium" variant="inverse" class="slds-m-bottom_small"></lightning-icon>
-                <p class="slds-text-heading_small">Este producto aún no tiene información capturada.</p>
-            </div>
-        </template>
-    </template>
+                </lightning-record-edit-form>
+            </template>
+
+            <template if:false={sections.length}>
+                <div class="slds-p-around_medium slds-text-align_center slds-text-color_weak">
+                    Cargando estructura de la página...
+                </div>
+            </template>
+            
+        </div>
+    </article>
 </template>

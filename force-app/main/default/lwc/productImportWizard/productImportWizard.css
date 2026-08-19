@@ -348,6 +348,41 @@
     border-radius: 0.35rem;
 }
 
+/* ── Caja de CSV de seguimiento (Fase 2) ─────────────────────────── */
+.followup-box {
+    background: #f0f8ff;
+    border: 1px solid #c9d9f7;
+    border-radius: 0.6rem;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.followup-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+    color: #032d60;
+}
+
+.followup-hint {
+    font-size: 0.82rem;
+    color: #3e5c76;
+    margin: 0 0 0.85rem;
+    line-height: 1.4;
+}
+
+.followup-controls {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.75rem;
+}
+
+.followup-combobox {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
 /* ── Caja de procesamiento ───────────────────────────────────────── */
 .processing-box {
     display: flex;

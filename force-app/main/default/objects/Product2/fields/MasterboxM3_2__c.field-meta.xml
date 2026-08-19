@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>MasterboxM3_2__c</fullName>
+    <description>Repuntado 2026-08-16: antes solo devolvia el CBM de la Masterbox 1 (via MasterboxM3__c). Ahora delega en CBM_Total__c, que suma las 6 masterbox. Se mantiene el nombre del campo para no romper OpportunityLineItem.Total_CBM__c ni ContainerAddItems.cls, que ya lo consumen.</description>
     <externalId>false</externalId>
-    <formula>IF( RecordType.DeveloperName == &apos;Producto&apos;, 
-MasterboxM3__c, 
-IF(RecordType.DeveloperName == &apos;ProductoDeFabrica&apos;, 
-ProductoBase__r.MasterboxM3__c, 
-ProductoDeFabrica__r.ProductoBase__r.MasterboxM3__c))</formula>
+    <formula>CBM_Total__c</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>MasterboxM3_2</label>
     <precision>18</precision>

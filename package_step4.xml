@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>Product2-1-Producto Base</members>
+        <name>Layout</name>
+    </types>
+    <types>
+        <members>Product2.Resumen_Fabrica</members>
+        <name>CompactLayout</name>
+    </types>
+    <types>
+        <members>Product2.ProductoDeFabrica</members>
+        <name>RecordType</name>
+    </types>
+    <version>60.0</version>
+</Package>
