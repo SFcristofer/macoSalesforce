@@ -1,0 +1,1 @@
+Map<String, Schema.SObjectField> fields = Schema.SObjectType.PermissionSet.fields.getMap(); for (String f : fields.keySet()) { if (f.containsIgnoreCase('twofactor') || f.containsIgnoreCase('mfa')) { System.debug('Field: ' + f); } }

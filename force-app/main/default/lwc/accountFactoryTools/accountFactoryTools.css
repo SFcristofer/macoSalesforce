@@ -1,0 +1,309 @@
+:host {
+    --pg-blue: #1e73be;
+    --pg-blue-dark: #0b4f86;
+    --pg-orange: #ee7830;
+    --pg-bg: #f5f8fb;
+    --pg-border: #d8e3ee;
+    --pg-text: #1c2b39;
+    --pg-text-muted: #5b6b7a;
+
+    display: block;
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--pg-text);
+}
+
+.pg-tool {
+    background: #ffffff;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(11, 79, 134, 0.12);
+}
+
+.pg-accent-bar {
+    height: 4px;
+    background: linear-gradient(90deg, var(--pg-orange) 0%, var(--pg-orange) 100%);
+}
+
+.pg-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--pg-blue);
+    padding: 0.85rem 1.25rem;
+}
+
+.pg-header-title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: #ffffff;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+.pg-header-title .pg-logo-chip {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    background: var(--pg-orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+
+.pg-close-btn,
+.pg-back-btn {
+    --sds-c-icon-color-foreground-default: #ffffff;
+    --slds-c-icon-color-foreground-default: #ffffff;
+}
+
+.pg-menu-intro {
+    color: var(--pg-text-muted);
+    font-size: 0.9rem;
+    margin: 1.1rem 0 0.9rem;
+}
+
+.pg-menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.9rem;
+}
+
+.pg-menu-card {
+    border: 1px solid var(--pg-border);
+    border-radius: 0.5rem;
+    padding: 1.1rem 1rem;
+    cursor: pointer;
+    background: #ffffff;
+    transition: box-shadow 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.pg-menu-card:hover {
+    border-color: var(--pg-blue);
+    box-shadow: 0 4px 12px rgba(11, 79, 134, 0.14);
+    transform: translateY(-2px);
+}
+
+.pg-menu-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--pg-bg);
+    border: 1px solid var(--pg-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.7rem;
+}
+
+.pg-menu-icon lightning-icon {
+    --sds-c-icon-color-foreground-default: var(--pg-blue);
+    --slds-c-icon-color-foreground-default: var(--pg-blue);
+}
+
+.pg-menu-card-title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--pg-blue-dark);
+    margin: 0 0 0.35rem;
+}
+
+.pg-menu-card-desc {
+    font-size: 0.8rem;
+    color: var(--pg-text-muted);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.pg-body {
+    padding: 0 1.25rem 1.25rem;
+}
+
+.pg-section {
+    border: 1px solid var(--pg-border);
+    border-radius: 0.5rem;
+    margin-top: 1.25rem;
+    padding: 1.1rem 1.25rem 1.3rem;
+    background: #ffffff;
+}
+
+.pg-section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.35rem;
+}
+
+.pg-section-icon {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    border-radius: 50%;
+    background: var(--pg-bg);
+    border: 1px solid var(--pg-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pg-section-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--pg-blue-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin: 0;
+}
+
+.pg-section-desc {
+    color: var(--pg-text-muted);
+    font-size: 0.83rem;
+    margin: 0 0 0.85rem;
+    line-height: 1.45;
+}
+
+.pg-field {
+    margin-bottom: 0.65rem;
+}
+
+.pg-product-list {
+    list-style: none;
+    margin: 0.4rem 0 0.85rem;
+    padding: 0;
+    border: 1px solid var(--pg-border);
+    border-radius: 0.35rem;
+    max-height: 160px;
+    overflow-y: auto;
+}
+
+.pg-product-list li {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border-bottom: 1px solid var(--pg-border);
+    color: var(--pg-blue-dark);
+}
+
+.pg-product-list li:last-child {
+    border-bottom: none;
+}
+
+.pg-product-list li:hover {
+    background: var(--pg-bg);
+}
+
+.pg-selected-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--pg-bg);
+    border: 1px solid var(--pg-border);
+    border-radius: 999px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.8rem;
+    color: var(--pg-blue-dark);
+    margin-bottom: 0.85rem;
+}
+
+.pg-actions-row {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    margin-top: 0.9rem;
+    flex-wrap: wrap;
+}
+
+.pg-btn-primary {
+    --sds-c-button-brand-color-background: var(--pg-blue);
+    --sds-c-button-brand-color-background-hover: var(--pg-blue-dark);
+    --sds-c-button-brand-color-border: var(--pg-blue);
+    --slds-c-button-brand-color-background: var(--pg-blue);
+    --slds-c-button-brand-color-background-hover: var(--pg-blue-dark);
+    --slds-c-button-brand-color-border: var(--pg-blue);
+}
+
+.pg-dropzone {
+    margin-bottom: 0.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.15rem;
+    border: 2px dashed var(--pg-border);
+    border-radius: 0.5rem;
+    background: var(--pg-bg);
+    padding: 1.6rem 1rem;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.pg-dropzone:hover {
+    border-color: var(--pg-blue);
+    background: #eef5fc;
+}
+
+.pg-dropzone-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid var(--pg-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.pg-dropzone-icon lightning-icon {
+    --sds-c-icon-color-foreground-default: var(--pg-blue);
+    --slds-c-icon-color-foreground-default: var(--pg-blue);
+}
+
+.pg-dropzone-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--pg-blue-dark);
+    margin: 0;
+    word-break: break-all;
+}
+
+.pg-dropzone-sub {
+    font-size: 0.78rem;
+    color: var(--pg-text-muted);
+    margin: 0.15rem 0 0;
+}
+
+.pg-hidden-file-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.pg-preview-label {
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--pg-blue-dark);
+    margin: 0.9rem 0 0.3rem;
+}
+
+.pg-preview-empty {
+    font-size: 0.85rem;
+    color: var(--pg-text-muted);
+    margin: 0.9rem 0;
+}
+
+.pg-table-wrap {
+    margin-top: 1rem;
+    overflow-x: auto;
+}

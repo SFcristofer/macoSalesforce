@@ -1,0 +1,177 @@
+<template>
+    <div class="pg-tool">
+        <div class="pg-accent-bar"></div>
+
+        <div class="pg-header">
+            <div class="pg-header-title">
+                <template if:false={isMenuStep}>
+                    <lightning-button-icon class="pg-back-btn" icon-name="utility:back" variant="bare-inverse"
+                            alternative-text="Volver" title="Volver al menú" onclick={handleBackToMenu}>
+                    </lightning-button-icon>
+                </template>
+                <span class="pg-logo-chip">PG</span>
+                <span>{stepTitle}</span>
+            </div>
+            <lightning-button-icon class="pg-close-btn" icon-name="utility:close" variant="bare-inverse"
+                    alternative-text="Cerrar" title="Cerrar" onclick={handleClose}>
+            </lightning-button-icon>
+        </div>
+
+        <div class="pg-body">
+
+            <!-- ===================== MENU: ELEGIR HERRAMIENTA ===================== -->
+            <template if:true={isMenuStep}>
+                <p class="pg-menu-intro">¿Qué necesitas hacer con los productos de esta fábrica?</p>
+
+                <div class="pg-menu-grid">
+                    <div class="pg-menu-card" onclick={handleGoToClone}>
+                        <div class="pg-menu-icon"><lightning-icon icon-name="utility:copy" size="small"></lightning-icon></div>
+                        <h3 class="pg-menu-card-title">Clonar / Duplicar Producto</h3>
+                        <p class="pg-menu-card-desc">Crea una variante de un producto cambiando su marca o su color.</p>
+                    </div>
+
+                    <div class="pg-menu-card" onclick={handleGoToExport}>
+                        <div class="pg-menu-icon"><lightning-icon icon-name="utility:download" size="small"></lightning-icon></div>
+                        <h3 class="pg-menu-card-title">Exportar Productos</h3>
+                        <p class="pg-menu-card-desc">Descarga o envía por correo el listado de productos de esta fábrica.</p>
+                    </div>
+
+                    <div class="pg-menu-card" onclick={handleGoToPrices}>
+                        <div class="pg-menu-icon"><lightning-icon icon-name="utility:currency" size="small"></lightning-icon></div>
+                        <h3 class="pg-menu-card-title">Actualizar Precios</h3>
+                        <p class="pg-menu-card-desc">Sube el archivo del proveedor, valida la variación de precio y aplícala.</p>
+                    </div>
+                </div>
+            </template>
+
+            <!-- ===================== CLONAR / DUPLICAR ===================== -->
+            <template if:true={isCloneStep}>
+                <div class="pg-section">
+                    <p class="pg-section-desc">Busca un producto de esta fábrica y crea una variante cambiando su marca (clonar) o su color (duplicar).</p>
+
+                    <div class="pg-field">
+                        <lightning-input label="Buscar producto" value={searchTerm} onchange={handleSearchChange}></lightning-input>
+                    </div>
+
+                    <template if:true={productOptions.length}>
+                        <ul class="pg-product-list">
+                            <template for:each={productOptions} for:item="opt">
+                                <li key={opt.productId} data-id={opt.productId} onclick={handleSelectProduct}>
+                                    {opt.name} ({opt.productCode})
+                                </li>
+                            </template>
+                        </ul>
+                    </template>
+
+                    <template if:true={selectedProductLabel}>
+                        <div class="pg-selected-chip">
+                            <lightning-icon icon-name="utility:check" size="xx-small"></lightning-icon>
+                            {selectedProductLabel}
+                        </div>
+                    </template>
+
+                    <div class="pg-field">
+                        <lightning-radio-group name="cloneMode"
+                                label="Acción"
+                                options={cloneModeOptions}
+                                value={cloneMode}
+                                onchange={handleCloneModeChange}
+                                type="radio">
+                        </lightning-radio-group>
+                    </div>
+
+                    <template if:true={isBrandMode}>
+                        <div class="pg-field">
+                            <lightning-input label="Nueva marca" value={newBrand} onchange={handleNewBrandChange}></lightning-input>
+                        </div>
+                    </template>
+                    <template if:true={isColorMode}>
+                        <div class="pg-field">
+                            <lightning-input label="Nuevo color" value={newColor} onchange={handleNewColorChange}></lightning-input>
+                        </div>
+                    </template>
+
+                    <div class="pg-actions-row">
+                        <lightning-button class="pg-btn-primary" label="Clonar / Duplicar" variant="brand" onclick={handleClone} disabled={cloneDisabled}></lightning-button>
+                        <template if:true={cloneLoading}><lightning-spinner size="small" alternative-text="Procesando"></lightning-spinner></template>
+                    </div>
+                </div>
+            </template>
+
+            <!-- ===================== EXPORTAR / ENVIAR ===================== -->
+            <template if:true={isExportStep}>
+                <div class="pg-section">
+                    <p class="pg-section-desc">Descarga el listado (Id, Supplier Code, Price) para enviarlo al proveedor, o mándalo directo por correo al email comercial de la cuenta.</p>
+
+                    <template if:true={exportPreviewLoading}>
+                        <lightning-spinner size="small" alternative-text="Cargando productos"></lightning-spinner>
+                    </template>
+
+                    <template if:false={exportPreviewLoading}>
+                        <template if:true={hasExportPreview}>
+                            <p class="pg-preview-label">Se van a incluir {exportPreviewRows.length} producto(s):</p>
+                            <div class="pg-table-wrap">
+                                <lightning-datatable
+                                        key-field="productId"
+                                        data={exportPreviewRows}
+                                        columns={exportPreviewColumns}
+                                        hide-checkbox-column="true">
+                                </lightning-datatable>
+                            </div>
+                        </template>
+                        <template if:false={hasExportPreview}>
+                            <p class="pg-preview-empty">Esta fábrica no tiene productos activos para exportar.</p>
+                        </template>
+                    </template>
+
+                    <div class="pg-actions-row">
+                        <lightning-button label="Descargar CSV" onclick={handleDownloadCsv} disabled={exportLoading}></lightning-button>
+                        <lightning-button class="pg-btn-primary" label="Enviar por Correo" variant="brand" onclick={handleSendEmail} disabled={emailLoading}></lightning-button>
+                        <template if:true={exportLoading}><lightning-spinner size="small" alternative-text="Generando"></lightning-spinner></template>
+                    </div>
+                </div>
+            </template>
+
+            <!-- ===================== CARGAR / VALIDAR / APLICAR ===================== -->
+            <template if:true={isPricesStep}>
+                <div class="pg-section">
+                    <p class="pg-section-desc">Sube el archivo que regresó el proveedor (mismas columnas: Id, Supplier Code, Price) para validar la variación de precio antes de aplicarla.</p>
+
+                    <label class="pg-dropzone" for="pg-file-input">
+                        <div class="pg-dropzone-icon"><lightning-icon icon-name="utility:upload" size="small"></lightning-icon></div>
+                        <template if:false={selectedFileName}>
+                            <p class="pg-dropzone-title">Haz clic para elegir el archivo</p>
+                            <p class="pg-dropzone-sub">Formato .csv — Id, Supplier Code, Price</p>
+                        </template>
+                        <template if:true={selectedFileName}>
+                            <p class="pg-dropzone-title">{selectedFileName}</p>
+                            <p class="pg-dropzone-sub">Haz clic para elegir otro archivo</p>
+                        </template>
+                        <input id="pg-file-input" class="pg-hidden-file-input" type="file" accept=".csv" onchange={handleFileChange} />
+                    </label>
+
+                    <div class="pg-actions-row">
+                        <lightning-button class="pg-btn-primary" label="Validar" variant="brand" onclick={handleValidate} disabled={validateDisabled}></lightning-button>
+                        <template if:true={validateLoading}><lightning-spinner size="small" alternative-text="Validando"></lightning-spinner></template>
+                    </div>
+
+                    <template if:true={hasPriceRows}>
+                        <div class="pg-table-wrap">
+                            <lightning-datatable
+                                    key-field="productId"
+                                    data={priceRows}
+                                    columns={priceColumns}
+                                    hide-checkbox-column="true">
+                            </lightning-datatable>
+                        </div>
+                        <div class="pg-actions-row">
+                            <lightning-button class="pg-btn-primary" label="Aplicar Actualización" variant="brand" onclick={handleApply} disabled={applyDisabled}></lightning-button>
+                            <template if:true={applyLoading}><lightning-spinner size="small" alternative-text="Aplicando"></lightning-spinner></template>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+        </div>
+    </div>
+</template>

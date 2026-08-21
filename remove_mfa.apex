@@ -1,4 +1,4 @@
-Id targetUserId = '0054w00000AXeSkAAL';
+Id targetUserId = '0054w00000AY1qjAAD';
 try {
     System.UserManagement.deregisterVerificationMethod(targetUserId, Auth.VerificationMethod.U2F);
     System.debug('U2F_REMOVED');
